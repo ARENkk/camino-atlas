@@ -436,6 +436,25 @@ export function MapView({ variant }: Props) {
     const zh = props.zh || label;
     const en = props.en || '';
     clearTerminalPopup();
+
+    const container = document.createElement('div');
+    const labelEl = document.createElement('div');
+    labelEl.className = 'popup-label';
+    labelEl.textContent = label;
+    container.appendChild(labelEl);
+
+    const titleEl = document.createElement('div');
+    titleEl.className = 'popup-title';
+    titleEl.textContent = zh;
+    container.appendChild(titleEl);
+
+    if (en) {
+      const subEl = document.createElement('div');
+      subEl.className = 'popup-sub';
+      subEl.textContent = en;
+      container.appendChild(subEl);
+    }
+
     popupRef.current = new maplibregl.Popup({
       closeButton: false,
       closeOnClick: false,
@@ -444,11 +463,7 @@ export function MapView({ variant }: Props) {
       className: 'route-marker-popup',
     })
       .setLngLat(coords)
-      .setHTML(
-        `<div class="popup-label">${escapeHtml(label)}</div><div class="popup-title">${escapeHtml(zh)}</div>${
-          en ? `<div class="popup-sub">${escapeHtml(en)}</div>` : ''
-        }`,
-      )
+      .setDOMContent(container)
       .addTo(map);
   };
 
