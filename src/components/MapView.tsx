@@ -894,7 +894,6 @@ export function MapView({ variant }: Props) {
           currentMap.fitBounds(renderedBounds, {
             padding: 40,
             duration: 820,
-            easing: (t: number) => 1 - Math.pow(1 - t, 2),
           });
         };
 
