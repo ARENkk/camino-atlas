@@ -1,0 +1,880 @@
+{
+    "routeGroups":  [
+                        {
+                            "id":  "camino-frances",
+                            "name_zh":  "法国之路",
+                            "name_en":  "Camino Francés",
+                            "tagline":  "横穿西班牙北部，补给成熟，最适合第一次朝圣。",
+                            "difficulty_shells":  3,
+                            "default_variant_id":  "camino_frances_full",
+                            "official_url":  "",
+                            "variants":  [
+                                             "camino_frances_full",
+                                             "camino-frances-sarria-last100"
+                                         ]
+                        },
+                        {
+                            "id":  "camino-portugues",
+                            "name_zh":  "葡萄牙之路（Camino Portugués）",
+                            "name_en":  "Camino Portugués",
+                            "tagline":  "自葡萄牙北上，节奏平稳，城乡交替明显。",
+                            "difficulty_shells":  3,
+                            "default_variant_id":  "camino-portugues-full-lisbon",
+                            "official_url":  "",
+                            "variants":  [
+                                             "camino-portugues-full-lisbon",
+                                             "camino-portugues-popular-porto"
+                                         ]
+                        },
+                        {
+                            "id":  "camino-del-norte",
+                            "name_zh":  "北方之路（Camino del Norte）",
+                            "name_en":  "Camino del Norte",
+                            "tagline":  "沿西班牙北海岸前进，风景强烈，天气多变。",
+                            "difficulty_shells":  4,
+                            "default_variant_id":  "camino-del-norte-main",
+                            "official_url":  "",
+                            "variants":  [
+                                             "camino-del-norte-main"
+                                         ]
+                        },
+                        {
+                            "id":  "camino-primitivo",
+                            "name_zh":  "原始之路（Camino Primitivo）",
+                            "name_en":  "Camino Primitivo",
+                            "tagline":  "穿越阿斯图里亚斯山区，爬升更多，风格更硬核。",
+                            "difficulty_shells":  4,
+                            "default_variant_id":  "camino-primitivo-main",
+                            "official_url":  "",
+                            "variants":  [
+                                             "camino-primitivo-main"
+                                         ]
+                        },
+                        {
+                            "id":  "via-de-la-plata",
+                            "name_zh":  "银之路（Vía de la Plata）",
+                            "name_en":  "Vía de la Plata",
+                            "tagline":  "纵贯西班牙西部，距离超长，更考验节奏与补给。",
+                            "difficulty_shells":  5,
+                            "default_variant_id":  "via-de-la-plata-main",
+                            "official_url":  "",
+                            "variants":  [
+                                             "via-de-la-plata-main"
+                                         ]
+                        },
+                        {
+                            "id":  "camino-ingles",
+                            "name_zh":  "英国之路（Camino Inglés）",
+                            "name_en":  "Camino Inglés",
+                            "tagline":  "从加利西亚北部短程入城，适合假期有限的人。",
+                            "difficulty_shells":  2,
+                            "default_variant_id":  "camino-ingles-main",
+                            "official_url":  "",
+                            "variants":  [
+                                             "camino-ingles-main"
+                                         ]
+                        },
+                        {
+                            "id":  "camino-finisterre-after-santiago",
+                            "name_zh":  "朝圣之后：菲尼斯特雷之路",
+                            "name_en":  "After Santiago: Camino to Finisterre",
+                            "tagline":  "从圣地亚哥继续走向海边终点，收束感最强。",
+                            "difficulty_shells":  2,
+                            "default_variant_id":  "camino-finisterre-main",
+                            "official_url":  "",
+                            "variants":  [
+                                             "camino-finisterre-main"
+                                         ]
+                        }
+                    ],
+    "routeVariants":  [
+                          {
+                              "id":  "camino_frances_full",
+                              "group_id":  "camino-frances",
+                              "variant_name_zh":  "全程主线（圣让皮耶德波尔）",
+                              "variant_name_en":  "Full route (Saint-Jean-Pied-de-Port)",
+                              "start_place":  {
+                                                  "zh":  "圣让皮耶德波尔",
+                                                  "en":  "Saint-Jean-Pied-de-Port"
+                                              },
+                              "end_place":  {
+                                                "zh":  "圣地亚哥-德孔波斯特拉",
+                                                "en":  "Santiago de Compostela"
+                                            },
+                              "distance_km_total":  775,
+                              "days_recommended_total":  {
+                                                             "min":  30,
+                                                             "max":  35
+                                                         },
+                              "distance_km_map":  0,
+                              "days_recommended_map":  {
+                                                           "min":  0,
+                                                           "max":  0
+                                                       },
+                              "highlights":  [
+                                                 "标志性经典路线，沿途社群氛围浓",
+                                                 "补给与住宿选择多，新手友好",
+                                                 "村镇密集，节奏容易掌控",
+                                                 "在 Triacastela 附近可分岔，经 San Xil 或经 Samos，两条路线最终都会回到主线。"
+                                             ],
+                              "geometry_source":  "visugpx_gpx_fullroute_2026-03-05",
+                              "geometry_path":  "/geo/camino-frances-full.geojson",
+                              "note":  "适合第一次长距离朝圣，也最容易在路上建立同行关系。",
+                              "positioning":  "第一次完整朝圣最经典、补给最成熟的主线路线。",
+                              "experience":  [
+                                                 "村镇密度高，补给与咖啡馆节奏明显。",
+                                                 "地形总体均衡，偶有爬升但可控。",
+                                                 "沿线国际朝圣者多，交流机会非常多。"
+                                             ],
+                              "list_hint":  "完整体验法国之路社群与节奏，首刷最稳妥。",
+                              "countriesPassed":  [
+                                                      "法国",
+                                                      "西班牙"
+                                                  ],
+                              "mainWalkingCountry":  "西班牙",
+                              "usualSchengenApplyCountry":  "西班牙",
+                              "stay_supply_pressure":  [
+                                                           "床位紧张度：旺季高，热门节点常需提前 1-2 天滚动预订。",
+                                                           "庇护所费用区间：公立常见约 10-15 欧，私立常见约 15-28 欧，旺季与热门节点会浮动。",
+                                                           "补给密度：整体高，多数日段 8-12 km 可完成一次补给。",
+                                                           "行李转运：服务成熟、覆盖广，按天转运在主线执行难度较低。"
+                                                       ],
+                              "visa_planning":  [
+                                                    "经过国家：法国 / 西班牙。",
+                                                    "申根准备：优先看主停留国；停留接近再看首入境。",
+                                                    "材料重点：主线住宿、交通与连续行程尽量前后一致。"
+                                                ],
+                              "cautions":  [
+                                               "Meseta 路段日照强且遮阴少，需要固定补水与电解质节奏。",
+                                               "连续硬路面会累积足底和胫骨压力，建议控制步幅并做晚间放松。",
+                                               "雨后石板路与泥地混合段较易滑，下坡应主动降速。"
+                                           ],
+                              "best_for":  [
+                                               "第一次走 4 周以上长线、希望节奏最稳定的人。",
+                                               "想把住宿、补给、交通不确定性压到较低的人。",
+                                               "希望在主线上持续建立徒步节奏与恢复能力的人。"
+                                           ],
+                              "certificate_and_starts":  [
+                                                             "证书条件：从 Saint-Jean-Pied-de-Port 全程或从末段起步都可满足常见步行门槛。",
+                                                             "常见起点：Saint-Jean-Pied-de-Port 是完整主线首选。",
+                                                             "时间分配：常见节奏是 30-35 天，也有人拆分为多次完成。",
+                                                             "经典变体：Triacastela 可经 San Xil 或 Samos，最终回归主线。"
+                                                         ],
+                              "not_for":  [
+                                              "强烈追求安静感、希望尽量减少社交干扰的人。",
+                                              "不愿接受旺季床位竞争和频繁滚动预订的人。",
+                                              "对暴晒、连续硬路面和高人流节奏适应较弱的人。"
+                                          ],
+                              "route_note_lines":  [
+                                                       "由法入西横穿北部内陆，村镇密集、补给成熟，是最成熟的长线主廊。",
+                                                       "真正难点不在单日强度，而在高人流、Meseta 暴晒与订床节奏管理。"
+                                                   ],
+                              "season_advice":  [
+                                                    "最佳窗口是 4-6 月与 9-10 月，气温和人流更平衡。",
+                                                    "盛夏（7-8 月）不太适合首刷者，Meseta 午后常见 35-40C，暴晒会明显放大脱水与疲劳。",
+                                                    "冬季不太推荐全线，白天短，部分服务缩减，连续行程弹性会下降。",
+                                                    "春秋最稳，但秋季早晚温差更明显，防风与保暖准备要更完整。"
+                                                ],
+                              "route_impression":  "由法入西横穿北部内陆，村镇密集、补给成熟，是最成熟的长线主廊。真正难点不在单日强度，而在高人流、Meseta 暴晒与订床节奏管理。"
+                          },
+                          {
+                              "id":  "camino-del-norte-main",
+                              "group_id":  "camino-del-norte",
+                              "variant_name_zh":  "主线（Main Route）",
+                              "variant_name_en":  "Main Route",
+                              "start_place":  {
+                                                  "zh":  "伊伦（Irún）",
+                                                  "en":  "Irún"
+                                              },
+                              "end_place":  {
+                                                "zh":  "圣地亚哥-德孔波斯特拉（Santiago de Compostela）",
+                                                "en":  "Santiago de Compostela"
+                                            },
+                              "distance_km_total":  825,
+                              "days_recommended_total":  {
+                                                             "min":  33,
+                                                             "max":  40
+                                                         },
+                              "distance_km_map":  825,
+                              "days_recommended_map":  {
+                                                           "min":  33,
+                                                           "max":  40
+                                                       },
+                              "highlights":  [
+                                                 "海岸线景观连续，地形变化丰富",
+                                                 "北部城市文化层次感强",
+                                                 "整段完成后的成就感很高"
+                                             ],
+                              "geometry_source":  "osm_relation_19001007_imported_2026-03-07",
+                              "geometry_path":  "/geo/camino-del-norte.geojson",
+                              "note":  "海岸风景与城镇文化并行，对体能与天气适应要求更高。",
+                              "positioning":  "海岸风景强，但天气与起伏更考验准备。",
+                              "experience":  [
+                                                 "海岸与山地短爬升频繁，体能波动感明显。",
+                                                 "城市段与海边段交替，视觉变化很强。",
+                                                 "人流少于法国之路，整体更从容。"
+                                             ],
+                              "list_hint":  "海岸景观最强，但体能与天气管理要求更高。",
+                              "countriesPassed":  [
+                                                      "西班牙"
+                                                  ],
+                              "mainWalkingCountry":  "西班牙",
+                              "usualSchengenApplyCountry":  "西班牙",
+                              "stay_supply_pressure":  [
+                                                           "床位紧张度：中，海岸热门城市在周末和假期会偏紧。",
+                                                           "庇护所费用区间：常见约 12-28 欧，旅游城市波动更明显。",
+                                                           "补给密度：中，部分海岸段约 12-18 km 才有完整补给。",
+                                                           "行李转运：主干段可用，但偏海岸小镇的时效不如法兰西段稳定。"
+                                                       ],
+                                "visa_planning":  [
+                                                      "经过国家：西班牙。",
+                                                      "申根准备：通常按西班牙准备即可。",
+                                                      "材料重点：海岸线住宿、分段交通和连续行程要写清楚。"
+                                                  ],
+                              "cautions":  [
+                                               "海风叠加阵雨会快速降温，需确保防风层和保暖层可快速切换。",
+                                               "频繁短爬升与下坡对膝踝冲击更明显，登山杖能明显减压。",
+                                               "海岸暴露路段体感变化快，建议早出发并预留天气机动。"
+                                           ],
+                              "best_for":  [
+                                               "有一定连续起伏应对能力的人。",
+                                               "更看重海岸线、城镇感和路线变化的人。",
+                                               "愿意为风景层次接受天气与体能波动的人。"
+                                           ],
+                              "certificate_and_starts":  [
+                                                             "证书条件：Irún 全程可满足。",
+                                                             "常见起点：Irún；也有人按假期从 Santander / Gijón 分段。",
+                                                             "时间分配：常见仍是长线推进，后段单独完成也不少见。",
+                                                             "经典走法：后段与法国之路合流后节奏会明显加快。"
+                                                         ],
+                              "not_for":  [
+                                              "对风雨、湿冷和连续爬升适应较弱的人。",
+                                              "希望全程补给和节奏像法国之路一样稳定的人。",
+                                              "想把住宿、天气、装备管理复杂度压到最低的人。"
+                                          ],
+                              "route_note_lines":  [
+                                                       "沿西班牙北海岸推进，海岸景观、城镇节奏与起伏地形交替明显。",
+                                                       "风景层次很强，但天气变化、湿冷和连续爬升会明显提高体能与装备要求。"
+                                                   ],
+                              "season_advice":  [
+                                                    "最佳窗口是 5-6 月与 9 月，天气稳定度和人流压力相对均衡。",
+                                                    "盛夏不推荐以轻松海岸线预期出发，湿热与起伏叠加也会增压。",
+                                                    "冬季不推荐长段推进，北部风雨频繁且部分服务点会缩减。",
+                                                    "春季易遇新雨天气多，秋季体感接近但风力与温差更要重点应对。"
+                                                ],
+                              "route_impression":  "沿西班牙北海岸推进，海岸景观、城镇节奏与起伏地形交替明显。风景层次很强，但天气变化、湿冷和连续爬升会明显提高体能与装备要求。"
+                          },
+                          {
+                              "id":  "camino-primitivo-main",
+                              "group_id":  "camino-primitivo",
+                              "variant_name_zh":  "主线（Main Route）",
+                              "variant_name_en":  "Main Route",
+                              "start_place":  {
+                                                  "zh":  "奥维耶多（Oviedo）",
+                                                  "en":  "Oviedo"
+                                              },
+                              "end_place":  {
+                                                "zh":  "圣地亚哥-德孔波斯特拉（Santiago de Compostela）",
+                                                "en":  "Santiago de Compostela"
+                                            },
+                              "distance_km_total":  320,
+                              "days_recommended_total":  {
+                                                             "min":  12,
+                                                             "max":  15
+                                                         },
+                              "distance_km_map":  320,
+                              "days_recommended_map":  {
+                                                           "min":  12,
+                                                           "max":  15
+                                                       },
+                              "highlights":  [
+                                                 "历史感强，山地段体验扎实",
+                                                 "路线更安静，徒步沉浸感好",
+                                                 "适合偏好自然与挑战的朝圣者"
+                                             ],
+                              "geometry_source":  "osm_relation_19298101_imported_2026-03-07",
+                              "geometry_path":  "/geo/camino-primitivo.geojson",
+                              "note":  "更偏山地与林地体验，适合偏好安静与挑战并存的人。",
+                              "positioning":  "更安静、更硬核、更偏山地徒步体验。",
+                              "experience":  [
+                                                 "林地与山脊路段占比高，徒步感最强。",
+                                                 "村镇间距相对更大，节奏更“野”。",
+                                                 "社交密度低于热门线路，安静感明显。"
+                                             ],
+                              "list_hint":  "安静且更具挑战的山地线，适合想走硬核体验。",
+                              "countriesPassed":  [
+                                                      "西班牙"
+                                                  ],
+                              "mainWalkingCountry":  "西班牙",
+                              "usualSchengenApplyCountry":  "西班牙",
+                              "stay_supply_pressure":  [
+                                                           "床位紧张度：中，山地关键落脚点在旺季会阶段性紧张。",
+                                                           "庇护所费用区间：常见约 12-25 欧，偏远段选择较少。",
+                                                           "补给密度：中低，部分日段约 15 km 以上才有完整补给。",
+                                                           "行李转运：可用但覆盖不如热门线密集，偏远段转运更要提前确认。"
+                                                       ],
+                                "visa_planning":  [
+                                                      "经过国家：西班牙。",
+                                                      "申根准备：通常按西班牙准备即可。",
+                                                      "材料重点：山区段住宿与补给安排尽量提前串好。"
+                                                  ],
+                              "cautions":  [
+                                               "长下坡对胫骨压力显著，需在前几天就控制冲坡节奏。",
+                                               "山地天气切换快，雨具与保暖层必须放在易取位置。",
+                                               "偏远段通讯与商店时段不稳定，离镇前应完成当日补给确认。"
+                                           ],
+                              "best_for":  [
+                                               "喜欢山地地形与长爬升的人。",
+                                               "希望减少人流干扰、专注行走体验的人。",
+                                               "有一定负重与连续爬升经验的人。"
+                                           ],
+                              "certificate_and_starts":  [
+                                                             "证书条件：Oviedo 起步可稳定满足。",
+                                                             "常见起点：Oviedo；也有人按假期从 Lugo 前后分段。",
+                                                             "时间分配：常见做法是完整走 Primitive 山地精华段。",
+                                                             "经典走法：到 Melide 合流后利用成熟补给收尾。"
+                                                         ],
+                              "not_for":  [
+                                              "第一次长线就想选低管理压力路线的人。",
+                                              "对山地天气变化、泥地和补给间距敏感的人。",
+                                              "更依赖高密度服务、固定节奏和强社交感的人。"
+                                          ],
+                              "route_note_lines":  [
+                                                       "穿越阿斯图里亚斯山地，林地和长爬升路段连续，行走沉浸感最强。",
+                                                       "真正挑战是山地天气、泥地与补给波动下的恢复管理，不适合热闹主线思维。"
+                                                   ],
+                              "season_advice":  [
+                                                    "最佳窗口是 5-6 月与 9 月，山地体感更友好且可行走时段较长。",
+                                                    "盛夏不推荐以平路缓进安排日程，山地热感和爬升会加放大疲劳。",
+                                                    "冬季不推荐全程推进，高处天气不稳且部分服务点运营受限。",
+                                                    "春季泥地和雨雾概率更高，秋季早晚降温快，保暖与防水需双重准备。"
+                                                ],
+                              "route_impression":  "穿越阿斯图里亚斯山地，林地和长爬升路段连续，行走沉浸感最强。真正挑战是山地天气、泥地与补给波动下的恢复管理，不适合热闹主线思维。"
+                          },
+                          {
+                              "id":  "via-de-la-plata-main",
+                              "group_id":  "via-de-la-plata",
+                              "variant_name_zh":  "主线（Main Route）",
+                              "variant_name_en":  "Main Route",
+                              "start_place":  {
+                                                  "zh":  "塞维利亚（Sevilla）",
+                                                  "en":  "Sevilla"
+                                              },
+                              "end_place":  {
+                                                "zh":  "圣地亚哥-德孔波斯特拉（Santiago de Compostela）",
+                                                "en":  "Santiago de Compostela"
+                                            },
+                              "distance_km_total":  1000,
+                              "days_recommended_total":  {
+                                                             "min":  40,
+                                                             "max":  50
+                                                         },
+                              "distance_km_map":  1000,
+                              "days_recommended_map":  {
+                                                           "min":  40,
+                                                           "max":  50
+                                                       },
+                              "highlights":  [
+                                                 "纵贯西班牙南北，地貌变化巨大",
+                                                 "人流相对更少，适合长距离独行",
+                                                 "沿线历史遗迹密度高"
+                                             ],
+                              "geometry_source":  "osm_relation_241329_imported_2026-03-07",
+                              "geometry_path":  "/geo/via-de-la-plata.geojson",
+                              "note":  "是一条强调长期节奏管理的纵贯线，适合有长线经验的人。",
+                              "positioning":  "超长纵贯线，适合有长线经验、能做长期节奏管理的人。",
+                              "experience":  [
+                                                 "南北纵贯跨度大，地貌与气候变化非常明显。",
+                                                 "城镇间距普遍更大，独行感更强。",
+                                                 "步行是主线，节奏管理比冲速度更关键。"
+                                             ],
+                              "list_hint":  "超长纵贯线，重在长期节奏与补给管理。",
+                              "countriesPassed":  [
+                                                      "西班牙"
+                                                  ],
+                              "mainWalkingCountry":  "西班牙",
+                              "usualSchengenApplyCountry":  "西班牙",
+                              "stay_supply_pressure":  [
+                                                           "床位紧张度：中低，总体不拥挤但可选住宿数量较少。",
+                                                           "庇护所费用区间：常见约 12-26 欧，小镇私宿波动较大。",
+                                                           "补给密度：偏低，常见约 15-25 km 才有完整补给点。",
+                                                           "行李转运：可用性中等，长距离分段时更依赖提前确认服务覆盖。"
+                                                       ],
+                                "visa_planning":  [
+                                                      "经过国家：西班牙。",
+                                                      "申根准备：通常按西班牙准备即可。",
+                                                      "材料重点：长线住宿、分段节奏和补给计划要更完整。"
+                                                  ],
+                              "cautions":  [
+                                               "空旷路段遮阴少，需按时段而非渴感进行补水管理。",
+                                               "长期连续行走易出现延迟性疲劳，建议固定恢复日而非硬顶。",
+                                               "部分小镇周日服务收缩明显，当天行程应提前确认营业时段。"
+                                           ],
+                              "best_for":  [
+                                               "有 30 天以上长线经验的人。",
+                                               "能长期做补水、防晒和节奏管理的人。",
+                                               "接受人流较少、城镇间距较长的徒步者。"
+                                           ],
+                              "certificate_and_starts":  [
+                                                             "证书条件：Sevilla 起步可满足完整长线规则。",
+                                                             "常见起点：Sevilla；不少人采用分年分段完成。",
+                                                             "时间分配：常见先走南段精华，再二刷补齐北段。",
+                                                             "经典走法：每周预设恢复日，比追求日均里程更关键。"
+                                                         ],
+                              "not_for":  [
+                                              "想依赖高密度补给和成熟服务体系的人。",
+                                              "对高温暴晒、空旷路段和长期节奏管理不适应的人。",
+                                              "第一次长线就想靠热门主线逻辑推进的人。"
+                                          ],
+                              "route_note_lines":  [
+                                                       "纵贯西班牙西部，城镇间距更长、人流更低，路线节奏像长期管理。",
+                                                       "真正挑战在高温暴晒下的补水防晒与恢复执行，而不是单日配速。"
+                                                   ],
+                              "season_advice":  [
+                                                    "最佳窗口是春季北上或秋季分段，温度与日照更适合长期推进。",
+                                                    "盛夏不推荐南段长距离硬走，高温暴晒会显著抬高失温与脱水风险。",
+                                                    "冬季不推荐连续推进，白天短且部分小镇服务收缩明显。",
+                                                    "春季利于稳定建节奏，秋季体感更适但需关注早晚温差。"
+                                                ],
+                              "route_impression":  "纵贯西班牙西部，城镇间距更长、人流更低，路线节奏像长期管理。真正挑战在高温暴晒下的补水防晒与恢复执行，而不是单日配速。"
+                          },
+                          {
+                              "id":  "camino-ingles-main",
+                              "group_id":  "camino-ingles",
+                              "variant_name_zh":  "主线（Main Route）",
+                              "variant_name_en":  "Main Route",
+                              "start_place":  {
+                                                  "zh":  "费罗尔（Ferrol）",
+                                                  "en":  "Ferrol"
+                                              },
+                              "end_place":  {
+                                                "zh":  "圣地亚哥-德孔波斯特拉（Santiago de Compostela）",
+                                                "en":  "Santiago de Compostela"
+                                            },
+                              "distance_km_total":  118,
+                              "days_recommended_total":  {
+                                                             "min":  5,
+                                                             "max":  7
+                                                         },
+                              "distance_km_map":  118,
+                              "days_recommended_map":  {
+                                                           "min":  5,
+                                                           "max":  7
+                                                       },
+                              "highlights":  [
+                                                 "短线高效，适合首刷朝圣体验",
+                                                 "海港到圣城的节奏转换明确",
+                                                 "假期有限时的优选路线"
+                                             ],
+                              "geometry_source":  "osm_relation_1102966_imported_2026-03-07",
+                              "geometry_path":  "/geo/camino-ingles.geojson",
+                              "note":  "路线短而紧凑，适合假期有限但想完成完整朝圣体验。",
+                              "positioning":  "适合时间有限但希望完成完整朝圣体验的短线主路。",
+                              "experience":  [
+                                                 "路线短而紧凑，节奏切换快。",
+                                                 "港口城市到内陆圣城的变化清晰。",
+                                                 "补给总体成熟，日程执行效率高。"
+                                             ],
+                              "list_hint":  "短假期也能完整朝圣，节奏紧凑效率高。",
+                              "countriesPassed":  [
+                                                      "西班牙"
+                                                  ],
+                              "mainWalkingCountry":  "西班牙",
+                              "usualSchengenApplyCountry":  "西班牙",
+                              "stay_supply_pressure":  [
+                                                           "床位紧张度：中，周末和节庆节点会出现短时紧张。",
+                                                           "庇护所费用区间：常见约 12-24 欧，整体可控。",
+                                                           "补给密度：高，约每 8-12 km 可找到稳定补给。",
+                                                           "行李转运：服务成熟，短线行程可灵活按天使用。"
+                                                       ],
+                                "visa_planning":  [
+                                                      "经过国家：西班牙。",
+                                                      "申根准备：通常按西班牙准备即可。",
+                                                      "材料重点：短线行程直接，住宿、到达交通和返程安排写清即可。"
+                                                  ],
+                              "cautions":  [
+                                               "短线最常见问题是首日过冲，建议前两天保持控速。",
+                                               "连续阴雨时衣物难干，需准备可快速轮换的快干层。",
+                                               "港城到内陆过渡段节奏变化快，出发时间要尽量前置。"
+                                           ],
+                              "best_for":  [
+                                               "只有 5-7 天假期、想完整拿证的人。",
+                                               "想快速体验朝圣路径与终点仪式感的人。",
+                                               "偏好短线、效率高、准备成本较低的人。"
+                                           ],
+                                "certificate_and_starts":  [
+                                                              "证书条件：Ferrol 起步最稳妥，里程满足常见步行拿证要求。",
+                                                              "常见起点：Ferrol 是最常见、最好理解的版本。",
+                                                              "时间分配：多数人按 5-6 天完成。",
+                                                              "常见走法：常作为第一次短线拿证或主线后的补走选择。"
+                                                          ],
+                              "not_for":  [
+                                              "想在一条线路里感受长线节奏建立过程的人。",
+                                              "期待多地貌、长时间沉浸与明显阶段变化的人。",
+                                              "把完成公里数和长线修行感看得很重的人。"
+                                          ],
+                              "route_note_lines":  [
+                                                       "从加利西亚北部短程入城，线路紧凑、补给成熟，完成效率很高。",
+                                                       "挑战不在于地形复杂度，而在于短天数内的节奏控制与恢复安排。"
+                                                   ],
+                              "season_advice":  [
+                                                    "最佳窗口是 4-6 月与 9-10 月，体感舒适且执行效率最高。",
+                                                    "盛夏不推荐压缩极限里程，闷热和人流会放大疲劳。",
+                                                    "冬季不推荐高效赶进度，短日照和阴雨会压缩每日机动空间。",
+                                                    "春季适合稳定推进，秋季需重点防雨防风并保留机动半天。"
+                                                ],
+                              "route_impression":  "从加利西亚北部短程入城，线路紧凑、补给成熟，完成效率很高。挑战不在于地形复杂度，而在于短天数内的节奏控制与恢复安排。"
+                          },
+                          {
+                              "id":  "camino-frances-sarria-last100",
+                              "group_id":  "camino-frances",
+                              "variant_name_zh":  "末段主线（Sarria - Santiago）",
+                              "variant_name_en":  "Last 100km (Sarria - Santiago)",
+                              "start_place":  {
+                                                  "zh":  "萨里亚（Sarria）",
+                                                  "en":  "Sarria"
+                                              },
+                              "end_place":  {
+                                                "zh":  "圣地亚哥-德孔波斯特拉（Santiago de Compostela）",
+                                                "en":  "Santiago de Compostela"
+                                            },
+                              "distance_km_total":  115,
+                              "days_recommended_total":  {
+                                                             "min":  5,
+                                                             "max":  7
+                                                         },
+                              "distance_km_map":  115,
+                              "days_recommended_map":  {
+                                                           "min":  5,
+                                                           "max":  7
+                                                       },
+                              "highlights":  [
+                                                 "最热门拿证书末段，路标清晰、补给密集",
+                                                 "村镇与服务成熟，适合首次朝圣徒步",
+                                                 "时间成本低，完整体验朝圣终点仪式感"
+                                             ],
+                              "geometry_source":  "derived_from_camino-frances-full_2026-03-05",
+                              "geometry_path":  "/geo/camino-frances-sarria.geojson",
+                              "note":  "路标清晰、社群活跃，是终点氛围最集中的一段。",
+                              "positioning":  "最常见的拿证末段，服务成熟、完成感强。",
+                              "experience":  [
+                                                 "村镇与补给非常密集，日程安排弹性大。",
+                                                 "人流最集中，路上互动频繁。",
+                                                 "整体起伏温和，适合连续多日稳定行走。"
+                                             ],
+                              "list_hint":  "一周内完成经典末段，拿证与终点氛围兼顾。",
+                              "countriesPassed":  [
+                                                      "法国",
+                                                      "西班牙"
+                                                  ],
+                              "mainWalkingCountry":  "西班牙",
+                              "usualSchengenApplyCountry":  "西班牙",
+                              "stay_supply_pressure":  [
+                                                           "床位紧张度：高，Sarria 出发波峰明显，热门节点需提前订床。",
+                                                           "庇护所费用区间：常见约 10-25 欧，旺季私立价格更容易上浮。",
+                                                           "补给密度：很高，常见每 5-10 km 就有餐饮或商店。",
+                                                           "行李转运：服务非常成熟，短线分段走法普遍依赖转运。"
+                                                       ],
+                                "visa_planning":  [
+                                                      "经过国家：西班牙。",
+                                                      "申根准备：通常按西班牙准备即可。",
+                                                      "材料重点：Sarria 起步后的住宿、交通和行程安排尽量连贯。"
+                                                  ],
+                              "cautions":  [
+                                               "高人流容易被队伍节奏带快，首日应主动压住配速。",
+                                               "连续起伏不极端，但每天数公里累积照样消耗。",
+                                               "雨天泥地与石板明显，需优先保证防滑与足部干燥。"
+                                           ],
+                              "best_for":  [
+                                               "假期约一周，仍希望完成常见朝圣证书门槛的人。",
+                                               "第一次试朝圣徒步，想先验证节奏与装备的人。",
+                                               "更看重终点氛围、社交密度与仪式感的人。"
+                                           ],
+                              "certificate_and_starts":  [
+                                                             "证书条件：Sarria 起步可满足常见步行门槛。",
+                                                             "常见起点：Sarria；时间更紧时也有人在后段做更短天数压缩，但不作为默认主走法写法。",
+                                                             "时间分配：多数人按 5-7 天完成。",
+                                                             "经典缩法：若体能不足，可在 Arzúa 后缩短单日里程。"
+                                                         ],
+                              "not_for":  [
+                                              "把低密度、清静感排在终点氛围之前的人。",
+                                              "计划临时找床且不愿预订住宿的人。",
+                                              "希望在一条线里体验长线多地貌变化与独立节奏形成的人。"
+                                          ],
+                              "route_note_lines":  [
+                                                       "集中在加利西亚丘陵与村镇带，路标清晰、节奏紧凑，终点氛围最强。",
+                                                       "关键是在人流密集环境中稳住配速与恢复，不适合把它当安静线来走。"
+                                                   ],
+                              "season_advice":  [
+                                                    "最佳窗口是 4-6 月与 9-10 月，气温舒适且徒步节奏最稳定。",
+                                                    "盛夏不太推荐临时起意出发，人流高峰叠加闷热会明显压低行走体验。",
+                                                    "冬季不推荐冲短天数，降雨偏高且白天短，收尾阶段节奏容错更低。",
+                                                    "春季泥地湿滑概率较高，秋季早晚温差明显，鞋底抓地与保暖要兼顾。"
+                                                ],
+                              "route_impression":  "集中在加利西亚丘陵与村镇带，路标清晰、节奏紧凑，终点氛围最强。关键是在人流密集环境中稳住配速与恢复，不适合把它当安静线来走。"
+                          },
+                          {
+                              "id":  "camino-finisterre-main",
+                              "group_id":  "camino-finisterre-after-santiago",
+                              "variant_name_zh":  "主线（Santiago - Fisterra）",
+                              "variant_name_en":  "Main Route (Santiago - Fisterra)",
+                              "start_place":  {
+                                                  "zh":  "圣地亚哥-德孔波斯特拉（Santiago de Compostela）",
+                                                  "en":  "Santiago de Compostela"
+                                              },
+                              "end_place":  {
+                                                "zh":  "菲尼斯特雷（Fisterra）",
+                                                "en":  "Fisterra"
+                                            },
+                              "distance_km_total":  90,
+                              "days_recommended_total":  {
+                                                             "min":  3,
+                                                             "max":  4
+                                                         },
+                              "distance_km_map":  90,
+                              "days_recommended_map":  {
+                                                           "min":  3,
+                                                           "max":  4
+                                                       },
+                              "highlights":  [
+                                                 "朝圣后的经典延伸段，终点海岸仪式感强",
+                                                 "从城市到大西洋海岸，风景转换明显",
+                                                 "天数短，适合完成主线后继续行走"
+                                             ],
+                              "geometry_source":  "osm_relation_385098_rebuilt_santiago_to_fisterra_2026-03-09",
+                              "geometry_path":  "/geo/camino-finisterre.geojson",
+                              "note":  "更强调朝圣后的沉浸与收束感，海岸终点仪式感很强。",
+                              "positioning":  "属于到达圣地亚哥之后的延伸朝圣，重在收束与告别。",
+                              "experience":  [
+                                                 "从圣城逐步走向海岸，情绪层次感强。",
+                                                 "村镇与海风路段交替，节奏相对舒展。",
+                                                 "人流明显少于主干线，空间感更大。"
+                                             ],
+                              "list_hint":  "到达圣地亚哥后的延伸段，走向大地尽头。",
+                              "countriesPassed":  [
+                                                      "西班牙"
+                                                  ],
+                              "mainWalkingCountry":  "西班牙",
+                              "usualSchengenApplyCountry":  "西班牙",
+                              "stay_supply_pressure":  [
+                                                           "床位紧张度：中，终点前后热门小镇在旺季会阶段性紧张。",
+                                                           "庇护所费用区间：常见约 12-25 欧，海岸节点价格波动更明显。",
+                                                           "补给密度：中，多数路段约 10-15 km 可完成一次补给。",
+                                                           "行李转运：可用性较好，常用于主线后接续完成收束段。"
+                                                       ],
+                                "visa_planning":  [
+                                                      "经过国家：西班牙。",
+                                                      "申根准备：通常按西班牙准备即可。",
+                                                      "材料重点：多作为 Santiago 之后延伸段，一般并入同一次西班牙行程准备。"
+                                                  ],
+                              "cautions":  [
+                                               "海岸侧风会放大体感消耗，雨披和外层需优先防风性能。",
+                                               "乡间雨后草地窗口较短，午后出发过晚容易错过补给。",
+                                               "到达 Santiago 后若恢复不足，延伸段前两天应主动降低强度。"
+                                           ],
+                              "best_for":  [
+                                               "已到 Santiago，想把旅程走到海边终点的人。",
+                                               "更看重朝圣后的延伸感与收束感的人。",
+                                               "想在 3-4 天内增加一段情绪层次的人。"
+                                           ],
+                              "certificate_and_starts":  [
+                                                             "常见走法：属于 Santiago 之后的经典延伸段。",
+                                                             "常见起点：Santiago；常见终点为 Fisterra。",
+                                                             "时间分配：多数人按 3-4 天完成海岸收束。",
+                                                             "经典延伸：体能充足时可再加 Muxía 作为附加分支。"
+                                                         ],
+                              "not_for":  [
+                                              "还没完成主朝圣线，却只想单独抽离体验的人。",
+                                              "想靠这条线感受典型主线路况和补给节奏的人。",
+                                              "对海风、海岸天气和短程连续行走恢复较弱的人。"
+                                          ],
+                              "route_note_lines":  [
+                                                       "从 Santiago 继续走向大西洋海岸，路线较短，但终点仪式感和收束感都很明确。",
+                                                       "核心不是继续冲强度，而是在海岸天气变化中放慢节奏，兼顾主线结束后的恢复与体能管理。"
+                                                   ],
+                              "season_advice":  [
+                                                    "最佳窗口是 4-6 月与 9-10 月，海岸体感和行走稳定性更好。",
+                                                    "盛夏不推荐高强度赶路，海岸暴晒与风热会降低恢复效率。",
+                                                    "冬季不推荐连续推进，侧风降雨和短日照会放大海岸段风险。",
+                                                    "春季景观层次好，秋季风雨变化更快，防风防雨装备要提前验证。"
+                                                ],
+                              "route_impression":  "从 Santiago 继续走向大西洋海岸，路线较短，但终点仪式感和收束感都很明确。核心不是继续冲强度，而是在海岸天气变化中放慢节奏，兼顾主线结束后的恢复与体能管理。"
+                          },
+                          {
+                              "id":  "camino-portugues-full-lisbon",
+                              "group_id":  "camino-portugues",
+                              "variant_name_zh":  "全程主线（里斯本）",
+                              "variant_name_en":  "Full route (Lisbon)",
+                              "start_place":  {
+                                                  "zh":  "里斯本（Lisbon）",
+                                                  "en":  "Lisbon"
+                                              },
+                              "end_place":  {
+                                                "zh":  "圣地亚哥-德孔波斯特拉（Santiago de Compostela）",
+                                                "en":  "Santiago de Compostela"
+                                            },
+                              "distance_km_total":  620,
+                              "days_recommended_total":  {
+                                                             "min":  25,
+                                                             "max":  30
+                                                         },
+                              "distance_km_map":  620,
+                              "days_recommended_map":  {
+                                                           "min":  25,
+                                                           "max":  30
+                                                       },
+                              "highlights":  [
+                                                 "从里斯本一路北上，完整体验葡萄牙之路主线。",
+                                                 "覆盖里斯本、科英布拉、波尔图到圣地亚哥的连续朝圣轨迹。",
+                                                 "适合想走完整葡萄牙线的长线行程。"
+                                             ],
+                              "geometry_source":  "osm_relations_7684546_385135_trimmed_plus_verified_2026-03-07",
+                              "geometry_path":  "/geo/camino-portugues-lisbon.geojson",
+                              "note":  "从葡萄牙首都一路北上，完整体验葡萄牙之路层次变化。",
+                              "positioning":  "节奏更平稳，城市与乡村交替体验明显的完整葡萄牙主线。",
+                              "experience":  [
+                                                 "前段城市与平原较多，中后段转入更典型朝圣节奏。",
+                                                 "路面类型多样，硬路面占比相对更高。",
+                                                 "整体比北线稳定，但总天数要求更高。"
+                                             ],
+                              "list_hint":  "从里斯本完整北上，适合想走全线的人。",
+                              "countriesPassed":  [
+                                                      "葡萄牙",
+                                                      "西班牙"
+                                                  ],
+                              "mainWalkingCountry":  "葡萄牙",
+                              "usualSchengenApplyCountry":  "葡萄牙",
+                              "stay_supply_pressure":  [
+                                                           "床位紧张度：中，Porto 以后在旺季明显抬升，前段相对可控。",
+                                                           "庇护所费用区间：葡段常见约 12-22 欧，西段常见约 12-26 欧。",
+                                                           "补给密度：前段波动较大，后段普遍可做到每 10-15 km 补给。",
+                                                           "行李转运：葡西主走廊可用，但前段覆盖密度不如热门西线稳定。"
+                                                       ],
+                              "visa_planning":  [
+                                                    "经过国家：葡萄牙 / 西班牙。",
+                                                    "申根准备：优先看主停留国；停留接近再看首入境。",
+                                                    "材料重点：起步国住宿 + 后续主线行程一起整理。"
+                                                ],
+                              "cautions":  [
+                                               "前段城市与硬路面比例偏高，需要注意足底与胫骨的累积负荷。",
+                                               "跨境前后节奏变化明显，建议提前做好连续天数分配。",
+                                               "雨天石板与城市路口易滑，下坡和转弯要主动降速。"
+                                           ],
+                              "best_for":  [
+                                               "想从 Lisbon 完整走到 Santiago 的长线徒步者。",
+                                               "希望从城市到乡镇逐步进入朝圣节奏的人。",
+                                               "想要比法国之路更平稳、但仍保留成熟补给的人。"
+                                           ],
+                              "certificate_and_starts":  [
+                                                             "证书条件：从 Lisbon 或 Porto 起步都可满足常见步行门槛。",
+                                                             "常见起点：完整党多从 Lisbon，效率党多从 Porto。",
+                                                             "时间分配：最常见是 Porto 起走 10-14 天，Lisbon 全程为 25-30 天。",
+                                                             "经典走法：Lisbon-Porto 段偏长线管理，Porto 以后偏朝圣主廊节奏。"
+                                                         ],
+                              "not_for":  [
+                                              "想一上路就进入最纯粹多野徒步状态的人。",
+                                              "对前段城市过渡、铺装路比例较高接受度较低的人。",
+                                              "希望极短时间内完成完整主线的人。"
+                                          ],
+                              "route_note_lines":  [
+                                                       "从葡萄牙首都一路北上，城市段、乡野段与朝圣主廊的层次变化最完整。",
+                                                       "真正挑战是长天数下的脚感恢复、铺装路耐受与跨国节奏规划，不是短期冲刺。"
+                                                   ],
+                              "season_advice":  [
+                                                    "最佳窗口是 3-5 月与 9-11 月，温度与降雨分布更适合连续长线。",
+                                                    "盛夏不推荐从 Lisbon 起走，南段热暴晒和硬路面反射热会明显加压。",
+                                                    "冬季不太推荐全程推进，雨天连续性和白天时长会影响阶段计划。",
+                                                    "春季适合稳步北上，秋季体感更凉爽但需预留降雨机动日。"
+                                                ],
+                              "route_impression":  "从葡萄牙首都一路北上，城市段、乡野段与朝圣主廊的层次变化最完整。真正挑战是长天数下的脚感恢复、铺装路耐受与跨国节奏规划，不是短期冲刺。"
+                          },
+                          {
+                              "id":  "camino-portugues-popular-porto",
+                              "group_id":  "camino-portugues",
+                              "variant_name_zh":  "热门起点（波尔图）",
+                              "variant_name_en":  "Popular start (Porto)",
+                              "start_place":  {
+                                                  "zh":  "波尔图（Porto）",
+                                                  "en":  "Porto"
+                                              },
+                              "end_place":  {
+                                                "zh":  "圣地亚哥-德孔波斯特拉（Santiago de Compostela）",
+                                                "en":  "Santiago de Compostela"
+                                            },
+                              "distance_km_total":  240,
+                              "days_recommended_total":  {
+                                                             "min":  10,
+                                                             "max":  14
+                                                         },
+                              "distance_km_map":  240,
+                              "days_recommended_map":  {
+                                                           "min":  10,
+                                                           "max":  14
+                                                       },
+                              "highlights":  [
+                                                 "从波尔图起步，天数与补给节奏更友好。",
+                                                 "覆盖葡萄牙中北段与加利西亚热门朝圣路段。",
+                                                 "适合时间有限但想完成葡萄牙主线核心体验。"
+                                             ],
+                              "geometry_source":  "wiportugal_CaminhoSantiago_Central_gpx_2026-03-07",
+                              "geometry_path":  "/geo/camino-portugues-porto.geojson",
+                              "note":  "从波尔图出发节奏更友好，适合时间有限的主线体验。",
+                              "positioning":  "热门起点版本，天数更友好，仍保留葡萄牙主线核心体验。",
+                              "experience":  [
+                                                 "起点后很快进入稳定朝圣节奏，社群活跃。",
+                                                 "城镇与乡间切换频繁，日程安排弹性高。",
+                                                 "后段进入加利西亚后朝圣氛围明显升温。"
+                                             ],
+                              "list_hint":  "10-14 天内完成葡萄牙主线核心体验。",
+                              "countriesPassed":  [
+                                                      "葡萄牙",
+                                                      "西班牙"
+                                                  ],
+                              "mainWalkingCountry":  "葡萄牙",
+                              "usualSchengenApplyCountry":  "葡萄牙",
+                              "stay_supply_pressure":  [
+                                                           "床位紧张度：中高，热门季节后半段常出现临近满房。",
+                                                           "庇护所费用区间：常见约 12-25 欧，热门城市节点更高。",
+                                                           "补给密度：高，多数日段约每 8-12 km 可完成补给。",
+                                                           "行李转运：可用性高，适合用转运压缩假期版体验波动。"
+                                                       ],
+                              "visa_planning":  [
+                                                    "经过国家：葡萄牙 / 西班牙。",
+                                                    "申根准备：通常可按葡萄牙起步行程准备。",
+                                                    "材料重点：Porto 起步后的住宿、交通和后续主线衔接要清楚。"
+                                                ],
+                              "cautions":  [
+                                               "湿滑石板与城市过街段是常见摔伤风险。",
+                                               "连续社交和高频管理容易打乱恢复节奏，需要控制晚间作息。",
+                                               "后段气温湿和，但连续多天仍会累积脚踝负荷。"
+                                           ],
+                              "best_for":  [
+                                               "假期约 10-14 天，希望完成一条成熟主线的人。",
+                                               "第一次尝试葡萄牙之路，想降低长线负担的人。",
+                                               "重视补给成熟度与节奏可控性的人。"
+                                           ],
+                              "certificate_and_starts":  [
+                                                             "证书条件：Porto 起步里程充足，拿证稳定。",
+                                                             "常见起点：Porto 是主流版本。",
+                                                             "时间分配：多数人按 11-13 天节奏完成。",
+                                                             "经典缩法：若时间更紧，可再北移起点，但需核对里程规则。"
+                                                         ],
+                              "not_for":  [
+                                              "想体验从 Lisbon 开始的完整层次变化的人。",
+                                              "希望路线人流很低、社交感更弱的人。",
+                                              "想要更强山地强度或更硬核地形刺激的人。"
+                                          ],
+                              "route_note_lines":  [
+                                                       "从 Porto 起步后很快进入成熟朝圣主廊，城镇切换频繁，整体节奏更可控。",
+                                                       "规划重点是旺季床位波动和雨天湿滑路面的节奏管理，而不是路线辨识难度。"
+                                                   ],
+                              "season_advice":  [
+                                                    "最佳窗口是 4-6 月与 9-10 月，体感稳定且补给节奏易控制。",
+                                                    "盛夏不推荐压缩行程，热感叠加人流会放大疲劳堆积。",
+                                                    "冬季不推荐新手首刷，阴雨连续期会压缩每日可走时段。",
+                                                    "春季路线变化快，秋季湿冷增多，防雨层与快干系统要完整。"
+                                                ],
+                              "route_impression":  "从 Porto 起步后很快进入成熟朝圣主廊，城镇切换频繁，整体节奏更可控。规划重点是旺季床位波动和雨天湿滑路面的节奏管理，而不是路线辨识难度。"
+                          }
+                      ]
+}

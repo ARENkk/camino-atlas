@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="openstreetmap-cgimap 2.1.0 (202845 spike-06.openstreetmap.org)" copyright="OpenStreetMap and contributors" attribution="http://www.openstreetmap.org/copyright" license="http://opendatacommons.org/licenses/odbl/1-0/">
+ <node id="601416618" visible="true" version="6" changeset="156369962" timestamp="2024-09-08T21:32:25Z" user="Rodrigo Rega" uid="32529" lat="43.0056020" lon="-7.5642937"/>
+ <node id="601416619" visible="true" version="2" changeset="9412056" timestamp="2011-09-27T16:22:17Z" user="edvac" uid="121415" lat="43.0054592" lon="-7.5643793"/>
+ <node id="823585554" visible="true" version="2" changeset="9412056" timestamp="2011-09-27T16:22:18Z" user="edvac" uid="121415" lat="43.0065266" lon="-7.5628429"/>
+ <node id="823585555" visible="true" version="2" changeset="9412056" timestamp="2011-09-27T16:22:18Z" user="edvac" uid="121415" lat="43.0067765" lon="-7.5626278"/>
+ <node id="823585556" visible="true" version="2" changeset="9412056" timestamp="2011-09-27T16:22:18Z" user="edvac" uid="121415" lat="43.0068875" lon="-7.5625123"/>
+ <node id="864801271" visible="true" version="4" changeset="156369962" timestamp="2024-09-08T21:32:25Z" user="Rodrigo Rega" uid="32529" lat="43.0058328" lon="-7.5640249"/>
+ <node id="948152912" visible="true" version="4" changeset="167039125" timestamp="2025-06-01T08:16:36Z" user="Davileci" uid="8123953" lat="43.0088396" lon="-7.5591756"/>
+ <node id="948153108" visible="true" version="1" changeset="6040005" timestamp="2010-10-14T14:50:34Z" user="edvac" uid="121415" lat="43.0092776" lon="-7.5589415"/>
+ <node id="950975678" visible="true" version="11" changeset="167038926" timestamp="2025-06-01T08:10:54Z" user="Davileci" uid="8123953" lat="43.0088141" lon="-7.5592306"/>
+ <node id="982603946" visible="true" version="3" changeset="113918439" timestamp="2021-11-17T21:55:50Z" user="Rodrigo Rega" uid="32529" lat="43.0090398" lon="-7.5590416"/>
+ <node id="983624873" visible="true" version="1" changeset="6330752" timestamp="2010-11-09T19:40:51Z" user="edvac" uid="121415" lat="43.0090281" lon="-7.5590351"/>
+ <node id="1447153349" visible="true" version="1" changeset="9412056" timestamp="2011-09-27T16:22:05Z" user="edvac" uid="121415" lat="43.0051682" lon="-7.5644517"/>
+ <node id="1447153352" visible="true" version="1" changeset="9412056" timestamp="2011-09-27T16:22:05Z" user="edvac" uid="121415" lat="43.0053251" lon="-7.5644234"/>
+ <node id="1447153386" visible="true" version="1" changeset="9412056" timestamp="2011-09-27T16:22:06Z" user="edvac" uid="121415" lat="43.0069152" lon="-7.5624567"/>
+ <node id="1705825509" visible="true" version="3" changeset="37321259" timestamp="2016-02-20T01:09:50Z" user="Rodrigo Rega" uid="32529" lat="43.0049171" lon="-7.5644801"/>
+ <node id="1705825658" visible="true" version="2" changeset="61781355" timestamp="2018-08-18T22:21:24Z" user="Rodrigo Rega" uid="32529" lat="43.0071736" lon="-7.5621851"/>
+ <node id="2302735835" visible="true" version="9" changeset="167039523" timestamp="2025-06-01T08:29:54Z" user="Davileci" uid="8123953" lat="43.0088123" lon="-7.5592394">
+  <tag k="barrier" v="bollard"/>
+  <tag k="bollard" v="rising"/>
+  <tag k="source" v="(ODbL) ForzaCatro"/>
+ </node>
+ <node id="2431322260" visible="true" version="4" changeset="131796185" timestamp="2023-01-28T06:40:31Z" user="Rodrigo Rega" uid="32529" lat="43.0081082" lon="-7.5604699">
+  <tag k="crossing" v="uncontrolled"/>
+  <tag k="crossing:island" v="no"/>
+  <tag k="highway" v="crossing"/>
+  <tag k="tactile_paving" v="no"/>
+ </node>
+ <node id="2566498019" visible="true" version="2" changeset="41062870" timestamp="2016-07-27T13:24:17Z" user="Rodrigo Rega" uid="32529" lat="43.0090614" lon="-7.5589733"/>
+ <node id="2566498021" visible="true" version="1" changeset="19291734" timestamp="2013-12-05T15:49:50Z" user="edvac" uid="121415" lat="43.0091531" lon="-7.5589735"/>
+ <node id="2566498023" visible="true" version="1" changeset="19291734" timestamp="2013-12-05T15:49:50Z" user="edvac" uid="121415" lat="43.0092277" lon="-7.5589872"/>
+ <node id="2566498024" visible="true" version="1" changeset="19291734" timestamp="2013-12-05T15:49:50Z" user="edvac" uid="121415" lat="43.0092563" lon="-7.5589722"/>
+ <node id="3050451251" visible="true" version="1" changeset="25118631" timestamp="2014-08-30T14:03:47Z" user="Rodrigo Rega" uid="32529" lat="43.0060385" lon="-7.5637075"/>
+ <node id="3137633129" visible="true" version="3" changeset="26182778" timestamp="2014-10-19T00:47:55Z" user="edvac" uid="121415" lat="43.0093564" lon="-7.5586502"/>
+ <node id="3138914206" visible="true" version="2" changeset="41062870" timestamp="2016-07-27T13:24:17Z" user="Rodrigo Rega" uid="32529" lat="43.0090631" lon="-7.5589952"/>
+ <node id="3138914213" visible="true" version="1" changeset="26198844" timestamp="2014-10-19T18:37:03Z" user="Luiyo" uid="316694" lat="43.0093340" lon="-7.5587328"/>
+ <node id="3759704199" visible="true" version="7" changeset="164912208" timestamp="2025-04-13T20:45:46Z" user="Rodrigo Rega" uid="32529" lat="43.0086314" lon="-7.5594622">
+  <tag k="crossing:island" v="no"/>
+  <tag k="crossing:markings" v="yes"/>
+  <tag k="crossing:signals" v="no"/>
+  <tag k="highway" v="crossing"/>
+  <tag k="tactile_paving" v="yes"/>
+ </node>
+ <node id="4015679366" visible="true" version="2" changeset="156369962" timestamp="2024-09-08T21:32:25Z" user="Rodrigo Rega" uid="32529" lat="43.0055723" lon="-7.5643223"/>
+ <node id="4015679369" visible="true" version="3" changeset="156369962" timestamp="2024-09-08T21:32:25Z" user="Rodrigo Rega" uid="32529" lat="43.0057317" lon="-7.5641661"/>
+ <node id="4015679371" visible="true" version="1" changeset="37321259" timestamp="2016-02-20T01:09:48Z" user="Rodrigo Rega" uid="32529" lat="43.0060218" lon="-7.5637371"/>
+ <node id="5502251057" visible="true" version="6" changeset="167039125" timestamp="2025-06-01T08:16:36Z" user="Davileci" uid="8123953" lat="43.0088228" lon="-7.5591706"/>
+ <node id="5502262404" visible="true" version="1" changeset="57497885" timestamp="2018-03-24T23:32:07Z" user="Rodrigo Rega" uid="32529" lat="43.0088941" lon="-7.5593897"/>
+ <node id="5502262405" visible="true" version="4" changeset="156162165" timestamp="2024-09-03T22:46:34Z" user="Rodrigo Rega" uid="32529" lat="43.0087920" lon="-7.5593386"/>
+ <node id="5502271880" visible="true" version="3" changeset="164912208" timestamp="2025-04-13T20:45:46Z" user="Rodrigo Rega" uid="32529" lat="43.0084293" lon="-7.5596626"/>
+ <node id="5502271881" visible="true" version="2" changeset="164912208" timestamp="2025-04-13T20:45:46Z" user="Rodrigo Rega" uid="32529" lat="43.0084700" lon="-7.5595942"/>
+ <node id="5502271882" visible="true" version="2" changeset="164912208" timestamp="2025-04-13T20:45:46Z" user="Rodrigo Rega" uid="32529" lat="43.0085742" lon="-7.5594842"/>
+ <node id="5502271883" visible="true" version="1" changeset="57498046" timestamp="2018-03-24T23:48:42Z" user="Rodrigo Rega" uid="32529" lat="43.0087166" lon="-7.5594447"/>
+ <node id="5502271885" visible="true" version="2" changeset="150276353" timestamp="2024-04-20T18:38:57Z" user="Rodrigo Rega" uid="32529" lat="43.0088110" lon="-7.5594741"/>
+ <node id="5502271886" visible="true" version="2" changeset="150276353" timestamp="2024-04-20T18:38:57Z" user="Rodrigo Rega" uid="32529" lat="43.0088432" lon="-7.5595013"/>
+ <node id="5502283375" visible="true" version="2" changeset="150276353" timestamp="2024-04-20T18:38:57Z" user="Rodrigo Rega" uid="32529" lat="43.0089303" lon="-7.5594303"/>
+ <node id="5502283376" visible="true" version="10" changeset="167370009" timestamp="2025-06-08T20:54:21Z" user="Rosendo" uid="519755" lat="43.0089008" lon="-7.5594836">
+  <tag k="button_operated" v="no"/>
+  <tag k="crossing" v="traffic_signals"/>
+  <tag k="highway" v="crossing"/>
+  <tag k="tactile_paving" v="yes"/>
+  <tag k="traffic_signals:sound" v="yes"/>
+  <tag k="traffic_signals:vibration" v="yes"/>
+ </node>
+ <node id="5502283377" visible="true" version="2" changeset="150276353" timestamp="2024-04-20T18:38:57Z" user="Rodrigo Rega" uid="32529" lat="43.0088741" lon="-7.5595317"/>
+ <node id="5627329145" visible="true" version="2" changeset="150276432" timestamp="2024-04-20T18:41:34Z" user="Rodrigo Rega" uid="32529" lat="43.0080818" lon="-7.5605622"/>
+ <node id="5627329147" visible="true" version="2" changeset="164912208" timestamp="2025-04-13T20:45:46Z" user="Rodrigo Rega" uid="32529" lat="43.0083994" lon="-7.5597203"/>
+ <node id="5627329148" visible="true" version="2" changeset="164912208" timestamp="2025-04-13T20:45:46Z" user="Rodrigo Rega" uid="32529" lat="43.0082758" lon="-7.5599999"/>
+ <node id="5627329149" visible="true" version="1" changeset="59088209" timestamp="2018-05-18T19:03:46Z" user="Rodrigo Rega" uid="32529" lat="43.0081297" lon="-7.5603982"/>
+ <node id="5627329151" visible="true" version="1" changeset="59088209" timestamp="2018-05-18T19:03:46Z" user="Rodrigo Rega" uid="32529" lat="43.0079208" lon="-7.5611351"/>
+ <node id="5627329152" visible="true" version="1" changeset="59088209" timestamp="2018-05-18T19:03:46Z" user="Rodrigo Rega" uid="32529" lat="43.0078002" lon="-7.5614731"/>
+ <node id="5840582197" visible="true" version="1" changeset="61781314" timestamp="2018-08-18T22:18:24Z" user="Rodrigo Rega" uid="32529" lat="43.0060033" lon="-7.5637700"/>
+ <node id="5840584093" visible="true" version="1" changeset="61781355" timestamp="2018-08-18T22:21:24Z" user="Rodrigo Rega" uid="32529" lat="43.0072431" lon="-7.5621336"/>
+ <node id="5840584094" visible="true" version="1" changeset="61781355" timestamp="2018-08-18T22:21:24Z" user="Rodrigo Rega" uid="32529" lat="43.0072321" lon="-7.5621043"/>
+ <node id="5840584106" visible="true" version="1" changeset="61781355" timestamp="2018-08-18T22:21:24Z" user="Rodrigo Rega" uid="32529" lat="43.0074942" lon="-7.5619425"/>
+ <node id="5840584107" visible="true" version="1" changeset="61781355" timestamp="2018-08-18T22:21:24Z" user="Rodrigo Rega" uid="32529" lat="43.0076413" lon="-7.5617507"/>
+ <node id="7237441166" visible="true" version="1" changeset="81375973" timestamp="2020-02-23T20:49:52Z" user="Rodrigo Rega" uid="32529" lat="43.0093165" lon="-7.5587975"/>
+ <node id="9261855365" visible="true" version="1" changeset="113918600" timestamp="2021-11-17T22:02:07Z" user="Rodrigo Rega" uid="32529" lat="43.0072151" lon="-7.5621544"/>
+ <node id="11833502882" visible="true" version="3" changeset="164912208" timestamp="2025-04-13T20:45:46Z" user="Rodrigo Rega" uid="32529" lat="43.0083695" lon="-7.5597866"/>
+ <node id="12752976759" visible="true" version="1" changeset="164912208" timestamp="2025-04-13T20:45:46Z" user="Rodrigo Rega" uid="32529" lat="43.0086078" lon="-7.5594650"/>
+ <node id="12752976760" visible="true" version="1" changeset="164912208" timestamp="2025-04-13T20:45:46Z" user="Rodrigo Rega" uid="32529" lat="43.0086552" lon="-7.5594594"/>
+ <node id="12752976761" visible="true" version="1" changeset="164912208" timestamp="2025-04-13T20:45:46Z" user="Rodrigo Rega" uid="32529" lat="43.0085391" lon="-7.5595144"/>
+ <way id="47190007" visible="true" version="13" changeset="160927559" timestamp="2025-01-02T21:50:39Z" user="Maurizio Melani (forwalk)" uid="1669056">
+  <nd ref="1447153386"/>
+  <nd ref="823585556"/>
+  <nd ref="823585555"/>
+  <nd ref="823585554"/>
+  <nd ref="3050451251"/>
+  <nd ref="4015679371"/>
+  <nd ref="5840582197"/>
+  <nd ref="864801271"/>
+  <tag k="cycleway:both" v="no"/>
+  <tag k="highway" v="pedestrian"/>
+  <tag k="lit" v="yes"/>
+  <tag k="maxspeed" v="20"/>
+  <tag k="motor_vehicle" v="permit"/>
+  <tag k="name" v="Rúa Calzada da Ponte"/>
+  <tag k="name:es" v="Calle Calzada del Puente"/>
+  <tag k="name:gl" v="Rúa Calzada da Ponte"/>
+  <tag k="oneway" v="no"/>
+  <tag k="sorting_name" v="Calzada da Ponte, Rúa"/>
+  <tag k="surface" v="paving_stones"/>
+ </way>
+ <way id="72867212" visible="true" version="12" changeset="156369962" timestamp="2024-09-08T21:32:25Z" user="Rodrigo Rega" uid="32529">
+  <nd ref="864801271"/>
+  <nd ref="4015679369"/>
+  <nd ref="601416618"/>
+  <tag k="cycleway:both" v="no"/>
+  <tag k="highway" v="pedestrian"/>
+  <tag k="layer" v="-1"/>
+  <tag k="lit" v="yes"/>
+  <tag k="maxheight" v="2"/>
+  <tag k="maxspeed" v="20"/>
+  <tag k="motor_vehicle" v="permit"/>
+  <tag k="name" v="Rúa Calzada da Ponte"/>
+  <tag k="name:es" v="Calle Calzada del Puente"/>
+  <tag k="name:gl" v="Rúa Calzada da Ponte"/>
+  <tag k="oneway" v="yes"/>
+  <tag k="sorting_name" v="Calzada da Ponte, Rúa"/>
+  <tag k="surface" v="paving_stones"/>
+  <tag k="tunnel" v="yes"/>
+ </way>
+ <way id="81604234" visible="true" version="15" changeset="167038170" timestamp="2025-06-01T07:43:46Z" user="Davileci" uid="8123953">
+  <nd ref="5502262405"/>
+  <nd ref="2302735835"/>
+  <nd ref="950975678"/>
+  <tag k="highway" v="pedestrian"/>
+  <tag k="lit" v="yes"/>
+  <tag k="name" v="Praza de Pío XII"/>
+  <tag k="name:es" v="Plaza de Pío XII"/>
+  <tag k="name:gl" v="Praza de Pío XII"/>
+  <tag k="parking:both:restriction" v="no_parking"/>
+  <tag k="sorting_name" v="Pío XII, Praza de"/>
+  <tag k="surface" v="paving_stones"/>
+ </way>
+ <way id="84569813" visible="true" version="8" changeset="160927559" timestamp="2025-01-02T21:50:39Z" user="Maurizio Melani (forwalk)" uid="1669056">
+  <nd ref="2566498019"/>
+  <nd ref="3138914206"/>
+  <nd ref="982603946"/>
+  <tag k="highway" v="footway"/>
+  <tag k="incline" v="up"/>
+  <tag k="lit" v="yes"/>
+  <tag k="name" v="Rampa de Santiago"/>
+  <tag k="name:es" v="Rampa de Santiago"/>
+  <tag k="name:gl" v="Rampa de Santiago"/>
+  <tag k="sorting_name" v="Santiago, Rampa de"/>
+  <tag k="surface" v="unhewn_cobblestone"/>
+ </way>
+ <way id="235025780" visible="true" version="11" changeset="173511439" timestamp="2025-10-19T22:07:21Z" user="Rodrigo Rega" uid="32529">
+  <nd ref="5502283377"/>
+  <nd ref="5502271886"/>
+  <nd ref="5502271885"/>
+  <nd ref="5502271883"/>
+  <nd ref="12752976760"/>
+  <tag k="footway" v="sidewalk"/>
+  <tag k="highway" v="footway"/>
+  <tag k="lit" v="yes"/>
+  <tag k="surface" v="paving_stones"/>
+ </way>
+ <way id="501358416" visible="true" version="4" changeset="143314077" timestamp="2023-10-29T14:12:13Z" user="Redondelán" uid="11664327">
+  <nd ref="1447153386"/>
+  <nd ref="1705825658"/>
+  <tag k="cycleway:both" v="no"/>
+  <tag k="highway" v="pedestrian"/>
+  <tag k="lit" v="yes"/>
+  <tag k="maxspeed" v="20"/>
+  <tag k="motor_vehicle" v="permit"/>
+  <tag k="name" v="Rúa Calzada da Ponte"/>
+  <tag k="name:es" v="Calle Calzada del Puente"/>
+  <tag k="name:gl" v="Rúa Calzada da Ponte"/>
+  <tag k="oneway" v="no"/>
+  <tag k="sorting_name" v="Calzada da Ponte, Rúa"/>
+  <tag k="surface" v="paving_stones"/>
+ </way>
+ <way id="572749959" visible="true" version="6" changeset="167038443" timestamp="2025-06-01T07:54:53Z" user="Davileci" uid="8123953">
+  <nd ref="950975678"/>
+  <nd ref="5502251057"/>
+  <tag k="bicycle" v="yes"/>
+  <tag k="highway" v="pedestrian"/>
+  <tag k="lit" v="yes"/>
+  <tag k="name" v="Praza de Pío XII"/>
+  <tag k="name:es" v="Plaza de Pío XII"/>
+  <tag k="name:gl" v="Praza de Pío XII"/>
+  <tag k="parking:both:restriction" v="no_parking"/>
+  <tag k="sorting_name" v="Pío XII, Praza de"/>
+  <tag k="surface" v="paving_stones"/>
+  <tag k="tunnel" v="building_passage"/>
+  <tag k="tunnel:name" v="Porta de Santiago"/>
+ </way>
+ <way id="572753044" visible="true" version="4" changeset="150276353" timestamp="2024-04-20T18:38:57Z" user="Rodrigo Rega" uid="32529">
+  <nd ref="5502283377"/>
+  <nd ref="5502283376"/>
+  <nd ref="5502283375"/>
+  <tag k="footway" v="crossing"/>
+  <tag k="highway" v="footway"/>
+  <tag k="lit" v="yes"/>
+  <tag k="surface" v="asphalt"/>
+ </way>
+ <way id="589304332" visible="true" version="4" changeset="164912208" timestamp="2025-04-13T20:45:46Z" user="Rodrigo Rega" uid="32529">
+  <nd ref="5627329145"/>
+  <nd ref="2431322260"/>
+  <nd ref="5627329149"/>
+  <tag k="footway" v="crossing"/>
+  <tag k="highway" v="footway"/>
+  <tag k="lit" v="yes"/>
+  <tag k="surface" v="asphalt"/>
+ </way>
+ <way id="589304334" visible="true" version="3" changeset="173511439" timestamp="2025-10-19T22:07:26Z" user="Rodrigo Rega" uid="32529">
+  <nd ref="5627329149"/>
+  <nd ref="5627329148"/>
+  <nd ref="11833502882"/>
+  <nd ref="5627329147"/>
+  <nd ref="5502271880"/>
+  <tag k="footway" v="sidewalk"/>
+  <tag k="highway" v="footway"/>
+  <tag k="surface" v="paving_stones"/>
+ </way>
+ <way id="617887847" visible="true" version="2" changeset="113918600" timestamp="2021-11-17T22:02:07Z" user="Rodrigo Rega" uid="32529">
+  <nd ref="5840584094"/>
+  <nd ref="5840584093"/>
+  <nd ref="9261855365"/>
+  <tag k="highway" v="footway"/>
+ </way>
+ <way id="617887848" visible="true" version="3" changeset="164912208" timestamp="2025-04-13T20:45:46Z" user="Rodrigo Rega" uid="32529">
+  <nd ref="5840584094"/>
+  <nd ref="5840584106"/>
+  <nd ref="5840584107"/>
+  <nd ref="5627329152"/>
+  <nd ref="5627329151"/>
+  <nd ref="5627329145"/>
+  <tag k="footway" v="sidewalk"/>
+  <tag k="highway" v="footway"/>
+ </way>
+ <way id="1003727821" visible="true" version="1" changeset="113918600" timestamp="2021-11-17T22:02:07Z" user="Rodrigo Rega" uid="32529">
+  <nd ref="9261855365"/>
+  <nd ref="1705825658"/>
+  <tag k="highway" v="steps"/>
+  <tag k="incline" v="down"/>
+ </way>
+ <way id="1348083411" visible="true" version="3" changeset="167039310" timestamp="2025-06-01T08:22:40Z" user="Davileci" uid="8123953">
+  <nd ref="982603946"/>
+  <nd ref="983624873"/>
+  <nd ref="948152912"/>
+  <nd ref="5502251057"/>
+ </way>
+ <way id="1348083412" visible="true" version="2" changeset="167049400" timestamp="2025-06-01T12:45:45Z" user="Davileci" uid="8123953">
+  <nd ref="2566498019"/>
+  <nd ref="2566498021"/>
+  <tag k="highway" v="pedestrian"/>
+  <tag k="lit" v="yes"/>
+  <tag k="name" v="Praza de Pío XII"/>
+  <tag k="name:es" v="Plaza de Pío XII"/>
+  <tag k="name:gl" v="Praza de Pío XII"/>
+  <tag k="parking:both:restriction" v="no_parking"/>
+  <tag k="sorting_name" v="Pío XII, Praza de"/>
+  <tag k="source" v="PNOA"/>
+  <tag k="surface" v="sett"/>
+ </way>
+ <way id="1348083413" visible="true" version="2" changeset="167049400" timestamp="2025-06-01T12:45:45Z" user="Davileci" uid="8123953">
+  <nd ref="2566498021"/>
+  <nd ref="2566498023"/>
+  <nd ref="2566498024"/>
+  <nd ref="948153108"/>
+  <tag k="highway" v="pedestrian"/>
+  <tag k="lit" v="yes"/>
+  <tag k="name" v="Praza de Pío XII"/>
+  <tag k="name:es" v="Plaza de Pío XII"/>
+  <tag k="name:gl" v="Praza de Pío XII"/>
+  <tag k="parking:both:restriction" v="no_parking"/>
+  <tag k="sorting_name" v="Pío XII, Praza de"/>
+  <tag k="source" v="PNOA"/>
+  <tag k="surface" v="sett"/>
+ </way>
+ <way id="1348083414" visible="true" version="2" changeset="161792588" timestamp="2025-01-26T19:22:58Z" user="Monchinho" uid="2788764">
+  <nd ref="948153108"/>
+  <nd ref="7237441166"/>
+  <nd ref="3138914213"/>
+  <nd ref="3137633129"/>
+  <tag k="highway" v="pedestrian"/>
+  <tag k="name" v="Rúa Bo Xesús"/>
+  <tag k="name:es" v="Calle Buen Jesús"/>
+  <tag k="name:gl" v="Rúa Bo Xesús"/>
+  <tag k="parking:both" v="no_parking"/>
+  <tag k="sorting_name" v="Bbo Xesús, Rúa"/>
+ </way>
+ <way id="1348083415" visible="true" version="1" changeset="160927559" timestamp="2025-01-02T21:50:39Z" user="Maurizio Melani (forwalk)" uid="1669056">
+  <nd ref="5502262405"/>
+  <nd ref="5502262404"/>
+  <nd ref="5502283375"/>
+  <tag k="footway" v="sidewalk"/>
+  <tag k="highway" v="footway"/>
+  <tag k="surface" v="paving_stones"/>
+ </way>
+ <way id="1377301562" visible="true" version="1" changeset="164912208" timestamp="2025-04-13T20:45:46Z" user="Rodrigo Rega" uid="32529">
+  <nd ref="12752976759"/>
+  <nd ref="5502271882"/>
+  <nd ref="12752976761"/>
+  <nd ref="5502271881"/>
+  <nd ref="5502271880"/>
+  <tag k="footway" v="sidewalk"/>
+  <tag k="highway" v="footway"/>
+  <tag k="lit" v="yes"/>
+ </way>
+ <way id="1377301563" visible="true" version="1" changeset="164912208" timestamp="2025-04-13T20:45:46Z" user="Rodrigo Rega" uid="32529">
+  <nd ref="12752976760"/>
+  <nd ref="3759704199"/>
+  <nd ref="12752976759"/>
+  <tag k="footway" v="crossing"/>
+  <tag k="highway" v="footway"/>
+  <tag k="lit" v="yes"/>
+  <tag k="surface" v="asphalt"/>
+ </way>
+ <way id="1428567575" visible="true" version="1" changeset="171733654" timestamp="2025-09-10T12:29:19Z" user="Hugoren Martinako" uid="3392826">
+  <nd ref="601416618"/>
+  <nd ref="4015679366"/>
+  <nd ref="601416619"/>
+  <nd ref="1447153352"/>
+  <nd ref="1447153349"/>
+  <nd ref="1705825509"/>
+  <tag k="cycleway:both" v="no"/>
+  <tag k="highway" v="pedestrian"/>
+  <tag k="lit" v="yes"/>
+  <tag k="maxspeed" v="20"/>
+  <tag k="motor_vehicle" v="destination"/>
+  <tag k="name" v="Rúa Calzada da Ponte"/>
+  <tag k="name:es" v="Calle Calzada del Puente"/>
+  <tag k="name:gl" v="Rúa Calzada da Ponte"/>
+  <tag k="oneway" v="no"/>
+  <tag k="sorting_name" v="Calzada da Ponte, Rúa"/>
+  <tag k="surface" v="paving_stones"/>
+ </way>
+ <relation id="19586852" visible="true" version="1" changeset="171733654" timestamp="2025-09-10T12:29:19Z" user="Hugoren Martinako" uid="3392826">
+  <member type="way" ref="1348083414" role=""/>
+  <member type="way" ref="1348083413" role=""/>
+  <member type="way" ref="1348083412" role=""/>
+  <member type="way" ref="84569813" role=""/>
+  <member type="way" ref="1348083411" role=""/>
+  <member type="way" ref="572749959" role=""/>
+  <member type="way" ref="81604234" role=""/>
+  <member type="way" ref="1348083415" role=""/>
+  <member type="way" ref="572753044" role=""/>
+  <member type="way" ref="235025780" role=""/>
+  <member type="way" ref="1377301563" role=""/>
+  <member type="way" ref="1377301562" role=""/>
+  <member type="way" ref="589304334" role=""/>
+  <member type="way" ref="589304332" role=""/>
+  <member type="way" ref="617887848" role=""/>
+  <member type="way" ref="617887847" role=""/>
+  <member type="way" ref="1003727821" role=""/>
+  <member type="way" ref="501358416" role=""/>
+  <member type="way" ref="47190007" role=""/>
+  <member type="way" ref="72867212" role=""/>
+  <member type="way" ref="1428567575" role=""/>
+  <tag k="distance" v="0.8"/>
+  <tag k="name" v="Etapa 10b: Variante da Porta de Santiago"/>
+  <tag k="network" v="nwn"/>
+  <tag k="osmc:symbol" v="blue:blue:shell_modern"/>
+  <tag k="pilgrimage" v="yes"/>
+  <tag k="religion" v="christian"/>
+  <tag k="roundtrip" v="no"/>
+  <tag k="route" v="hiking"/>
+  <tag k="stage" v="10"/>
+  <tag k="symbol" v="yellow shell on blue;yellow arrow"/>
+  <tag k="type" v="route"/>
+  <tag k="wiki:symbol" v="Symbol_Jakobsweg.png"/>
+ </relation>
+</osm>

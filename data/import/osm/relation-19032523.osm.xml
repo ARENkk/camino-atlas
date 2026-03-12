@@ -1,0 +1,1029 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="openstreetmap-cgimap 2.1.0 (110973 spike-06.openstreetmap.org)" copyright="OpenStreetMap and contributors" attribution="http://www.openstreetmap.org/copyright" license="http://opendatacommons.org/licenses/odbl/1-0/">
+ <node id="258771960" visible="true" version="3" changeset="160909028" timestamp="2025-01-02T14:11:44Z" user="AMZAMUS93" uid="10337830" lat="43.4179132" lon="-3.4912192"/>
+ <node id="258771962" visible="true" version="3" changeset="160909028" timestamp="2025-01-02T14:11:44Z" user="AMZAMUS93" uid="10337830" lat="43.4179904" lon="-3.4912062"/>
+ <node id="258771984" visible="true" version="3" changeset="24215692" timestamp="2014-07-18T08:17:59Z" user="Emilio Gomez" uid="2904" lat="43.4182605" lon="-3.4912100"/>
+ <node id="258772075" visible="true" version="4" changeset="160909028" timestamp="2025-01-02T14:11:44Z" user="AMZAMUS93" uid="10337830" lat="43.4175104" lon="-3.4913760"/>
+ <node id="258772078" visible="true" version="2" changeset="160909028" timestamp="2025-01-02T14:11:44Z" user="AMZAMUS93" uid="10337830" lat="43.4177500" lon="-3.4912517"/>
+ <node id="258772081" visible="true" version="2" changeset="160909028" timestamp="2025-01-02T14:11:44Z" user="AMZAMUS93" uid="10337830" lat="43.4178315" lon="-3.4912312"/>
+ <node id="258772188" visible="true" version="2" changeset="52090405" timestamp="2017-09-16T09:27:39Z" user="Emilio Gomez" uid="2904" lat="43.4192447" lon="-3.4912953"/>
+ <node id="258772190" visible="true" version="2" changeset="49552374" timestamp="2017-06-15T08:33:59Z" user="Emilio Gomez" uid="2904" lat="43.4211235" lon="-3.4914642"/>
+ <node id="258772192" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4213971" lon="-3.4914909"/>
+ <node id="258772193" visible="true" version="3" changeset="49552374" timestamp="2017-06-15T08:33:59Z" user="Emilio Gomez" uid="2904" lat="43.4228357" lon="-3.4916230"/>
+ <node id="258772199" visible="true" version="4" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4250082" lon="-3.4918591"/>
+ <node id="258772200" visible="true" version="3" changeset="52090405" timestamp="2017-09-16T09:27:39Z" user="Emilio Gomez" uid="2904" lat="43.4253246" lon="-3.4918959"/>
+ <node id="258772201" visible="true" version="3" changeset="24215692" timestamp="2014-07-18T08:17:59Z" user="Emilio Gomez" uid="2904" lat="43.4261139" lon="-3.4920258"/>
+ <node id="258772202" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4269631" lon="-3.4921961"/>
+ <node id="258772205" visible="true" version="1" changeset="198568" timestamp="2008-04-20T10:34:24Z" user="Emilio Gomez" uid="2904" lat="43.4284404" lon="-3.4924950">
+  <tag k="created_by" v="JOSM"/>
+ </node>
+ <node id="258772206" visible="true" version="2" changeset="52090405" timestamp="2017-09-16T09:27:39Z" user="Emilio Gomez" uid="2904" lat="43.4288683" lon="-3.4925794"/>
+ <node id="258772209" visible="true" version="4" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4290277" lon="-3.4926061"/>
+ <node id="258772210" visible="true" version="4" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4291968" lon="-3.4926247"/>
+ <node id="258772211" visible="true" version="3" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4293112" lon="-3.4926253"/>
+ <node id="258772229" visible="true" version="3" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4294651" lon="-3.4926036"/>
+ <node id="258772230" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4296003" lon="-3.4925643"/>
+ <node id="258772231" visible="true" version="3" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4296865" lon="-3.4925250"/>
+ <node id="258772232" visible="true" version="3" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4298188" lon="-3.4924480"/>
+ <node id="258772233" visible="true" version="4" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4299337" lon="-3.4923576"/>
+ <node id="258772234" visible="true" version="1" changeset="198568" timestamp="2008-04-20T10:34:52Z" user="Emilio Gomez" uid="2904" lat="43.4300170" lon="-3.4922773">
+  <tag k="created_by" v="JOSM"/>
+ </node>
+ <node id="258772235" visible="true" version="1" changeset="198568" timestamp="2008-04-20T10:34:54Z" user="Emilio Gomez" uid="2904" lat="43.4301258" lon="-3.4921646">
+  <tag k="created_by" v="JOSM"/>
+ </node>
+ <node id="258772236" visible="true" version="1" changeset="198568" timestamp="2008-04-20T10:34:57Z" user="Emilio Gomez" uid="2904" lat="43.4302572" lon="-3.4919882">
+  <tag k="created_by" v="JOSM"/>
+ </node>
+ <node id="258772237" visible="true" version="3" changeset="52090405" timestamp="2017-09-16T09:27:39Z" user="Emilio Gomez" uid="2904" lat="43.4305476" lon="-3.4915701"/>
+ <node id="258772241" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4311933" lon="-3.4907824"/>
+ <node id="258772250" visible="true" version="2" changeset="52090405" timestamp="2017-09-16T09:27:39Z" user="Emilio Gomez" uid="2904" lat="43.4322861" lon="-3.4895667"/>
+ <node id="258772257" visible="true" version="2" changeset="52089543" timestamp="2017-09-16T08:44:31Z" user="Emilio Gomez" uid="2904" lat="43.4337855" lon="-3.4879163"/>
+ <node id="258772258" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4344055" lon="-3.4871431"/>
+ <node id="258772260" visible="true" version="3" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4346167" lon="-3.4868807"/>
+ <node id="258772262" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4360972" lon="-3.4850314"/>
+ <node id="258772263" visible="true" version="1" changeset="198568" timestamp="2008-04-20T10:35:22Z" user="Emilio Gomez" uid="2904" lat="43.4365446" lon="-3.4844696">
+  <tag k="created_by" v="JOSM"/>
+ </node>
+ <node id="258772264" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4367034" lon="-3.4842711"/>
+ <node id="258772271" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4367973" lon="-3.4841477"/>
+ <node id="258772272" visible="true" version="1" changeset="198568" timestamp="2008-04-20T10:35:30Z" user="Emilio Gomez" uid="2904" lat="43.4368974" lon="-3.4839967">
+  <tag k="created_by" v="JOSM"/>
+ </node>
+ <node id="258772273" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4370619" lon="-3.4837251"/>
+ <node id="258772281" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4374817" lon="-3.4830225"/>
+ <node id="258772282" visible="true" version="1" changeset="198568" timestamp="2008-04-20T10:35:38Z" user="Emilio Gomez" uid="2904" lat="43.4376069" lon="-3.4827767">
+  <tag k="created_by" v="JOSM"/>
+ </node>
+ <node id="258772289" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4376838" lon="-3.4825732"/>
+ <node id="258772290" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4377444" lon="-3.4823918"/>
+ <node id="258772292" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4379779" lon="-3.4816585"/>
+ <node id="258772293" visible="true" version="3" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4383114" lon="-3.4805834"/>
+ <node id="258772295" visible="true" version="1" changeset="198568" timestamp="2008-04-20T10:35:53Z" user="Emilio Gomez" uid="2904" lat="43.4383576" lon="-3.4804682">
+  <tag k="created_by" v="JOSM"/>
+ </node>
+ <node id="258772302" visible="true" version="3" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4385272" lon="-3.4801646"/>
+ <node id="258772303" visible="true" version="3" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4386640" lon="-3.4799549"/>
+ <node id="258772304" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4389244" lon="-3.4795748"/>
+ <node id="258772306" visible="true" version="3" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4391481" lon="-3.4793134"/>
+ <node id="258772307" visible="true" version="3" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4393408" lon="-3.4791550"/>
+ <node id="258772324" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4394756" lon="-3.4790777"/>
+ <node id="258772357" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4396217" lon="-3.4790218"/>
+ <node id="258772363" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4398504" lon="-3.4789618"/>
+ <node id="258772364" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4401293" lon="-3.4788980"/>
+ <node id="258772365" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4403164" lon="-3.4788395"/>
+ <node id="258772366" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4404735" lon="-3.4787702"/>
+ <node id="258772367" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4406211" lon="-3.4786731"/>
+ <node id="258772371" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4407337" lon="-3.4785830"/>
+ <node id="258772372" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4408533" lon="-3.4784553"/>
+ <node id="258772373" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4409921" lon="-3.4782756"/>
+ <node id="258772374" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4411530" lon="-3.4780366"/>
+ <node id="258772375" visible="true" version="1" changeset="198568" timestamp="2008-04-20T10:36:39Z" user="Emilio Gomez" uid="2904" lat="43.4420062" lon="-3.4767821">
+  <tag k="created_by" v="JOSM"/>
+ </node>
+ <node id="258772376" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4426384" lon="-3.4758500"/>
+ <node id="258772377" visible="true" version="2" changeset="52089543" timestamp="2017-09-16T08:44:31Z" user="Emilio Gomez" uid="2904" lat="43.4429872" lon="-3.4753379"/>
+ <node id="258772378" visible="true" version="3" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4431942" lon="-3.4750308"/>
+ <node id="258772379" visible="true" version="1" changeset="198568" timestamp="2008-04-20T10:36:51Z" user="Emilio Gomez" uid="2904" lat="43.4433387" lon="-3.4748189">
+  <tag k="created_by" v="JOSM"/>
+ </node>
+ <node id="258772383" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4434231" lon="-3.4746907"/>
+ <node id="258772384" visible="true" version="2" changeset="161077221" timestamp="2025-01-06T22:40:18Z" user="AMZAMUS93" uid="10337830" lat="43.4435118" lon="-3.4745371"/>
+ <node id="258772385" visible="true" version="2" changeset="161077221" timestamp="2025-01-06T22:40:18Z" user="AMZAMUS93" uid="10337830" lat="43.4435563" lon="-3.4744322"/>
+ <node id="258772386" visible="true" version="2" changeset="161077221" timestamp="2025-01-06T22:40:18Z" user="AMZAMUS93" uid="10337830" lat="43.4435997" lon="-3.4743111">
+  <tag k="crossing" v="uncontrolled"/>
+  <tag k="highway" v="crossing"/>
+ </node>
+ <node id="258772387" visible="true" version="1" changeset="198568" timestamp="2008-04-20T10:37:05Z" user="Emilio Gomez" uid="2904" lat="43.4436408" lon="-3.4741575">
+  <tag k="created_by" v="JOSM"/>
+ </node>
+ <node id="258772388" visible="true" version="2" changeset="161077221" timestamp="2025-01-06T22:40:18Z" user="AMZAMUS93" uid="10337830" lat="43.4436672" lon="-3.4739940"/>
+ <node id="258772393" visible="true" version="1" changeset="198568" timestamp="2008-04-20T10:37:11Z" user="Emilio Gomez" uid="2904" lat="43.4436812" lon="-3.4738942">
+  <tag k="created_by" v="JOSM"/>
+ </node>
+ <node id="258772404" visible="true" version="2" changeset="161077221" timestamp="2025-01-06T22:40:18Z" user="AMZAMUS93" uid="10337830" lat="43.4437187" lon="-3.4735539"/>
+ <node id="258772411" visible="true" version="3" changeset="120559214" timestamp="2022-05-04T19:52:19Z" user="PinkFall" uid="10887461" lat="43.4443742" lon="-3.4677504"/>
+ <node id="258772413" visible="true" version="1" changeset="198568" timestamp="2008-04-20T10:37:30Z" user="Emilio Gomez" uid="2904" lat="43.4446045" lon="-3.4657159">
+  <tag k="created_by" v="JOSM"/>
+ </node>
+ <node id="258772415" visible="true" version="1" changeset="198568" timestamp="2008-04-20T10:37:33Z" user="Emilio Gomez" uid="2904" lat="43.4446364" lon="-3.4653364">
+  <tag k="created_by" v="JOSM"/>
+ </node>
+ <node id="258772416" visible="true" version="1" changeset="198568" timestamp="2008-04-20T10:37:36Z" user="Emilio Gomez" uid="2904" lat="43.4446584" lon="-3.4649972">
+  <tag k="created_by" v="JOSM"/>
+ </node>
+ <node id="258772418" visible="true" version="1" changeset="198568" timestamp="2008-04-20T10:37:39Z" user="Emilio Gomez" uid="2904" lat="43.4447609" lon="-3.4632953">
+  <tag k="created_by" v="JOSM"/>
+ </node>
+ <node id="258772419" visible="true" version="2" changeset="90425506" timestamp="2020-09-04T16:34:52Z" user="Juan Carlos G F" uid="3071067" lat="43.4448092" lon="-3.4624989"/>
+ <node id="443664195" visible="true" version="5" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4231194" lon="-3.4916578"/>
+ <node id="443667958" visible="true" version="2" changeset="52089543" timestamp="2017-09-16T08:44:31Z" user="Emilio Gomez" uid="2904" lat="43.4448270" lon="-3.4620771"/>
+ <node id="443667961" visible="true" version="5" changeset="90425506" timestamp="2020-09-04T16:34:52Z" user="Juan Carlos G F" uid="3071067" lat="43.4447961" lon="-3.4617173"/>
+ <node id="443667963" visible="true" version="3" changeset="52089543" timestamp="2017-09-16T08:44:31Z" user="Emilio Gomez" uid="2904" lat="43.4446120" lon="-3.4611286"/>
+ <node id="443667967" visible="true" version="3" changeset="52089543" timestamp="2017-09-16T08:44:31Z" user="Emilio Gomez" uid="2904" lat="43.4445098" lon="-3.4608881"/>
+ <node id="443667968" visible="true" version="6" changeset="90435736" timestamp="2020-09-04T23:33:33Z" user="Juan Carlos G F" uid="3071067" lat="43.4443669" lon="-3.4602174"/>
+ <node id="443667994" visible="true" version="6" changeset="90435736" timestamp="2020-09-04T23:33:33Z" user="Juan Carlos G F" uid="3071067" lat="43.4443620" lon="-3.4603523"/>
+ <node id="443668020" visible="true" version="6" changeset="90435736" timestamp="2020-09-04T23:33:33Z" user="Juan Carlos G F" uid="3071067" lat="43.4443055" lon="-3.4601121"/>
+ <node id="443668022" visible="true" version="6" changeset="90435736" timestamp="2020-09-04T23:33:33Z" user="Juan Carlos G F" uid="3071067" lat="43.4443320" lon="-3.4601400"/>
+ <node id="443668024" visible="true" version="6" changeset="175726495" timestamp="2025-12-09T18:18:54Z" user="kapazao_import" uid="8770019" lat="43.4443787" lon="-3.4605645">
+  <tag k="crossing" v="uncontrolled"/>
+  <tag k="crossing:markings" v="zebra"/>
+  <tag k="highway" v="crossing"/>
+ </node>
+ <node id="676617780" visible="true" version="2" changeset="120559214" timestamp="2022-05-04T19:52:19Z" user="PinkFall" uid="10887461" lat="43.4445860" lon="-3.4658795"/>
+ <node id="822961422" visible="true" version="3" changeset="103361526" timestamp="2021-04-21T19:33:31Z" user="5R-MFT" uid="3417876" lat="43.4445439" lon="-3.4557268"/>
+ <node id="828951498" visible="true" version="3" changeset="90435736" timestamp="2020-09-04T23:33:33Z" user="Juan Carlos G F" uid="3071067" lat="43.4445260" lon="-3.4571675"/>
+ <node id="828958288" visible="true" version="3" changeset="90435736" timestamp="2020-09-04T23:33:33Z" user="Juan Carlos G F" uid="3071067" lat="43.4443236" lon="-3.4591205"/>
+ <node id="828979536" visible="true" version="5" changeset="175726495" timestamp="2025-12-09T18:19:04Z" user="kapazao_import" uid="8770019" lat="43.4442518" lon="-3.4599612">
+  <tag k="crossing" v="uncontrolled"/>
+  <tag k="crossing:markings" v="zebra"/>
+  <tag k="highway" v="crossing"/>
+ </node>
+ <node id="828979538" visible="true" version="2" changeset="90435736" timestamp="2020-09-04T23:33:33Z" user="Juan Carlos G F" uid="3071067" lat="43.4444106" lon="-3.4580860"/>
+ <node id="829048325" visible="true" version="2" changeset="90425506" timestamp="2020-09-04T16:34:52Z" user="Juan Carlos G F" uid="3071067" lat="43.4445323" lon="-3.4566035"/>
+ <node id="829048329" visible="true" version="2" changeset="162584663" timestamp="2025-02-16T19:50:48Z" user="id037" uid="11090780" lat="43.4444665" lon="-3.4575920"/>
+ <node id="829048342" visible="true" version="2" changeset="90425506" timestamp="2020-09-04T16:34:52Z" user="Juan Carlos G F" uid="3071067" lat="43.4445313" lon="-3.4567082"/>
+ <node id="1134157867" visible="true" version="3" changeset="120559214" timestamp="2022-05-04T19:52:19Z" user="PinkFall" uid="10887461" lat="43.4444852" lon="-3.4667698"/>
+ <node id="1574166813" visible="true" version="2" changeset="52090405" timestamp="2017-09-16T09:27:40Z" user="Emilio Gomez" uid="2904" lat="43.4304630" lon="-3.4916925"/>
+ <node id="1584862823" visible="true" version="1" changeset="10353696" timestamp="2012-01-10T18:16:27Z" user="Fran ClauSam" uid="575918" lat="43.4339314" lon="-3.4877392"/>
+ <node id="1584862832" visible="true" version="2" changeset="24215692" timestamp="2014-07-18T08:17:59Z" user="Emilio Gomez" uid="2904" lat="43.4347916" lon="-3.4866570"/>
+ <node id="2968478840" visible="true" version="1" changeset="24215692" timestamp="2014-07-18T08:17:45Z" user="Emilio Gomez" uid="2904" lat="43.4257225" lon="-3.4919520"/>
+ <node id="2968478841" visible="true" version="3" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4295212" lon="-3.4925903"/>
+ <node id="2968478851" visible="true" version="2" changeset="52089543" timestamp="2017-09-16T08:44:31Z" user="Emilio Gomez" uid="2904" lat="43.4308146" lon="-3.4912243"/>
+ <node id="2968478852" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4350394" lon="-3.4863525"/>
+ <node id="2968478853" visible="true" version="1" changeset="24215692" timestamp="2014-07-18T08:17:46Z" user="Emilio Gomez" uid="2904" lat="43.4381832" lon="-3.4809928"/>
+ <node id="2968478854" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4384149" lon="-3.4803545"/>
+ <node id="2968478855" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4433625" lon="-3.4747830"/>
+ <node id="2968478856" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4434720" lon="-3.4746142"/>
+ <node id="5109011210" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4329228" lon="-3.4888772"/>
+ <node id="5109011211" visible="true" version="1" changeset="52089543" timestamp="2017-09-16T08:44:29Z" user="Emilio Gomez" uid="2904" lat="43.4306602" lon="-3.4914207"/>
+ <node id="5109011212" visible="true" version="1" changeset="52089543" timestamp="2017-09-16T08:44:29Z" user="Emilio Gomez" uid="2904" lat="43.4336150" lon="-3.4881149"/>
+ <node id="5109011213" visible="true" version="1" changeset="52089543" timestamp="2017-09-16T08:44:29Z" user="Emilio Gomez" uid="2904" lat="43.4437765" lon="-3.4730302"/>
+ <node id="5109011434" visible="true" version="1" changeset="52089543" timestamp="2017-09-16T08:44:30Z" user="Emilio Gomez" uid="2904" lat="43.4446854" lon="-3.4613085"/>
+ <node id="5109011435" visible="true" version="2" changeset="90425506" timestamp="2020-09-04T16:34:52Z" user="Juan Carlos G F" uid="3071067" lat="43.4447511" lon="-3.4615271"/>
+ <node id="5109011436" visible="true" version="1" changeset="52089543" timestamp="2017-09-16T08:44:30Z" user="Emilio Gomez" uid="2904" lat="43.4448136" lon="-3.4618341"/>
+ <node id="5109011437" visible="true" version="1" changeset="52089543" timestamp="2017-09-16T08:44:30Z" user="Emilio Gomez" uid="2904" lat="43.4448208" lon="-3.4622781"/>
+ <node id="5109011438" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4392372" lon="-3.4792326"/>
+ <node id="5109011439" visible="true" version="1" changeset="52089543" timestamp="2017-09-16T08:44:30Z" user="Emilio Gomez" uid="2904" lat="43.4390340" lon="-3.4794360"/>
+ <node id="5109068081" visible="true" version="2" changeset="160909028" timestamp="2025-01-02T14:11:44Z" user="AMZAMUS93" uid="10337830" lat="43.4175727" lon="-3.4913269"/>
+ <node id="5109068085" visible="true" version="1" changeset="52090405" timestamp="2017-09-16T09:27:36Z" user="Emilio Gomez" uid="2904" lat="43.4299731" lon="-3.4923213"/>
+ <node id="5109068086" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4298817" lon="-3.4924024"/>
+ <node id="5109068087" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4297603" lon="-3.4924852"/>
+ <node id="5109068091" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4286179" lon="-3.4925296"/>
+ <node id="5109068092" visible="true" version="2" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4255643" lon="-3.4919282"/>
+ <node id="5109068093" visible="true" version="1" changeset="52090405" timestamp="2017-09-16T09:27:36Z" user="Emilio Gomez" uid="2904" lat="43.4224204" lon="-3.4915833"/>
+ <node id="7876093148" visible="true" version="1" changeset="90425506" timestamp="2020-09-04T16:34:52Z" user="Juan Carlos G F" uid="3071067" lat="43.4448229" lon="-3.4619521"/>
+ <node id="7876093153" visible="true" version="2" changeset="90435736" timestamp="2020-09-04T23:33:33Z" user="Juan Carlos G F" uid="3071067" lat="43.4443732" lon="-3.4602624"/>
+ <node id="7876093154" visible="true" version="2" changeset="90435736" timestamp="2020-09-04T23:33:33Z" user="Juan Carlos G F" uid="3071067" lat="43.4443450" lon="-3.4603919"/>
+ <node id="7876895373" visible="true" version="1" changeset="90435736" timestamp="2020-09-04T23:33:33Z" user="Juan Carlos G F" uid="3071067" lat="43.4443705" lon="-3.4585236"/>
+ <node id="7876944394" visible="true" version="3" changeset="175727748" timestamp="2025-12-09T18:55:45Z" user="kapazao_import" uid="8770019" lat="43.4445184" lon="-3.4572781">
+  <tag k="crossing" v="uncontrolled"/>
+  <tag k="crossing:markings" v="zebra"/>
+  <tag k="highway" v="crossing"/>
+ </node>
+ <node id="7876944395" visible="true" version="1" changeset="90435736" timestamp="2020-09-04T23:33:33Z" user="Juan Carlos G F" uid="3071067" lat="43.4445248" lon="-3.4572272"/>
+ <node id="7876944396" visible="true" version="3" changeset="175727748" timestamp="2025-12-09T18:55:45Z" user="kapazao_import" uid="8770019" lat="43.4444214" lon="-3.4579790">
+  <tag k="crossing" v="uncontrolled"/>
+  <tag k="crossing:markings" v="zebra"/>
+  <tag k="highway" v="crossing"/>
+ </node>
+ <node id="7876944397" visible="true" version="3" changeset="175727748" timestamp="2025-12-09T18:55:45Z" user="kapazao_import" uid="8770019" lat="43.4443982" lon="-3.4582209">
+  <tag k="crossing" v="uncontrolled"/>
+  <tag k="crossing:markings" v="zebra"/>
+  <tag k="highway" v="crossing"/>
+ </node>
+ <node id="7876944398" visible="true" version="4" changeset="175727748" timestamp="2025-12-09T18:55:45Z" user="kapazao_import" uid="8770019" lat="43.4443290" lon="-3.4590309">
+  <tag k="crossing" v="uncontrolled"/>
+  <tag k="crossing:island" v="no"/>
+  <tag k="crossing:markings" v="zebra"/>
+  <tag k="highway" v="crossing"/>
+ </node>
+ <node id="7876944399" visible="true" version="4" changeset="175727748" timestamp="2025-12-09T18:55:45Z" user="kapazao_import" uid="8770019" lat="43.4443157" lon="-3.4592398">
+  <tag k="crossing" v="uncontrolled"/>
+  <tag k="crossing:island" v="no"/>
+  <tag k="crossing:markings" v="zebra"/>
+  <tag k="highway" v="crossing"/>
+ </node>
+ <node id="7876944400" visible="true" version="1" changeset="90435736" timestamp="2020-09-04T23:33:33Z" user="Juan Carlos G F" uid="3071067" lat="43.4442750" lon="-3.4600937"/>
+ <node id="7876944401" visible="true" version="1" changeset="90435736" timestamp="2020-09-04T23:33:33Z" user="Juan Carlos G F" uid="3071067" lat="43.4443528" lon="-3.4601758"/>
+ <node id="8653254480" visible="true" version="1" changeset="103362117" timestamp="2021-04-21T19:50:06Z" user="5R-MFT" uid="3417876" lat="43.4445340" lon="-3.4564773"/>
+ <node id="9007701312" visible="true" version="2" changeset="120559214" timestamp="2022-05-04T19:52:19Z" user="PinkFall" uid="10887461" lat="43.4443594" lon="-3.4678810"/>
+ <node id="9007701316" visible="true" version="3" changeset="161077221" timestamp="2025-01-06T22:40:18Z" user="AMZAMUS93" uid="10337830" lat="43.4439192" lon="-3.4717989"/>
+ <node id="9007702619" visible="true" version="2" changeset="161077221" timestamp="2025-01-06T22:40:18Z" user="AMZAMUS93" uid="10337830" lat="43.4439645" lon="-3.4714010"/>
+ <node id="9132781850" visible="true" version="1" changeset="111877189" timestamp="2021-09-29T16:57:09Z" user="Juanantonaya" uid="150021" lat="43.4442634" lon="-3.4600275">
+  <tag k="highway" v="give_way"/>
+ </node>
+ <node id="9132781851" visible="true" version="1" changeset="111877189" timestamp="2021-09-29T16:57:09Z" user="Juanantonaya" uid="150021" lat="43.4443735" lon="-3.4603106"/>
+ <node id="9132781873" visible="true" version="2" changeset="175727760" timestamp="2025-12-09T18:56:01Z" user="kapazao_import" uid="8770019" lat="43.4444603" lon="-3.4576367">
+  <tag k="crossing" v="uncontrolled"/>
+  <tag k="crossing:markings" v="zebra"/>
+  <tag k="highway" v="crossing"/>
+ </node>
+ <node id="9132781874" visible="true" version="2" changeset="175727760" timestamp="2025-12-09T18:56:01Z" user="kapazao_import" uid="8770019" lat="43.4445332" lon="-3.4565356">
+  <tag k="crossing" v="uncontrolled"/>
+  <tag k="crossing:markings" v="zebra"/>
+  <tag k="highway" v="crossing"/>
+ </node>
+ <node id="9132781880" visible="true" version="2" changeset="175727760" timestamp="2025-12-09T18:56:01Z" user="kapazao_import" uid="8770019" lat="43.4445426" lon="-3.4558239">
+  <tag k="crossing" v="uncontrolled"/>
+  <tag k="crossing:markings" v="zebra"/>
+  <tag k="highway" v="crossing"/>
+ </node>
+ <node id="12468959992" visible="true" version="1" changeset="160909028" timestamp="2025-01-02T14:11:44Z" user="AMZAMUS93" uid="10337830" lat="43.4179503" lon="-3.4912114"/>
+ <node id="12477082564" visible="true" version="1" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4254485" lon="-3.4919092"/>
+ <node id="12477082565" visible="true" version="1" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4294022" lon="-3.4926154"/>
+ <node id="12477082566" visible="true" version="1" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4290818" lon="-3.4926143"/>
+ <node id="12477082567" visible="true" version="1" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4296439" lon="-3.4925453"/>
+ <node id="12477108882" visible="true" version="1" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4358642" lon="-3.4853201"/>
+ <node id="12477108883" visible="true" version="1" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4373891" lon="-3.4831831"/>
+ <node id="12477108884" visible="true" version="1" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4375517" lon="-3.4828903"/>
+ <node id="12477108885" visible="true" version="1" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4376469" lon="-3.4826762"/>
+ <node id="12477108886" visible="true" version="1" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4390935" lon="-3.4793699"/>
+ <node id="12477108887" visible="true" version="1" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4392884" lon="-3.4791930"/>
+ <node id="12477108888" visible="true" version="1" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4394082" lon="-3.4791138"/>
+ <node id="12477108889" visible="true" version="1" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4395447" lon="-3.4790485"/>
+ <node id="12477108890" visible="true" version="1" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4397348" lon="-3.4789876"/>
+ <node id="12477108891" visible="true" version="1" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4402382" lon="-3.4788670"/>
+ <node id="12477108892" visible="true" version="1" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4403968" lon="-3.4788066"/>
+ <node id="12477108893" visible="true" version="1" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4405485" lon="-3.4787250"/>
+ <node id="12477108894" visible="true" version="1" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830" lat="43.4407960" lon="-3.4785200"/>
+ <node id="12479523238" visible="true" version="1" changeset="161077221" timestamp="2025-01-06T22:40:18Z" user="AMZAMUS93" uid="10337830" lat="43.4435764" lon="-3.4743789"/>
+ <node id="12479523239" visible="true" version="1" changeset="161077221" timestamp="2025-01-06T22:40:18Z" user="AMZAMUS93" uid="10337830" lat="43.4435355" lon="-3.4744847"/>
+ <node id="12479523240" visible="true" version="1" changeset="161077221" timestamp="2025-01-06T22:40:18Z" user="AMZAMUS93" uid="10337830" lat="43.4436524" lon="-3.4740970"/>
+ <node id="12479523241" visible="true" version="1" changeset="161077221" timestamp="2025-01-06T22:40:18Z" user="AMZAMUS93" uid="10337830" lat="43.4436219" lon="-3.4742343"/>
+ <way id="23875169" visible="true" version="9" changeset="160909028" timestamp="2025-01-02T14:11:44Z" user="AMZAMUS93" uid="10337830">
+  <nd ref="258771960"/>
+  <nd ref="12468959992"/>
+  <nd ref="258771962"/>
+  <nd ref="258771984"/>
+  <tag k="hazmat" v="no"/>
+  <tag k="hazmat:water" v="no"/>
+  <tag k="hgv" v="no"/>
+  <tag k="highway" v="secondary"/>
+  <tag k="lanes" v="2"/>
+  <tag k="loc_name" v="Carretera de los Puentes"/>
+  <tag k="name" v="Cicero-Santoña"/>
+  <tag k="ref" v="CA-241"/>
+  <tag k="ref:colour" v="green"/>
+  <tag k="ref:colour_bg" v="green"/>
+  <tag k="ref:colour_tx" v="white"/>
+  <tag k="surface" v="asphalt"/>
+ </way>
+ <way id="23875181" visible="true" version="8" changeset="89856629" timestamp="2020-08-24T12:01:20Z" user="Emilio Gomez" uid="2904">
+  <nd ref="443664195"/>
+  <nd ref="258772199"/>
+  <tag k="bridge" v="yes"/>
+  <tag k="hazmat" v="no"/>
+  <tag k="hazmat:water" v="no"/>
+  <tag k="hgv" v="no"/>
+  <tag k="highway" v="secondary"/>
+  <tag k="layer" v="1"/>
+  <tag k="loc_name" v="Carretera de los Puentes"/>
+  <tag k="maxspeed" v="70"/>
+  <tag k="name" v="Cicero-Santoña"/>
+  <tag k="overtaking" v="no"/>
+  <tag k="ref" v="CA-241"/>
+  <tag k="ref:colour" v="green"/>
+  <tag k="ref:colour_bg" v="green"/>
+  <tag k="ref:colour_tx" v="white"/>
+ </way>
+ <way id="23875183" visible="true" version="8" changeset="126041317" timestamp="2022-09-11T09:21:17Z" user="Juanantonaya" uid="150021">
+  <nd ref="258772376"/>
+  <nd ref="258772377"/>
+  <nd ref="258772378"/>
+  <tag k="hazmat" v="no"/>
+  <tag k="hazmat:water" v="no"/>
+  <tag k="hgv" v="no"/>
+  <tag k="highway" v="secondary"/>
+  <tag k="lanes" v="2"/>
+  <tag k="loc_name" v="Carretera de los Puentes"/>
+  <tag k="maxspeed" v="70"/>
+  <tag k="name" v="Cicero-Santoña"/>
+  <tag k="overtaking" v="no"/>
+  <tag k="ref" v="CA-241"/>
+  <tag k="ref:colour" v="green"/>
+  <tag k="ref:colour_bg" v="green"/>
+  <tag k="ref:colour_tx" v="white"/>
+  <tag k="surface" v="asphalt"/>
+ </way>
+ <way id="23875184" visible="true" version="6" changeset="89856629" timestamp="2020-08-24T12:01:20Z" user="Emilio Gomez" uid="2904">
+  <nd ref="258772375"/>
+  <nd ref="258772376"/>
+  <tag k="bridge" v="yes"/>
+  <tag k="hazmat" v="no"/>
+  <tag k="hazmat:water" v="no"/>
+  <tag k="hgv" v="no"/>
+  <tag k="highway" v="secondary"/>
+  <tag k="layer" v="1"/>
+  <tag k="loc_name" v="Carretera de los Puentes"/>
+  <tag k="maxspeed" v="70"/>
+  <tag k="name" v="Cicero-Santoña"/>
+  <tag k="overtaking" v="no"/>
+  <tag k="ref" v="CA-241"/>
+  <tag k="ref:colour" v="green"/>
+  <tag k="ref:colour_bg" v="green"/>
+  <tag k="ref:colour_tx" v="white"/>
+ </way>
+ <way id="23875186" visible="true" version="13" changeset="139778351" timestamp="2023-08-12T08:59:02Z" user="Juanantonaya" uid="150021">
+  <nd ref="258772418"/>
+  <nd ref="258772419"/>
+  <nd ref="5109011437"/>
+  <nd ref="443667958"/>
+  <nd ref="7876093148"/>
+  <nd ref="5109011436"/>
+  <nd ref="443667961"/>
+  <nd ref="5109011435"/>
+  <nd ref="5109011434"/>
+  <nd ref="443667963"/>
+  <nd ref="443667967"/>
+  <nd ref="443668024"/>
+  <tag k="hazmat" v="no"/>
+  <tag k="hazmat:water" v="no"/>
+  <tag k="hgv" v="no"/>
+  <tag k="highway" v="secondary"/>
+  <tag k="lanes" v="2"/>
+  <tag k="lit" v="yes"/>
+  <tag k="loc_name" v="Carretera de los Puentes"/>
+  <tag k="maxspeed" v="50"/>
+  <tag k="name" v="Cicero-Santoña"/>
+  <tag k="overtaking" v="no"/>
+  <tag k="ref" v="CA-241"/>
+  <tag k="ref:colour" v="green"/>
+  <tag k="ref:colour_bg" v="green"/>
+  <tag k="ref:colour_tx" v="white"/>
+  <tag k="smoothness" v="good"/>
+  <tag k="surface" v="asphalt"/>
+ </way>
+ <way id="23875187" visible="true" version="9" changeset="139778348" timestamp="2023-08-12T08:58:56Z" user="Juanantonaya" uid="150021">
+  <nd ref="258772416"/>
+  <nd ref="258772418"/>
+  <tag k="bridge" v="yes"/>
+  <tag k="hazmat" v="no"/>
+  <tag k="hazmat:water" v="no"/>
+  <tag k="hgv" v="no"/>
+  <tag k="highway" v="secondary"/>
+  <tag k="lanes" v="2"/>
+  <tag k="layer" v="1"/>
+  <tag k="loc_name" v="Carretera de los Puentes"/>
+  <tag k="maxspeed" v="70"/>
+  <tag k="name" v="Cicero-Santoña"/>
+  <tag k="overtaking" v="no"/>
+  <tag k="ref" v="CA-241"/>
+  <tag k="ref:colour" v="green"/>
+  <tag k="ref:colour_bg" v="green"/>
+  <tag k="ref:colour_tx" v="white"/>
+  <tag k="smoothness" v="good"/>
+  <tag k="surface" v="asphalt"/>
+ </way>
+ <way id="37830517" visible="true" version="8" changeset="161077221" timestamp="2025-01-06T22:40:18Z" user="AMZAMUS93" uid="10337830">
+  <nd ref="258772386"/>
+  <nd ref="12479523241"/>
+  <nd ref="258772387"/>
+  <nd ref="12479523240"/>
+  <nd ref="258772388"/>
+  <nd ref="258772393"/>
+  <nd ref="258772404"/>
+  <nd ref="5109011213"/>
+  <tag k="hazmat" v="no"/>
+  <tag k="hazmat:water" v="no"/>
+  <tag k="hgv" v="no"/>
+  <tag k="highway" v="secondary"/>
+  <tag k="lanes" v="2"/>
+  <tag k="loc_name" v="Carretera de los Puentes"/>
+  <tag k="maxspeed" v="70"/>
+  <tag k="name" v="Cicero-Santoña"/>
+  <tag k="overtaking" v="no"/>
+  <tag k="ref" v="CA-241"/>
+  <tag k="ref:colour" v="green"/>
+  <tag k="ref:colour_bg" v="green"/>
+  <tag k="ref:colour_tx" v="white"/>
+  <tag k="surface" v="asphalt"/>
+ </way>
+ <way id="37830518" visible="true" version="8" changeset="161077221" timestamp="2025-01-06T22:40:18Z" user="AMZAMUS93" uid="10337830">
+  <nd ref="258772378"/>
+  <nd ref="258772379"/>
+  <nd ref="2968478855"/>
+  <nd ref="258772383"/>
+  <nd ref="2968478856"/>
+  <nd ref="258772384"/>
+  <nd ref="12479523239"/>
+  <nd ref="258772385"/>
+  <nd ref="12479523238"/>
+  <nd ref="258772386"/>
+  <tag k="hazmat" v="no"/>
+  <tag k="hazmat:water" v="no"/>
+  <tag k="hgv" v="no"/>
+  <tag k="highway" v="secondary"/>
+  <tag k="lanes" v="2"/>
+  <tag k="loc_name" v="Carretera de los Puentes"/>
+  <tag k="maxspeed" v="70"/>
+  <tag k="name" v="Cicero-Santoña"/>
+  <tag k="overtaking" v="no"/>
+  <tag k="ref" v="CA-241"/>
+  <tag k="ref:colour" v="green"/>
+  <tag k="ref:colour_bg" v="green"/>
+  <tag k="ref:colour_tx" v="white"/>
+  <tag k="surface" v="asphalt"/>
+ </way>
+ <way id="37830519" visible="true" version="9" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830">
+  <nd ref="258772231"/>
+  <nd ref="5109068087"/>
+  <nd ref="258772232"/>
+  <nd ref="5109068086"/>
+  <nd ref="258772233"/>
+  <nd ref="5109068085"/>
+  <nd ref="258772234"/>
+  <tag k="destination:forward" v="Santoña"/>
+  <tag k="destination:ref:forward" v="CA-241"/>
+  <tag k="hazmat" v="no"/>
+  <tag k="hazmat:water" v="no"/>
+  <tag k="hgv" v="no"/>
+  <tag k="highway" v="secondary"/>
+  <tag k="lanes" v="1"/>
+  <tag k="loc_name" v="Carretera de los Puentes"/>
+  <tag k="maxspeed" v="70"/>
+  <tag k="name" v="Cicero-Santoña"/>
+  <tag k="overtaking" v="no"/>
+  <tag k="ref" v="CA-241"/>
+  <tag k="ref:colour" v="green"/>
+  <tag k="ref:colour_bg" v="green"/>
+  <tag k="ref:colour_tx" v="white"/>
+  <tag k="surface" v="asphalt"/>
+  <tag k="turn" v="right"/>
+ </way>
+ <way id="37830520" visible="true" version="6" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830">
+  <nd ref="5109068091"/>
+  <nd ref="258772206"/>
+  <nd ref="258772209"/>
+  <nd ref="12477082566"/>
+  <nd ref="258772210"/>
+  <tag k="hazmat" v="no"/>
+  <tag k="hazmat:water" v="no"/>
+  <tag k="hgv" v="no"/>
+  <tag k="highway" v="secondary"/>
+  <tag k="loc_name" v="Carretera de los Puentes"/>
+  <tag k="maxspeed" v="70"/>
+  <tag k="name" v="Cicero-Santoña"/>
+  <tag k="overtaking" v="no"/>
+  <tag k="ref" v="CA-241"/>
+  <tag k="ref:colour" v="green"/>
+  <tag k="ref:colour_bg" v="green"/>
+  <tag k="ref:colour_tx" v="white"/>
+ </way>
+ <way id="37830521" visible="true" version="7" changeset="120366952" timestamp="2022-04-29T22:35:14Z" user="PinkFall" uid="10887461">
+  <nd ref="258771984"/>
+  <nd ref="258772188"/>
+  <tag k="hazmat" v="no"/>
+  <tag k="hazmat:water" v="no"/>
+  <tag k="hgv" v="no"/>
+  <tag k="highway" v="secondary"/>
+  <tag k="loc_name" v="Carretera de los Puentes"/>
+  <tag k="maxspeed" v="70"/>
+  <tag k="name" v="Cicero-Santoña"/>
+  <tag k="overtaking" v="no"/>
+  <tag k="ref" v="CA-241"/>
+  <tag k="ref:colour" v="green"/>
+  <tag k="ref:colour_bg" v="green"/>
+  <tag k="ref:colour_tx" v="white"/>
+ </way>
+ <way id="69091539" visible="true" version="9" changeset="162584663" timestamp="2025-02-16T19:50:48Z" user="id037" uid="11090780">
+  <nd ref="828979536"/>
+  <nd ref="7876944399"/>
+  <nd ref="828958288"/>
+  <nd ref="7876944398"/>
+  <nd ref="7876895373"/>
+  <nd ref="7876944397"/>
+  <nd ref="828979538"/>
+  <nd ref="7876944396"/>
+  <nd ref="9132781873"/>
+  <nd ref="829048329"/>
+  <nd ref="7876944394"/>
+  <nd ref="7876944395"/>
+  <nd ref="828951498"/>
+  <tag k="highway" v="residential"/>
+  <tag k="name" v="Calle Duque de Santoña"/>
+  <tag k="oneway" v="no"/>
+ </way>
+ <way id="69102345" visible="true" version="5" changeset="111877189" timestamp="2021-09-29T16:57:09Z" user="Juanantonaya" uid="150021">
+  <nd ref="828951498"/>
+  <nd ref="829048342"/>
+  <nd ref="829048325"/>
+  <nd ref="9132781874"/>
+  <nd ref="8653254480"/>
+  <nd ref="9132781880"/>
+  <nd ref="822961422"/>
+  <tag k="highway" v="residential"/>
+  <tag k="name" v="Calle Duque de Santoña"/>
+  <tag k="oneway" v="no"/>
+ </way>
+ <way id="199987035" visible="true" version="8" changeset="139778348" timestamp="2023-08-12T08:58:45Z" user="Juanantonaya" uid="150021">
+  <nd ref="1134157867"/>
+  <nd ref="676617780"/>
+  <nd ref="258772413"/>
+  <nd ref="258772415"/>
+  <nd ref="258772416"/>
+  <tag k="hazmat" v="no"/>
+  <tag k="hazmat:water" v="no"/>
+  <tag k="hgv" v="no"/>
+  <tag k="highway" v="secondary"/>
+  <tag k="lanes" v="2"/>
+  <tag k="loc_name" v="Carretera de los Puentes"/>
+  <tag k="maxspeed" v="70"/>
+  <tag k="name" v="Cicero-Santoña"/>
+  <tag k="overtaking" v="no"/>
+  <tag k="ref" v="CA-241"/>
+  <tag k="ref:colour" v="green"/>
+  <tag k="ref:colour_bg" v="green"/>
+  <tag k="ref:colour_tx" v="white"/>
+  <tag k="smoothness" v="good"/>
+  <tag k="surface" v="asphalt"/>
+ </way>
+ <way id="293269800" visible="true" version="5" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830">
+  <nd ref="2968478852"/>
+  <nd ref="12477108882"/>
+  <nd ref="258772262"/>
+  <nd ref="258772263"/>
+  <nd ref="258772264"/>
+  <nd ref="258772271"/>
+  <nd ref="258772272"/>
+  <nd ref="258772273"/>
+  <nd ref="12477108883"/>
+  <nd ref="258772281"/>
+  <nd ref="12477108884"/>
+  <nd ref="258772282"/>
+  <nd ref="12477108885"/>
+  <nd ref="258772289"/>
+  <nd ref="258772290"/>
+  <nd ref="258772292"/>
+  <nd ref="2968478853"/>
+  <tag k="hazmat" v="no"/>
+  <tag k="hazmat:water" v="no"/>
+  <tag k="hgv" v="no"/>
+  <tag k="highway" v="secondary"/>
+  <tag k="loc_name" v="Carretera de los Puentes"/>
+  <tag k="maxspeed" v="70"/>
+  <tag k="name" v="Cicero-Santoña"/>
+  <tag k="overtaking" v="no"/>
+  <tag k="ref" v="CA-241"/>
+  <tag k="ref:colour" v="green"/>
+  <tag k="ref:colour_bg" v="green"/>
+  <tag k="ref:colour_tx" v="white"/>
+ </way>
+ <way id="293269801" visible="true" version="4" changeset="89856629" timestamp="2020-08-24T12:01:20Z" user="Emilio Gomez" uid="2904">
+  <nd ref="1584862832"/>
+  <nd ref="2968478852"/>
+  <tag k="bridge" v="yes"/>
+  <tag k="hazmat" v="no"/>
+  <tag k="hazmat:water" v="no"/>
+  <tag k="hgv" v="no"/>
+  <tag k="highway" v="secondary"/>
+  <tag k="layer" v="1"/>
+  <tag k="loc_name" v="Carretera de los Puentes"/>
+  <tag k="maxspeed" v="70"/>
+  <tag k="name" v="Cicero-Santoña"/>
+  <tag k="overtaking" v="no"/>
+  <tag k="ref" v="CA-241"/>
+  <tag k="ref:colour" v="green"/>
+  <tag k="ref:colour_bg" v="green"/>
+  <tag k="ref:colour_tx" v="white"/>
+ </way>
+ <way id="293269802" visible="true" version="4" changeset="89856629" timestamp="2020-08-24T12:01:20Z" user="Emilio Gomez" uid="2904">
+  <nd ref="2968478853"/>
+  <nd ref="258772293"/>
+  <tag k="bridge" v="yes"/>
+  <tag k="hazmat" v="no"/>
+  <tag k="hazmat:water" v="no"/>
+  <tag k="hgv" v="no"/>
+  <tag k="highway" v="secondary"/>
+  <tag k="layer" v="1"/>
+  <tag k="loc_name" v="Carretera de los Puentes"/>
+  <tag k="maxspeed" v="70"/>
+  <tag k="name" v="Cicero-Santoña"/>
+  <tag k="overtaking" v="no"/>
+  <tag k="ref" v="CA-241"/>
+  <tag k="ref:colour" v="green"/>
+  <tag k="ref:colour_bg" v="green"/>
+  <tag k="ref:colour_tx" v="white"/>
+ </way>
+ <way id="293269803" visible="true" version="6" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830">
+  <nd ref="258772293"/>
+  <nd ref="258772295"/>
+  <nd ref="2968478854"/>
+  <nd ref="258772302"/>
+  <nd ref="258772303"/>
+  <nd ref="258772304"/>
+  <nd ref="5109011439"/>
+  <nd ref="12477108886"/>
+  <nd ref="258772306"/>
+  <nd ref="5109011438"/>
+  <nd ref="12477108887"/>
+  <nd ref="258772307"/>
+  <nd ref="12477108888"/>
+  <nd ref="258772324"/>
+  <nd ref="12477108889"/>
+  <nd ref="258772357"/>
+  <nd ref="12477108890"/>
+  <nd ref="258772363"/>
+  <nd ref="258772364"/>
+  <nd ref="12477108891"/>
+  <nd ref="258772365"/>
+  <nd ref="12477108892"/>
+  <nd ref="258772366"/>
+  <nd ref="12477108893"/>
+  <nd ref="258772367"/>
+  <nd ref="258772371"/>
+  <nd ref="12477108894"/>
+  <nd ref="258772372"/>
+  <nd ref="258772373"/>
+  <nd ref="258772374"/>
+  <nd ref="258772375"/>
+  <tag k="hazmat" v="no"/>
+  <tag k="hazmat:water" v="no"/>
+  <tag k="hgv" v="no"/>
+  <tag k="highway" v="secondary"/>
+  <tag k="loc_name" v="Carretera de los Puentes"/>
+  <tag k="maxspeed" v="70"/>
+  <tag k="name" v="Cicero-Santoña"/>
+  <tag k="overtaking" v="no"/>
+  <tag k="ref" v="CA-241"/>
+  <tag k="ref:colour" v="green"/>
+  <tag k="ref:colour_bg" v="green"/>
+  <tag k="ref:colour_tx" v="white"/>
+ </way>
+ <way id="293269804" visible="true" version="6" changeset="160909028" timestamp="2025-01-02T14:11:44Z" user="AMZAMUS93" uid="10337830">
+  <nd ref="5109068081"/>
+  <nd ref="258772078"/>
+  <tag k="bridge" v="yes"/>
+  <tag k="destination" v="Santoña;Iglesia de Santa María del Puerto"/>
+  <tag k="hazmat" v="no"/>
+  <tag k="hazmat:water" v="no"/>
+  <tag k="highway" v="secondary"/>
+  <tag k="lanes" v="1"/>
+  <tag k="layer" v="1"/>
+  <tag k="name" v="Cicero-Santoña"/>
+  <tag k="oneway" v="yes"/>
+  <tag k="ref" v="CA-241"/>
+  <tag k="ref:colour" v="green"/>
+  <tag k="ref:colour_bg" v="green"/>
+  <tag k="ref:colour_tx" v="white"/>
+  <tag k="surface" v="asphalt"/>
+ </way>
+ <way id="293269805" visible="true" version="5" changeset="89856629" timestamp="2020-08-24T12:01:20Z" user="Emilio Gomez" uid="2904">
+  <nd ref="5109068092"/>
+  <nd ref="2968478840"/>
+  <nd ref="258772201"/>
+  <nd ref="258772202"/>
+  <tag k="hazmat" v="no"/>
+  <tag k="hazmat:water" v="no"/>
+  <tag k="hgv" v="no"/>
+  <tag k="highway" v="secondary"/>
+  <tag k="loc_name" v="Carretera de los Puentes"/>
+  <tag k="maxspeed" v="70"/>
+  <tag k="name" v="Cicero-Santoña"/>
+  <tag k="overtaking" v="yes"/>
+  <tag k="ref" v="CA-241"/>
+  <tag k="ref:colour" v="green"/>
+  <tag k="ref:colour_bg" v="green"/>
+  <tag k="ref:colour_tx" v="white"/>
+ </way>
+ <way id="525114414" visible="true" version="4" changeset="89856629" timestamp="2020-08-24T12:01:20Z" user="Emilio Gomez" uid="2904">
+  <nd ref="2968478851"/>
+  <nd ref="258772241"/>
+  <nd ref="258772250"/>
+  <nd ref="5109011210"/>
+  <nd ref="5109011212"/>
+  <tag k="hazmat" v="no"/>
+  <tag k="hazmat:water" v="no"/>
+  <tag k="hgv" v="no"/>
+  <tag k="highway" v="secondary"/>
+  <tag k="loc_name" v="Carretera de los Puentes"/>
+  <tag k="maxspeed" v="70"/>
+  <tag k="name" v="Cicero-Santoña"/>
+  <tag k="overtaking" v="yes"/>
+  <tag k="ref" v="CA-241"/>
+  <tag k="ref:colour" v="green"/>
+  <tag k="ref:colour_bg" v="green"/>
+  <tag k="ref:colour_tx" v="white"/>
+ </way>
+ <way id="525114415" visible="true" version="3" changeset="89856629" timestamp="2020-08-24T12:01:20Z" user="Emilio Gomez" uid="2904">
+  <nd ref="5109011212"/>
+  <nd ref="258772257"/>
+  <nd ref="1584862823"/>
+  <nd ref="258772258"/>
+  <nd ref="258772260"/>
+  <nd ref="1584862832"/>
+  <tag k="hazmat" v="no"/>
+  <tag k="hazmat:water" v="no"/>
+  <tag k="hgv" v="no"/>
+  <tag k="highway" v="secondary"/>
+  <tag k="loc_name" v="Carretera de los Puentes"/>
+  <tag k="maxspeed" v="70"/>
+  <tag k="name" v="Cicero-Santoña"/>
+  <tag k="overtaking" v="no"/>
+  <tag k="ref" v="CA-241"/>
+  <tag k="ref:colour" v="green"/>
+  <tag k="ref:colour_bg" v="green"/>
+  <tag k="ref:colour_tx" v="white"/>
+ </way>
+ <way id="525114416" visible="true" version="9" changeset="161077221" timestamp="2025-01-06T22:40:18Z" user="AMZAMUS93" uid="10337830">
+  <nd ref="5109011213"/>
+  <nd ref="9007701316"/>
+  <nd ref="9007702619"/>
+  <nd ref="9007701312"/>
+  <nd ref="258772411"/>
+  <tag k="hazmat" v="no"/>
+  <tag k="hazmat:water" v="no"/>
+  <tag k="hgv" v="no"/>
+  <tag k="highway" v="secondary"/>
+  <tag k="lanes" v="2"/>
+  <tag k="loc_name" v="Carretera de los Puentes"/>
+  <tag k="maxspeed" v="70"/>
+  <tag k="name" v="Cicero-Santoña"/>
+  <tag k="overtaking" v="yes"/>
+  <tag k="ref" v="CA-241"/>
+  <tag k="ref:colour" v="green"/>
+  <tag k="ref:colour_bg" v="green"/>
+  <tag k="ref:colour_tx" v="white"/>
+  <tag k="smoothness" v="good"/>
+  <tag k="surface" v="asphalt"/>
+ </way>
+ <way id="525114417" visible="true" version="6" changeset="139778348" timestamp="2023-08-12T08:58:36Z" user="Juanantonaya" uid="150021">
+  <nd ref="258772411"/>
+  <nd ref="1134157867"/>
+  <tag k="hazmat" v="no"/>
+  <tag k="hazmat:water" v="no"/>
+  <tag k="hgv" v="no"/>
+  <tag k="highway" v="secondary"/>
+  <tag k="lanes" v="2"/>
+  <tag k="loc_name" v="Carretera de los Puentes"/>
+  <tag k="maxspeed" v="70"/>
+  <tag k="name" v="Cicero-Santoña"/>
+  <tag k="overtaking" v="no"/>
+  <tag k="ref" v="CA-241"/>
+  <tag k="ref:colour" v="green"/>
+  <tag k="ref:colour_bg" v="green"/>
+  <tag k="ref:colour_tx" v="white"/>
+  <tag k="smoothness" v="good"/>
+  <tag k="surface" v="asphalt"/>
+ </way>
+ <way id="525121961" visible="true" version="4" changeset="160909028" timestamp="2025-01-02T14:11:44Z" user="AMZAMUS93" uid="10337830">
+  <nd ref="258772078"/>
+  <nd ref="258772081"/>
+  <nd ref="258771960"/>
+  <tag k="destination" v="Santoña;Iglesia de Santa María del Puerto"/>
+  <tag k="hazmat" v="no"/>
+  <tag k="hazmat:water" v="no"/>
+  <tag k="highway" v="secondary"/>
+  <tag k="lanes" v="1"/>
+  <tag k="name" v="Cicero-Santoña"/>
+  <tag k="oneway" v="yes"/>
+  <tag k="ref" v="CA-241"/>
+  <tag k="ref:colour" v="green"/>
+  <tag k="ref:colour_bg" v="green"/>
+  <tag k="ref:colour_tx" v="white"/>
+  <tag k="surface" v="asphalt"/>
+ </way>
+ <way id="525121965" visible="true" version="3" changeset="89856629" timestamp="2020-08-24T12:01:20Z" user="Emilio Gomez" uid="2904">
+  <nd ref="258772075"/>
+  <nd ref="5109068081"/>
+  <tag k="destination" v="Santoña;Iglesia de Santa María del Puerto"/>
+  <tag k="hazmat" v="no"/>
+  <tag k="hazmat:water" v="no"/>
+  <tag k="highway" v="secondary"/>
+  <tag k="lanes" v="1"/>
+  <tag k="name" v="Cicero-Santoña"/>
+  <tag k="oneway" v="yes"/>
+  <tag k="ref" v="CA-241"/>
+  <tag k="ref:colour" v="green"/>
+  <tag k="ref:colour_bg" v="green"/>
+  <tag k="ref:colour_tx" v="white"/>
+  <tag k="surface" v="asphalt"/>
+ </way>
+ <way id="525121976" visible="true" version="3" changeset="89856629" timestamp="2020-08-24T12:01:20Z" user="Emilio Gomez" uid="2904">
+  <nd ref="258772234"/>
+  <nd ref="258772235"/>
+  <nd ref="258772236"/>
+  <nd ref="1574166813"/>
+  <nd ref="258772237"/>
+  <nd ref="5109011211"/>
+  <nd ref="2968478851"/>
+  <tag k="hazmat" v="no"/>
+  <tag k="hazmat:water" v="no"/>
+  <tag k="hgv" v="no"/>
+  <tag k="highway" v="secondary"/>
+  <tag k="loc_name" v="Carretera de los Puentes"/>
+  <tag k="maxspeed" v="70"/>
+  <tag k="name" v="Cicero-Santoña"/>
+  <tag k="overtaking" v="no"/>
+  <tag k="ref" v="CA-241"/>
+  <tag k="ref:colour" v="green"/>
+  <tag k="ref:colour_bg" v="green"/>
+  <tag k="ref:colour_tx" v="white"/>
+ </way>
+ <way id="525121983" visible="true" version="4" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830">
+  <nd ref="2968478841"/>
+  <nd ref="258772230"/>
+  <nd ref="12477082567"/>
+  <nd ref="258772231"/>
+  <tag k="destination:backward" v="Cicero"/>
+  <tag k="destination:ref:backward" v="CA-241"/>
+  <tag k="hazmat" v="no"/>
+  <tag k="hazmat:water" v="no"/>
+  <tag k="hgv" v="no"/>
+  <tag k="highway" v="secondary"/>
+  <tag k="loc_name" v="Carretera de los Puentes"/>
+  <tag k="maxspeed" v="70"/>
+  <tag k="name" v="Cicero-Santoña"/>
+  <tag k="overtaking" v="no"/>
+  <tag k="ref" v="CA-241"/>
+  <tag k="ref:colour" v="green"/>
+  <tag k="ref:colour_bg" v="green"/>
+  <tag k="ref:colour_tx" v="white"/>
+  <tag k="surface" v="asphalt"/>
+ </way>
+ <way id="525121990" visible="true" version="4" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830">
+  <nd ref="258772210"/>
+  <nd ref="258772211"/>
+  <nd ref="12477082565"/>
+  <nd ref="258772229"/>
+  <nd ref="2968478841"/>
+  <tag k="hazmat" v="no"/>
+  <tag k="hazmat:water" v="no"/>
+  <tag k="hgv" v="no"/>
+  <tag k="highway" v="secondary"/>
+  <tag k="loc_name" v="Carretera de los Puentes"/>
+  <tag k="maxspeed" v="70"/>
+  <tag k="name" v="Cicero-Santoña"/>
+  <tag k="overtaking" v="no"/>
+  <tag k="ref" v="CA-241"/>
+  <tag k="ref:colour" v="green"/>
+  <tag k="ref:colour_bg" v="green"/>
+  <tag k="ref:colour_tx" v="white"/>
+ </way>
+ <way id="525121996" visible="true" version="3" changeset="89856629" timestamp="2020-08-24T12:01:20Z" user="Emilio Gomez" uid="2904">
+  <nd ref="258772202"/>
+  <nd ref="258772205"/>
+  <nd ref="5109068091"/>
+  <tag k="hazmat" v="no"/>
+  <tag k="hazmat:water" v="no"/>
+  <tag k="hgv" v="no"/>
+  <tag k="highway" v="secondary"/>
+  <tag k="loc_name" v="Carretera de los Puentes"/>
+  <tag k="maxspeed" v="70"/>
+  <tag k="name" v="Cicero-Santoña"/>
+  <tag k="overtaking" v="yes"/>
+  <tag k="ref" v="CA-241"/>
+  <tag k="ref:colour" v="green"/>
+  <tag k="ref:colour_bg" v="green"/>
+  <tag k="ref:colour_tx" v="white"/>
+ </way>
+ <way id="525122001" visible="true" version="4" changeset="161041181" timestamp="2025-01-06T00:56:58Z" user="AMZAMUS93" uid="10337830">
+  <nd ref="258772199"/>
+  <nd ref="258772200"/>
+  <nd ref="12477082564"/>
+  <nd ref="5109068092"/>
+  <tag k="hazmat" v="no"/>
+  <tag k="hazmat:water" v="no"/>
+  <tag k="hgv" v="no"/>
+  <tag k="highway" v="secondary"/>
+  <tag k="loc_name" v="Carretera de los Puentes"/>
+  <tag k="maxspeed" v="70"/>
+  <tag k="name" v="Cicero-Santoña"/>
+  <tag k="overtaking" v="no"/>
+  <tag k="ref" v="CA-241"/>
+  <tag k="ref:colour" v="green"/>
+  <tag k="ref:colour_bg" v="green"/>
+  <tag k="ref:colour_tx" v="white"/>
+ </way>
+ <way id="525122005" visible="true" version="3" changeset="89856629" timestamp="2020-08-24T12:01:20Z" user="Emilio Gomez" uid="2904">
+  <nd ref="5109068093"/>
+  <nd ref="258772193"/>
+  <nd ref="443664195"/>
+  <tag k="hazmat" v="no"/>
+  <tag k="hazmat:water" v="no"/>
+  <tag k="hgv" v="no"/>
+  <tag k="highway" v="secondary"/>
+  <tag k="loc_name" v="Carretera de los Puentes"/>
+  <tag k="maxspeed" v="70"/>
+  <tag k="name" v="Cicero-Santoña"/>
+  <tag k="overtaking" v="no"/>
+  <tag k="ref" v="CA-241"/>
+  <tag k="ref:colour" v="green"/>
+  <tag k="ref:colour_bg" v="green"/>
+  <tag k="ref:colour_tx" v="white"/>
+ </way>
+ <way id="525122009" visible="true" version="3" changeset="89856629" timestamp="2020-08-24T12:01:20Z" user="Emilio Gomez" uid="2904">
+  <nd ref="258772188"/>
+  <nd ref="258772190"/>
+  <nd ref="258772192"/>
+  <nd ref="5109068093"/>
+  <tag k="hazmat" v="no"/>
+  <tag k="hazmat:water" v="no"/>
+  <tag k="hgv" v="no"/>
+  <tag k="highway" v="secondary"/>
+  <tag k="loc_name" v="Carretera de los Puentes"/>
+  <tag k="maxspeed" v="70"/>
+  <tag k="name" v="Cicero-Santoña"/>
+  <tag k="overtaking" v="yes"/>
+  <tag k="ref" v="CA-241"/>
+  <tag k="ref:colour" v="green"/>
+  <tag k="ref:colour_bg" v="green"/>
+  <tag k="ref:colour_tx" v="white"/>
+ </way>
+ <way id="988062216" visible="true" version="2" changeset="139778348" timestamp="2023-08-12T08:52:56Z" user="Juanantonaya" uid="150021">
+  <nd ref="7876093154"/>
+  <nd ref="443668024"/>
+  <tag k="highway" v="secondary"/>
+  <tag k="lanes" v="1"/>
+  <tag k="name" v="Cicero-Santoña"/>
+  <tag k="oneway" v="yes"/>
+  <tag k="ref" v="CA-241"/>
+  <tag k="smoothness" v="excellent"/>
+  <tag k="surface" v="asphalt"/>
+ </way>
+ <way id="988062218" visible="true" version="3" changeset="139778351" timestamp="2023-08-12T08:53:14Z" user="Juanantonaya" uid="150021">
+  <nd ref="828979536"/>
+  <nd ref="9132781850"/>
+  <nd ref="7876944400"/>
+  <tag k="highway" v="residential"/>
+  <tag k="lanes" v="1"/>
+  <tag k="lit" v="yes"/>
+  <tag k="name" v="Calle Duque de Santoña"/>
+  <tag k="oneway" v="yes"/>
+  <tag k="smoothness" v="excellent"/>
+  <tag k="surface" v="asphalt"/>
+ </way>
+ <way id="1380678623" visible="true" version="1" changeset="165376672" timestamp="2025-04-24T12:23:18Z" user="pyrog" uid="270456">
+  <nd ref="7876093153"/>
+  <nd ref="9132781851"/>
+  <nd ref="443667994"/>
+  <nd ref="7876093154"/>
+  <tag k="highway" v="residential"/>
+  <tag k="junction" v="roundabout"/>
+  <tag k="lit" v="yes"/>
+  <tag k="smoothness" v="excellent"/>
+  <tag k="surface" v="asphalt"/>
+ </way>
+ <way id="1380678624" visible="true" version="1" changeset="165376672" timestamp="2025-04-24T12:23:18Z" user="pyrog" uid="270456">
+  <nd ref="7876944400"/>
+  <nd ref="443668020"/>
+  <nd ref="443668022"/>
+  <nd ref="7876944401"/>
+  <nd ref="443667968"/>
+  <nd ref="7876093153"/>
+  <tag k="highway" v="residential"/>
+  <tag k="junction" v="roundabout"/>
+  <tag k="lit" v="yes"/>
+  <tag k="smoothness" v="excellent"/>
+  <tag k="surface" v="asphalt"/>
+ </way>
+ <relation id="19032523" visible="true" version="3" changeset="165413924" timestamp="2025-04-25T09:22:33Z" user="hasahi" uid="9623065">
+  <member type="way" ref="69102345" role=""/>
+  <member type="way" ref="69091539" role=""/>
+  <member type="way" ref="988062218" role=""/>
+  <member type="way" ref="1380678624" role=""/>
+  <member type="way" ref="1380678623" role=""/>
+  <member type="way" ref="988062216" role=""/>
+  <member type="way" ref="23875186" role=""/>
+  <member type="way" ref="23875187" role=""/>
+  <member type="way" ref="199987035" role=""/>
+  <member type="way" ref="525114417" role=""/>
+  <member type="way" ref="525114416" role=""/>
+  <member type="way" ref="37830517" role=""/>
+  <member type="way" ref="37830518" role=""/>
+  <member type="way" ref="23875183" role=""/>
+  <member type="way" ref="23875184" role=""/>
+  <member type="way" ref="293269803" role=""/>
+  <member type="way" ref="293269802" role=""/>
+  <member type="way" ref="293269800" role=""/>
+  <member type="way" ref="293269801" role=""/>
+  <member type="way" ref="525114415" role=""/>
+  <member type="way" ref="525114414" role=""/>
+  <member type="way" ref="525121976" role=""/>
+  <member type="way" ref="37830519" role=""/>
+  <member type="way" ref="525121983" role=""/>
+  <member type="way" ref="525121990" role=""/>
+  <member type="way" ref="37830520" role=""/>
+  <member type="way" ref="525121996" role=""/>
+  <member type="way" ref="293269805" role=""/>
+  <member type="way" ref="525122001" role=""/>
+  <member type="way" ref="23875181" role=""/>
+  <member type="way" ref="525122005" role=""/>
+  <member type="way" ref="525122009" role=""/>
+  <member type="way" ref="37830521" role=""/>
+  <member type="way" ref="23875169" role=""/>
+  <member type="way" ref="525121961" role=""/>
+  <member type="way" ref="293269804" role=""/>
+  <member type="way" ref="525121965" role=""/>
+  <tag k="denomination" v="roman_catholic"/>
+  <tag k="description" v="Camiño do Norte (rutas alternativas Cantabria)"/>
+  <tag k="from" v="Santoña"/>
+  <tag k="network" v="nwn"/>
+  <tag k="osmc:symbol" v="blue:blue:shell_modern"/>
+  <tag k="pilgrimage" v="yes"/>
+  <tag k="religion" v="christian"/>
+  <tag k="route" v="hiking"/>
+  <tag k="to" v="Cicero"/>
+  <tag k="type" v="route"/>
+ </relation>
+</osm>

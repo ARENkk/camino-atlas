@@ -1,0 +1,1119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="openstreetmap-cgimap 2.1.0 (1070441 spike-06.openstreetmap.org)" copyright="OpenStreetMap and contributors" attribution="http://www.openstreetmap.org/copyright" license="http://opendatacommons.org/licenses/odbl/1-0/">
+ <relation id="2163938" visible="true" version="135" changeset="176808118" timestamp="2026-01-04T07:39:03Z" user="hasahi" uid="9623065">
+  <member type="way" ref="160939528" role=""/>
+  <member type="way" ref="606409604" role=""/>
+  <member type="way" ref="64942280" role=""/>
+  <member type="way" ref="4975123" role=""/>
+  <member type="way" ref="4975122" role=""/>
+  <member type="way" ref="4907322" role=""/>
+  <member type="way" ref="547070425" role=""/>
+  <member type="way" ref="88821323" role=""/>
+  <member type="way" ref="88821335" role=""/>
+  <member type="way" ref="33741429" role=""/>
+  <member type="way" ref="309844159" role=""/>
+  <member type="way" ref="309844161" role=""/>
+  <member type="way" ref="309844160" role=""/>
+  <member type="way" ref="161567946" role=""/>
+  <member type="way" ref="66990231" role=""/>
+  <member type="way" ref="4903823" role=""/>
+  <member type="way" ref="40624631" role=""/>
+  <member type="way" ref="40624630" role=""/>
+  <member type="way" ref="532621891" role=""/>
+  <member type="way" ref="68573908" role=""/>
+  <member type="way" ref="1436485093" role=""/>
+  <member type="way" ref="4888439" role=""/>
+  <member type="way" ref="606063765" role=""/>
+  <member type="way" ref="4888437" role=""/>
+  <member type="way" ref="1163314481" role=""/>
+  <member type="way" ref="45985811" role=""/>
+  <member type="way" ref="605016516" role=""/>
+  <member type="way" ref="45985810" role=""/>
+  <member type="way" ref="45985809" role=""/>
+  <member type="way" ref="40626692" role=""/>
+  <member type="way" ref="40626581" role=""/>
+  <member type="way" ref="45985808" role=""/>
+  <member type="way" ref="46427874" role=""/>
+  <member type="way" ref="46427873" role=""/>
+  <member type="way" ref="45894652" role=""/>
+  <member type="way" ref="330914211" role=""/>
+  <member type="way" ref="532494246" role=""/>
+  <member type="way" ref="605016527" role=""/>
+  <member type="way" ref="4903127" role=""/>
+  <member type="way" ref="324603969" role=""/>
+  <member type="way" ref="292062095" role=""/>
+  <member type="way" ref="4922945" role=""/>
+  <member type="way" ref="606899531" role=""/>
+  <member type="way" ref="74473464" role=""/>
+  <member type="way" ref="606899533" role=""/>
+  <member type="way" ref="85474822" role=""/>
+  <member type="way" ref="85474816" role=""/>
+  <member type="way" ref="4893078" role=""/>
+  <member type="way" ref="1445222477" role=""/>
+  <member type="way" ref="606828917" role=""/>
+  <member type="way" ref="1218022570" role=""/>
+  <member type="way" ref="292062083" role=""/>
+  <member type="way" ref="51682088" role=""/>
+  <member type="way" ref="4918296" role=""/>
+  <member type="way" ref="242510056" role=""/>
+  <member type="way" ref="509474373" role=""/>
+  <member type="way" ref="4924560" role=""/>
+  <member type="way" ref="4918266" role=""/>
+  <member type="way" ref="1218022573" role=""/>
+  <member type="way" ref="1348062511" role=""/>
+  <member type="way" ref="1218022574" role=""/>
+  <member type="way" ref="1218022575" role=""/>
+  <member type="way" ref="472146980" role=""/>
+  <member type="way" ref="472109251" role=""/>
+  <member type="way" ref="40624530" role=""/>
+  <member type="way" ref="40623889" role=""/>
+  <member type="way" ref="195864339" role=""/>
+  <member type="way" ref="291718807" role=""/>
+  <member type="way" ref="195864337" role=""/>
+  <member type="way" ref="1218623197" role=""/>
+  <member type="way" ref="303467589" role=""/>
+  <member type="way" ref="607179120" role=""/>
+  <member type="way" ref="40150109" role=""/>
+  <member type="way" ref="66518948" role=""/>
+  <member type="way" ref="35971447" role=""/>
+  <member type="way" ref="309844237" role=""/>
+  <member type="way" ref="291680128" role=""/>
+  <member type="way" ref="64787313" role=""/>
+  <member type="way" ref="66518955" role=""/>
+  <member type="way" ref="64787322" role=""/>
+  <member type="way" ref="64776720" role=""/>
+  <member type="way" ref="607177318" role=""/>
+  <member type="way" ref="64776721" role=""/>
+  <member type="way" ref="63203675" role=""/>
+  <member type="way" ref="191390052" role=""/>
+  <member type="way" ref="218586283" role=""/>
+  <member type="way" ref="218586284" role=""/>
+  <member type="way" ref="993297731" role=""/>
+  <member type="way" ref="191390051" role=""/>
+  <member type="way" ref="309844224" role=""/>
+  <member type="way" ref="1238640783" role=""/>
+  <member type="way" ref="160939653" role=""/>
+  <member type="way" ref="160939598" role=""/>
+  <member type="way" ref="1057933993" role=""/>
+  <member type="way" ref="1464079146" role=""/>
+  <member type="way" ref="160939544" role=""/>
+  <member type="way" ref="1463655666" role=""/>
+  <member type="way" ref="1057940121" role=""/>
+  <member type="way" ref="1463655668" role=""/>
+  <member type="way" ref="1463655667" role=""/>
+  <member type="way" ref="1463655665" role=""/>
+  <member type="way" ref="63203688" role=""/>
+  <member type="way" ref="216498245" role=""/>
+  <member type="way" ref="66556070" role=""/>
+  <member type="way" ref="66556045" role=""/>
+  <member type="way" ref="160939552" role=""/>
+  <member type="way" ref="66556067" role=""/>
+  <member type="way" ref="309844226" role=""/>
+  <member type="way" ref="66556028" role=""/>
+  <member type="way" ref="309844228" role=""/>
+  <member type="way" ref="160939680" role=""/>
+  <member type="way" ref="160939699" role=""/>
+  <member type="way" ref="309844211" role=""/>
+  <member type="way" ref="309844230" role=""/>
+  <member type="way" ref="309844233" role=""/>
+  <member type="way" ref="309844248" role=""/>
+  <member type="way" ref="309844217" role=""/>
+  <member type="way" ref="66555955" role=""/>
+  <member type="way" ref="66556038" role=""/>
+  <member type="way" ref="1270681918" role=""/>
+  <member type="way" ref="66555977" role=""/>
+  <member type="way" ref="309844222" role=""/>
+  <member type="way" ref="160939784" role=""/>
+  <member type="way" ref="309844243" role=""/>
+  <member type="way" ref="331601228" role=""/>
+  <member type="way" ref="160939650" role=""/>
+  <member type="way" ref="249448823" role=""/>
+  <member type="way" ref="309844210" role=""/>
+  <member type="way" ref="249448819" role=""/>
+  <member type="way" ref="309844246" role=""/>
+  <member type="way" ref="309844218" role=""/>
+  <member type="way" ref="66918191" role=""/>
+  <member type="way" ref="923209009" role=""/>
+  <member type="way" ref="309844220" role=""/>
+  <member type="way" ref="401429854" role=""/>
+  <member type="way" ref="331601225" role=""/>
+  <member type="way" ref="66918222" role=""/>
+  <member type="way" ref="66556078" role=""/>
+  <member type="way" ref="66556083" role=""/>
+  <member type="way" ref="543082336" role=""/>
+  <member type="way" ref="543082335" role=""/>
+  <member type="way" ref="309844163" role=""/>
+  <member type="way" ref="309844162" role=""/>
+  <member type="way" ref="160939547" role=""/>
+  <member type="way" ref="160939546" role=""/>
+  <member type="way" ref="43841947" role=""/>
+  <member type="way" ref="66918260" role=""/>
+  <member type="way" ref="64046916" role=""/>
+  <member type="way" ref="66918275" role=""/>
+  <member type="way" ref="160939642" role=""/>
+  <member type="way" ref="309844221" role=""/>
+  <member type="way" ref="89942712" role=""/>
+  <member type="way" ref="89942718" role=""/>
+  <member type="way" ref="89942734" role=""/>
+  <member type="way" ref="23262012" role=""/>
+  <member type="way" ref="237661124" role=""/>
+  <member type="way" ref="298721518" role=""/>
+  <member type="way" ref="298721516" role=""/>
+  <member type="way" ref="66918168" role=""/>
+  <member type="way" ref="15239956" role=""/>
+  <member type="way" ref="15239957" role=""/>
+  <member type="way" ref="163642059" role=""/>
+  <member type="way" ref="292062093" role=""/>
+  <member type="way" ref="163642060" role=""/>
+  <member type="way" ref="163642061" role=""/>
+  <member type="way" ref="296111559" role=""/>
+  <member type="way" ref="296111561" role=""/>
+  <member type="way" ref="80340318" role=""/>
+  <member type="way" ref="80340311" role=""/>
+  <member type="way" ref="1432076257" role=""/>
+  <member type="way" ref="66918227" role=""/>
+  <member type="way" ref="160939670" role=""/>
+  <member type="way" ref="66918273" role=""/>
+  <member type="way" ref="89942733" role=""/>
+  <tag k="distance" v="27"/>
+  <tag k="name" v="Etapa 1: Oviedo/Uviéu - Grau/Grado"/>
+  <tag k="network" v="nwn"/>
+  <tag k="osmc:symbol" v="blue:blue:shell_modern"/>
+  <tag k="pilgrimage" v="yes"/>
+  <tag k="religion" v="christian"/>
+  <tag k="roundtrip" v="no"/>
+  <tag k="route" v="hiking"/>
+  <tag k="stage" v="1"/>
+  <tag k="symbol" v="yellow shell on blue;yellow arrow"/>
+  <tag k="type" v="route"/>
+  <tag k="wiki:symbol" v="Symbol_Jakobsweg.png"/>
+ </relation>
+ <relation id="2163939" visible="true" version="128" changeset="171736141" timestamp="2025-09-10T13:22:42Z" user="Monchinho" uid="2788764">
+  <member type="way" ref="790183048" role=""/>
+  <member type="way" ref="1318446472" role=""/>
+  <member type="way" ref="790183050" role=""/>
+  <member type="way" ref="1318446473" role=""/>
+  <member type="way" ref="790183047" role=""/>
+  <member type="way" ref="1318446480" role=""/>
+  <member type="way" ref="69017914" role=""/>
+  <member type="way" ref="1167764641" role=""/>
+  <member type="way" ref="991790250" role=""/>
+  <member type="way" ref="292304041" role=""/>
+  <member type="way" ref="1270674443" role=""/>
+  <member type="way" ref="1270674444" role=""/>
+  <member type="way" ref="1270674445" role=""/>
+  <member type="way" ref="1270674441" role=""/>
+  <member type="way" ref="308718055" role=""/>
+  <member type="way" ref="1270674439" role=""/>
+  <member type="way" ref="308718065" role=""/>
+  <member type="way" ref="1270674437" role=""/>
+  <member type="way" ref="1270671768" role=""/>
+  <member type="way" ref="292304044" role=""/>
+  <member type="way" ref="1270671766" role=""/>
+  <member type="way" ref="145461902" role=""/>
+  <member type="way" ref="292304042" role=""/>
+  <member type="way" ref="292304040" role=""/>
+  <member type="way" ref="292304034" role=""/>
+  <member type="way" ref="843662523" role=""/>
+  <member type="way" ref="292304038" role=""/>
+  <member type="way" ref="292304036" role=""/>
+  <tag k="distance" v="11"/>
+  <tag k="name" v="Etapa 8b: Variante da Proba de Burón"/>
+  <tag k="network" v="nwn"/>
+  <tag k="osmc:symbol" v="blue:blue:shell_modern"/>
+  <tag k="pilgrimage" v="yes"/>
+  <tag k="religion" v="christian"/>
+  <tag k="roundtrip" v="no"/>
+  <tag k="route" v="hiking"/>
+  <tag k="stage" v="8"/>
+  <tag k="symbol" v="yellow shell on blue;yellow arrow"/>
+  <tag k="type" v="route"/>
+  <tag k="wiki:symbol" v="Symbol_Jakobsweg.png"/>
+ </relation>
+ <relation id="10526092" visible="true" version="94" changeset="171733654" timestamp="2025-09-10T12:29:19Z" user="Hugoren Martinako" uid="3392826">
+  <member type="way" ref="789027134" role=""/>
+  <member type="way" ref="1303959164" role=""/>
+  <member type="way" ref="144650587" role=""/>
+  <member type="way" ref="144650561" role=""/>
+  <member type="way" ref="144650622" role=""/>
+  <member type="way" ref="47192791" role=""/>
+  <member type="way" ref="63255980" role=""/>
+  <member type="way" ref="366749034" role=""/>
+  <member type="way" ref="305922742" role=""/>
+  <member type="way" ref="305922744" role=""/>
+  <member type="way" ref="47192774" role=""/>
+  <member type="way" ref="160948576" role=""/>
+  <member type="way" ref="144650691" role=""/>
+  <member type="way" ref="306460774" role=""/>
+  <member type="way" ref="144650661" role=""/>
+  <member type="way" ref="47192779" role=""/>
+  <member type="way" ref="47192781" role=""/>
+  <member type="way" ref="47192784" role=""/>
+  <member type="way" ref="47192971" role=""/>
+  <member type="way" ref="144600074" role=""/>
+  <member type="way" ref="144600043" role=""/>
+  <member type="way" ref="144650565" role=""/>
+  <member type="way" ref="144650556" role=""/>
+  <member type="way" ref="306048321" role=""/>
+  <member type="way" ref="144713750" role=""/>
+  <member type="way" ref="306035943" role=""/>
+  <member type="way" ref="144713777" role=""/>
+  <member type="way" ref="144713866" role=""/>
+  <member type="way" ref="144713882" role=""/>
+  <member type="way" ref="144713812" role=""/>
+  <member type="way" ref="1372515956" role=""/>
+  <member type="way" ref="144713910" role=""/>
+  <member type="way" ref="144713851" role=""/>
+  <member type="way" ref="144713773" role=""/>
+  <member type="way" ref="307371927" role=""/>
+  <member type="way" ref="307371925" role=""/>
+  <member type="way" ref="366749037" role=""/>
+  <member type="way" ref="144713900" role=""/>
+  <member type="way" ref="789672560" role=""/>
+  <member type="way" ref="789672559" role=""/>
+  <member type="way" ref="1394127196" role=""/>
+  <member type="way" ref="1369667478" role=""/>
+  <member type="way" ref="1369667477" role=""/>
+  <member type="way" ref="186052304" role=""/>
+  <member type="way" ref="144713868" role=""/>
+  <member type="way" ref="67163151" role=""/>
+  <member type="way" ref="41833810" role=""/>
+  <member type="way" ref="73039908" role=""/>
+  <member type="way" ref="1368070131" role=""/>
+  <member type="way" ref="1368070132" role=""/>
+  <member type="way" ref="73039875" role=""/>
+  <member type="way" ref="737326823" role=""/>
+  <member type="way" ref="737326824" role=""/>
+  <member type="way" ref="67238828" role=""/>
+  <member type="way" ref="262928093" role=""/>
+  <member type="way" ref="262928076" role=""/>
+  <member type="way" ref="67489293" role=""/>
+  <tag k="distance" v="28"/>
+  <tag k="name" v="Etapa 11: San Romao da Retorta - Melide"/>
+  <tag k="network" v="nwn"/>
+  <tag k="osmc:symbol" v="blue:blue:shell_modern"/>
+  <tag k="pilgrimage" v="yes"/>
+  <tag k="religion" v="christian"/>
+  <tag k="roundtrip" v="no"/>
+  <tag k="route" v="hiking"/>
+  <tag k="stage" v="11"/>
+  <tag k="symbol" v="yellow shell on blue;yellow arrow"/>
+  <tag k="type" v="route"/>
+  <tag k="wiki:symbol" v="Symbol_Jakobsweg.png"/>
+ </relation>
+ <relation id="19298101" visible="true" version="8" changeset="175255447" timestamp="2025-11-28T21:17:58Z" user="Monchinho" uid="2788764">
+  <member type="relation" ref="2163938" role=""/>
+  <member type="relation" ref="19586861" role=""/>
+  <member type="relation" ref="19586860" role=""/>
+  <member type="relation" ref="19586862" role=""/>
+  <member type="relation" ref="19586858" role="alternative"/>
+  <member type="relation" ref="19586859" role=""/>
+  <member type="relation" ref="19586857" role=""/>
+  <member type="relation" ref="19586856" role=""/>
+  <member type="relation" ref="19586855" role=""/>
+  <member type="relation" ref="2163939" role="alternative"/>
+  <member type="relation" ref="19586854" role=""/>
+  <member type="relation" ref="19586853" role=""/>
+  <member type="relation" ref="19586852" role="alternative"/>
+  <member type="relation" ref="10526092" role=""/>
+  <tag k="alt_name:gl" v="Camín Primitivo"/>
+  <tag k="distance" v="291"/>
+  <tag k="from" v="Uviéu"/>
+  <tag k="name" v="Camino Primitivo"/>
+  <tag k="name:ast" v="Camín Primitivu"/>
+  <tag k="name:en" v="Primitive Way"/>
+  <tag k="name:es" v="Camino Primitivo"/>
+  <tag k="name:gl" v="Camiño Primitivo"/>
+  <tag k="network" v="nwn"/>
+  <tag k="osmc:symbol" v="blue:blue:shell_modern"/>
+  <tag k="pilgrimage" v="yes"/>
+  <tag k="religion" v="christian"/>
+  <tag k="roundtrip" v="no"/>
+  <tag k="route" v="hiking"/>
+  <tag k="symbol" v="yellow shell on blue;yellow arrow"/>
+  <tag k="to" v="Melide"/>
+  <tag k="type" v="superroute"/>
+  <tag k="website" v="https://www.caminosantiago.org/cpperegrino/caminos/caminover.asp?kCamino=ES05a&amp;CaminoId=2"/>
+  <tag k="wikidata" v="Q929491"/>
+  <tag k="wikipedia" v="gl:Camiño Primitivo"/>
+  <tag k="wiki:symbol" v="Symbol_Jakobsweg.png"/>
+ </relation>
+ <relation id="19586852" visible="true" version="1" changeset="171733654" timestamp="2025-09-10T12:29:19Z" user="Hugoren Martinako" uid="3392826">
+  <member type="way" ref="1348083414" role=""/>
+  <member type="way" ref="1348083413" role=""/>
+  <member type="way" ref="1348083412" role=""/>
+  <member type="way" ref="84569813" role=""/>
+  <member type="way" ref="1348083411" role=""/>
+  <member type="way" ref="572749959" role=""/>
+  <member type="way" ref="81604234" role=""/>
+  <member type="way" ref="1348083415" role=""/>
+  <member type="way" ref="572753044" role=""/>
+  <member type="way" ref="235025780" role=""/>
+  <member type="way" ref="1377301563" role=""/>
+  <member type="way" ref="1377301562" role=""/>
+  <member type="way" ref="589304334" role=""/>
+  <member type="way" ref="589304332" role=""/>
+  <member type="way" ref="617887848" role=""/>
+  <member type="way" ref="617887847" role=""/>
+  <member type="way" ref="1003727821" role=""/>
+  <member type="way" ref="501358416" role=""/>
+  <member type="way" ref="47190007" role=""/>
+  <member type="way" ref="72867212" role=""/>
+  <member type="way" ref="1428567575" role=""/>
+  <tag k="distance" v="0.8"/>
+  <tag k="name" v="Etapa 10b: Variante da Porta de Santiago"/>
+  <tag k="network" v="nwn"/>
+  <tag k="osmc:symbol" v="blue:blue:shell_modern"/>
+  <tag k="pilgrimage" v="yes"/>
+  <tag k="religion" v="christian"/>
+  <tag k="roundtrip" v="no"/>
+  <tag k="route" v="hiking"/>
+  <tag k="stage" v="10"/>
+  <tag k="symbol" v="yellow shell on blue;yellow arrow"/>
+  <tag k="type" v="route"/>
+  <tag k="wiki:symbol" v="Symbol_Jakobsweg.png"/>
+ </relation>
+ <relation id="19586853" visible="true" version="1" changeset="171733654" timestamp="2025-09-10T12:29:19Z" user="Hugoren Martinako" uid="3392826">
+  <member type="way" ref="84571541" role=""/>
+  <member type="way" ref="1348083421" role=""/>
+  <member type="way" ref="819443536" role=""/>
+  <member type="way" ref="790043033" role=""/>
+  <member type="way" ref="819443535" role=""/>
+  <member type="way" ref="572749961" role=""/>
+  <member type="way" ref="131555644" role=""/>
+  <member type="way" ref="790043032" role=""/>
+  <member type="way" ref="1281771819" role=""/>
+  <member type="way" ref="836508220" role=""/>
+  <member type="way" ref="131188997" role=""/>
+  <member type="way" ref="398498128" role=""/>
+  <member type="way" ref="398498499" role=""/>
+  <member type="way" ref="668142190" role=""/>
+  <member type="way" ref="1348083422" role=""/>
+  <member type="way" ref="1092619733" role=""/>
+  <member type="way" ref="1176535523" role=""/>
+  <member type="way" ref="1176535520" role=""/>
+  <member type="way" ref="1348083423" role=""/>
+  <member type="way" ref="300946905" role=""/>
+  <member type="way" ref="158372097" role=""/>
+  <member type="way" ref="72867213" role=""/>
+  <member type="way" ref="47190001" role=""/>
+  <member type="way" ref="47190000" role=""/>
+  <member type="way" ref="72867206" role=""/>
+  <member type="way" ref="47190004" role=""/>
+  <member type="way" ref="783390914" role=""/>
+  <member type="way" ref="819841805" role=""/>
+  <member type="way" ref="47190003" role=""/>
+  <member type="way" ref="121254716" role=""/>
+  <member type="way" ref="121254714" role=""/>
+  <member type="way" ref="47191498" role=""/>
+  <member type="way" ref="376957446" role=""/>
+  <member type="way" ref="47191499" role=""/>
+  <member type="way" ref="47191552" role=""/>
+  <member type="way" ref="47191554" role=""/>
+  <member type="way" ref="47191553" role=""/>
+  <member type="way" ref="47192626" role=""/>
+  <member type="way" ref="234946320" role=""/>
+  <member type="way" ref="161568042" role=""/>
+  <member type="way" ref="790044703" role=""/>
+  <member type="way" ref="819841792" role=""/>
+  <member type="way" ref="819841788" role=""/>
+  <member type="way" ref="144718930" role=""/>
+  <member type="way" ref="790044701" role=""/>
+  <member type="way" ref="144718918" role=""/>
+  <member type="way" ref="144718890" role=""/>
+  <member type="way" ref="790044699" role=""/>
+  <member type="way" ref="144718919" role=""/>
+  <member type="way" ref="790044698" role=""/>
+  <member type="way" ref="68457438" role=""/>
+  <member type="way" ref="819841778" role=""/>
+  <member type="way" ref="819841777" role=""/>
+  <member type="way" ref="819841785" role=""/>
+  <member type="way" ref="68455288" role=""/>
+  <member type="way" ref="292060005" role=""/>
+  <member type="way" ref="144718935" role=""/>
+  <member type="way" ref="144718908" role=""/>
+  <member type="way" ref="182428376" role=""/>
+  <member type="way" ref="182430235" role=""/>
+  <member type="way" ref="73041722" role=""/>
+  <member type="way" ref="160948570" role=""/>
+  <member type="way" ref="68455469" role=""/>
+  <member type="way" ref="73041852" role=""/>
+  <member type="way" ref="849364854" role=""/>
+  <tag k="distance" v="19"/>
+  <tag k="name" v="Etapa 10: Lugo - San Romao da Retorta"/>
+  <tag k="network" v="nwn"/>
+  <tag k="osmc:symbol" v="blue:blue:shell_modern"/>
+  <tag k="pilgrimage" v="yes"/>
+  <tag k="religion" v="christian"/>
+  <tag k="roundtrip" v="no"/>
+  <tag k="route" v="hiking"/>
+  <tag k="stage" v="10"/>
+  <tag k="symbol" v="yellow shell on blue;yellow arrow"/>
+  <tag k="type" v="route"/>
+  <tag k="wiki:symbol" v="Symbol_Jakobsweg.png"/>
+ </relation>
+ <relation id="19586854" visible="true" version="1" changeset="171733654" timestamp="2025-09-10T12:29:19Z" user="Hugoren Martinako" uid="3392826">
+  <member type="way" ref="68458795" role=""/>
+  <member type="way" ref="161567940" role=""/>
+  <member type="way" ref="1294628121" role=""/>
+  <member type="way" ref="1294628120" role=""/>
+  <member type="way" ref="160034567" role=""/>
+  <member type="way" ref="160944944" role=""/>
+  <member type="way" ref="160034589" role=""/>
+  <member type="way" ref="310291670" role=""/>
+  <member type="way" ref="310291698" role=""/>
+  <member type="way" ref="760132099" role=""/>
+  <member type="way" ref="444595516" role=""/>
+  <member type="way" ref="176389141" role=""/>
+  <member type="way" ref="1333495347" role=""/>
+  <member type="way" ref="176389160" role=""/>
+  <member type="way" ref="1270667205" role=""/>
+  <member type="way" ref="1333495348" role=""/>
+  <member type="way" ref="176389118" role=""/>
+  <member type="way" ref="1270667204" role=""/>
+  <member type="way" ref="649755395" role=""/>
+  <member type="way" ref="1076082691" role=""/>
+  <member type="way" ref="176391551" role=""/>
+  <member type="way" ref="1270667360" role=""/>
+  <member type="way" ref="1294627554" role=""/>
+  <member type="way" ref="68459791" role=""/>
+  <member type="way" ref="310291661" role=""/>
+  <member type="way" ref="176086515" role=""/>
+  <member type="way" ref="1294627440" role=""/>
+  <member type="way" ref="70191120" role=""/>
+  <member type="way" ref="176827071" role=""/>
+  <member type="way" ref="176061970" role=""/>
+  <member type="way" ref="291721766" role=""/>
+  <member type="way" ref="176061965" role=""/>
+  <member type="way" ref="96883856" role=""/>
+  <member type="way" ref="68460260" role=""/>
+  <member type="way" ref="1333703663" role=""/>
+  <member type="way" ref="1333703664" role=""/>
+  <member type="way" ref="310291701" role=""/>
+  <member type="way" ref="317596885" role=""/>
+  <member type="way" ref="317596891" role=""/>
+  <member type="way" ref="176221574" role=""/>
+  <member type="way" ref="176221594" role=""/>
+  <member type="way" ref="176221590" role=""/>
+  <member type="way" ref="176221592" role=""/>
+  <member type="way" ref="176221591" role=""/>
+  <member type="way" ref="310291678" role=""/>
+  <member type="way" ref="176221599" role=""/>
+  <member type="way" ref="790188562" role=""/>
+  <member type="way" ref="790188560" role=""/>
+  <member type="way" ref="176224026" role=""/>
+  <member type="way" ref="176221578" role=""/>
+  <member type="way" ref="176224025" role=""/>
+  <member type="way" ref="310291680" role=""/>
+  <member type="way" ref="291722048" role=""/>
+  <member type="way" ref="176689966" role=""/>
+  <member type="way" ref="310291684" role=""/>
+  <member type="way" ref="310291692" role=""/>
+  <member type="way" ref="184229629" role=""/>
+  <member type="way" ref="310291715" role=""/>
+  <member type="way" ref="291722254" role=""/>
+  <member type="way" ref="125530562" role=""/>
+  <member type="way" ref="70191130" role=""/>
+  <member type="way" ref="125530561" role=""/>
+  <member type="way" ref="310291707" role=""/>
+  <member type="way" ref="184080215" role=""/>
+  <member type="way" ref="184080210" role=""/>
+  <member type="way" ref="310291675" role=""/>
+  <member type="way" ref="68462470" role=""/>
+  <member type="way" ref="68462896" role=""/>
+  <member type="way" ref="366749035" role=""/>
+  <member type="way" ref="366749036" role=""/>
+  <member type="way" ref="140549233" role=""/>
+  <member type="way" ref="140549234" role=""/>
+  <member type="way" ref="160948577" role=""/>
+  <member type="way" ref="619421404" role=""/>
+  <member type="way" ref="106806238" role=""/>
+  <member type="way" ref="1354652775" role=""/>
+  <member type="way" ref="69056863" role=""/>
+  <member type="way" ref="164863563" role=""/>
+  <member type="way" ref="164863562" role=""/>
+  <member type="way" ref="566222627" role=""/>
+  <member type="way" ref="566222626" role=""/>
+  <member type="way" ref="291722409" role=""/>
+  <member type="way" ref="234949550" role=""/>
+  <member type="way" ref="234949556" role=""/>
+  <member type="way" ref="234949553" role=""/>
+  <member type="way" ref="1274493887" role=""/>
+  <member type="way" ref="591405902" role=""/>
+  <member type="way" ref="790187048" role=""/>
+  <member type="way" ref="405401814" role=""/>
+  <member type="way" ref="311016284" role=""/>
+  <member type="way" ref="234946276" role=""/>
+  <member type="way" ref="234946275" role=""/>
+  <member type="way" ref="33186870" role=""/>
+  <member type="way" ref="1294630239" role=""/>
+  <member type="way" ref="572753099" role=""/>
+  <member type="way" ref="790186244" role=""/>
+  <member type="way" ref="790186243" role=""/>
+  <member type="way" ref="84675827" role=""/>
+  <member type="way" ref="84675824" role=""/>
+  <member type="way" ref="235025755" role=""/>
+  <member type="way" ref="819443540" role=""/>
+  <member type="way" ref="291722577" role=""/>
+  <member type="way" ref="81296406" role=""/>
+  <member type="way" ref="308488828" role=""/>
+  <member type="way" ref="790043037" role=""/>
+  <member type="way" ref="560574024" role=""/>
+  <member type="way" ref="790043036" role=""/>
+  <member type="way" ref="560574023" role=""/>
+  <member type="way" ref="81368688" role=""/>
+  <tag k="distance" v="36"/>
+  <tag k="name" v="Etapa 9: O Cádavo - Lugo"/>
+  <tag k="network" v="nwn"/>
+  <tag k="osmc:symbol" v="blue:blue:shell_modern"/>
+  <tag k="pilgrimage" v="yes"/>
+  <tag k="religion" v="christian"/>
+  <tag k="roundtrip" v="no"/>
+  <tag k="route" v="hiking"/>
+  <tag k="stage" v="9"/>
+  <tag k="symbol" v="yellow shell on blue;yellow arrow"/>
+  <tag k="type" v="route"/>
+  <tag k="wiki:symbol" v="Symbol_Jakobsweg.png"/>
+ </relation>
+ <relation id="19586855" visible="true" version="1" changeset="171733654" timestamp="2025-09-10T12:29:19Z" user="Hugoren Martinako" uid="3392826">
+  <member type="way" ref="145427401" role=""/>
+  <member type="way" ref="1268376366" role=""/>
+  <member type="way" ref="376494031" role=""/>
+  <member type="way" ref="368016028" role=""/>
+  <member type="way" ref="160944935" role=""/>
+  <member type="way" ref="145427392" role=""/>
+  <member type="way" ref="310298031" role=""/>
+  <member type="way" ref="310298168" role=""/>
+  <member type="way" ref="160944938" role=""/>
+  <member type="way" ref="69019864" role=""/>
+  <member type="way" ref="69019839" role=""/>
+  <member type="way" ref="69019863" role=""/>
+  <member type="way" ref="310298044" role=""/>
+  <member type="way" ref="310298064" role=""/>
+  <member type="way" ref="69042855" role=""/>
+  <member type="way" ref="145461904" role=""/>
+  <member type="way" ref="310298109" role=""/>
+  <member type="way" ref="310298160" role=""/>
+  <member type="way" ref="310298057" role=""/>
+  <member type="way" ref="310298146" role=""/>
+  <member type="way" ref="310298113" role=""/>
+  <member type="way" ref="310298073" role=""/>
+  <member type="way" ref="310298130" role=""/>
+  <member type="way" ref="310298124" role=""/>
+  <member type="way" ref="310298055" role=""/>
+  <member type="way" ref="310298079" role=""/>
+  <member type="way" ref="310298121" role=""/>
+  <member type="way" ref="310298089" role=""/>
+  <member type="way" ref="310298061" role=""/>
+  <member type="way" ref="310298133" role=""/>
+  <member type="way" ref="160944971" role=""/>
+  <member type="way" ref="310298116" role=""/>
+  <member type="way" ref="1294629853" role=""/>
+  <member type="way" ref="69019946" role=""/>
+  <member type="way" ref="69019995" role=""/>
+  <member type="way" ref="310298141" role=""/>
+  <member type="way" ref="1294629773" role=""/>
+  <member type="way" ref="310291690" role=""/>
+  <member type="way" ref="310291703" role=""/>
+  <member type="way" ref="310291706" role=""/>
+  <member type="way" ref="310291700" role=""/>
+  <member type="way" ref="144449213" role=""/>
+  <member type="way" ref="144449220" role=""/>
+  <member type="way" ref="69020125" role=""/>
+  <member type="way" ref="70190407" role=""/>
+  <member type="way" ref="310291655" role=""/>
+  <member type="way" ref="310291696" role=""/>
+  <member type="way" ref="310291711" role=""/>
+  <member type="way" ref="310291668" role=""/>
+  <member type="way" ref="310291699" role=""/>
+  <member type="way" ref="159928248" role=""/>
+  <member type="way" ref="70191104" role=""/>
+  <member type="way" ref="70191097" role=""/>
+  <member type="way" ref="790191247" role=""/>
+  <member type="way" ref="160169434" role=""/>
+  <member type="way" ref="69020250" role=""/>
+  <member type="way" ref="310291688" role=""/>
+  <member type="way" ref="1033212347" role=""/>
+  <member type="way" ref="70191108" role=""/>
+  <member type="way" ref="1395683407" role=""/>
+  <member type="way" ref="699880782" role=""/>
+  <member type="way" ref="69020286" role=""/>
+  <member type="way" ref="310291664" role=""/>
+  <tag k="distance" v="24"/>
+  <tag k="name" v="Etapa 8: A Fonsagrada - O Cádavo"/>
+  <tag k="network" v="nwn"/>
+  <tag k="osmc:symbol" v="blue:blue:shell_modern"/>
+  <tag k="pilgrimage" v="yes"/>
+  <tag k="religion" v="christian"/>
+  <tag k="roundtrip" v="no"/>
+  <tag k="route" v="hiking"/>
+  <tag k="stage" v="8"/>
+  <tag k="symbol" v="yellow shell on blue;yellow arrow"/>
+  <tag k="type" v="route"/>
+  <tag k="wiki:symbol" v="Symbol_Jakobsweg.png"/>
+ </relation>
+ <relation id="19586856" visible="true" version="1" changeset="171733654" timestamp="2025-09-10T12:29:19Z" user="Hugoren Martinako" uid="3392826">
+  <member type="way" ref="291721514" role=""/>
+  <member type="way" ref="20000870" role=""/>
+  <member type="way" ref="69013291" role=""/>
+  <member type="way" ref="160944983" role=""/>
+  <member type="way" ref="1167764612" role=""/>
+  <member type="way" ref="69013299" role=""/>
+  <member type="way" ref="1167764615" role=""/>
+  <member type="way" ref="1167764616" role=""/>
+  <member type="way" ref="310152824" role=""/>
+  <member type="way" ref="1167764617" role=""/>
+  <member type="way" ref="69013323" role=""/>
+  <member type="way" ref="161568032" role=""/>
+  <member type="way" ref="452119192" role=""/>
+  <member type="way" ref="160944912" role=""/>
+  <member type="way" ref="701981201" role=""/>
+  <member type="way" ref="701981199" role=""/>
+  <member type="way" ref="160944917" role=""/>
+  <member type="way" ref="790180750" role=""/>
+  <member type="way" ref="790180749" role=""/>
+  <member type="way" ref="701981343" role=""/>
+  <member type="way" ref="310152822" role=""/>
+  <member type="way" ref="310152818" role=""/>
+  <member type="way" ref="452119725" role=""/>
+  <member type="way" ref="452280377" role=""/>
+  <member type="way" ref="96051077" role=""/>
+  <member type="way" ref="96051028" role=""/>
+  <member type="way" ref="1167764622" role=""/>
+  <member type="way" ref="1167764620" role=""/>
+  <member type="way" ref="701982333" role=""/>
+  <member type="way" ref="1167764623" role=""/>
+  <member type="way" ref="310158281" role=""/>
+  <member type="way" ref="1167764624" role=""/>
+  <member type="way" ref="1167764625" role=""/>
+  <member type="way" ref="310158290" role=""/>
+  <member type="way" ref="69013407" role=""/>
+  <member type="way" ref="310158282" role=""/>
+  <member type="way" ref="310158293" role=""/>
+  <member type="way" ref="70186988" role=""/>
+  <member type="way" ref="1167764628" role=""/>
+  <member type="way" ref="310158280" role=""/>
+  <member type="way" ref="310158291" role=""/>
+  <member type="way" ref="310158296" role=""/>
+  <member type="way" ref="310158285" role=""/>
+  <member type="way" ref="1338844456" role=""/>
+  <member type="way" ref="1338844462" role=""/>
+  <member type="way" ref="1131689233" role=""/>
+  <member type="way" ref="310158287" role=""/>
+  <member type="way" ref="1338844460" role=""/>
+  <member type="way" ref="496971266" role=""/>
+  <member type="way" ref="496971274" role=""/>
+  <member type="way" ref="144924328" role=""/>
+  <member type="way" ref="310158275" role=""/>
+  <member type="way" ref="310158284" role=""/>
+  <member type="way" ref="310158274" role=""/>
+  <member type="way" ref="1167764636" role=""/>
+  <member type="way" ref="1167764634" role=""/>
+  <member type="way" ref="145075939" role=""/>
+  <member type="way" ref="1167764637" role=""/>
+  <member type="way" ref="69016047" role=""/>
+  <member type="way" ref="790180546" role=""/>
+  <member type="way" ref="790180545" role=""/>
+  <member type="way" ref="366893298" role=""/>
+  <member type="way" ref="384399194" role=""/>
+  <member type="way" ref="384399193" role=""/>
+  <member type="way" ref="384399195" role=""/>
+  <member type="way" ref="69017178" role=""/>
+  <member type="way" ref="69017604" role=""/>
+  <member type="way" ref="790183052" role=""/>
+  <member type="way" ref="790182087" role=""/>
+  <member type="way" ref="760132097" role=""/>
+  <member type="way" ref="598575728" role=""/>
+  <member type="way" ref="1278402448" role=""/>
+  <member type="way" ref="790193668" role=""/>
+  <member type="way" ref="145427407" role=""/>
+  <member type="way" ref="790193667" role=""/>
+  <member type="way" ref="160944899" role=""/>
+  <tag k="distance" v="27"/>
+  <tag k="name" v="Etapa 7: Grandas de Salime - A Fonsagrada"/>
+  <tag k="network" v="nwn"/>
+  <tag k="osmc:symbol" v="blue:blue:shell_modern"/>
+  <tag k="pilgrimage" v="yes"/>
+  <tag k="religion" v="christian"/>
+  <tag k="roundtrip" v="no"/>
+  <tag k="route" v="hiking"/>
+  <tag k="stage" v="7"/>
+  <tag k="symbol" v="yellow shell on blue;yellow arrow"/>
+  <tag k="type" v="route"/>
+  <tag k="wiki:symbol" v="Symbol_Jakobsweg.png"/>
+ </relation>
+ <relation id="19586857" visible="true" version="1" changeset="171733654" timestamp="2025-09-10T12:29:19Z" user="Hugoren Martinako" uid="3392826">
+  <member type="way" ref="70179147" role=""/>
+  <member type="way" ref="67126031" role=""/>
+  <member type="way" ref="309990622" role=""/>
+  <member type="way" ref="69012980" role=""/>
+  <member type="way" ref="446434011" role=""/>
+  <member type="way" ref="699883386" role=""/>
+  <member type="way" ref="19930177" role=""/>
+  <member type="way" ref="19930175" role=""/>
+  <member type="way" ref="70186234" role=""/>
+  <member type="way" ref="508013530" role=""/>
+  <member type="way" ref="508013531" role=""/>
+  <member type="way" ref="69013169" role=""/>
+  <member type="way" ref="452117190" role=""/>
+  <member type="way" ref="160944919" role=""/>
+  <member type="way" ref="507992511" role=""/>
+  <member type="way" ref="507992510" role=""/>
+  <member type="way" ref="909194588" role=""/>
+  <member type="way" ref="69013237" role=""/>
+  <member type="way" ref="291721513" role=""/>
+  <member type="way" ref="287059183" role=""/>
+  <tag k="distance" v="16"/>
+  <tag k="name" v="Etapa 6: A Mesa - Grandas de Salime"/>
+  <tag k="network" v="nwn"/>
+  <tag k="osmc:symbol" v="blue:blue:shell_modern"/>
+  <tag k="pilgrimage" v="yes"/>
+  <tag k="religion" v="christian"/>
+  <tag k="roundtrip" v="no"/>
+  <tag k="route" v="hiking"/>
+  <tag k="stage" v="6"/>
+  <tag k="symbol" v="yellow shell on blue;yellow arrow"/>
+  <tag k="type" v="route"/>
+  <tag k="wiki:symbol" v="Symbol_Jakobsweg.png"/>
+ </relation>
+ <relation id="19586858" visible="true" version="1" changeset="171733654" timestamp="2025-09-10T12:29:19Z" user="Hugoren Martinako" uid="3392826">
+  <member type="way" ref="67086213" role=""/>
+  <member type="way" ref="68829321" role=""/>
+  <member type="way" ref="160944964" role=""/>
+  <member type="way" ref="67090654" role=""/>
+  <member type="way" ref="499554216" role=""/>
+  <member type="way" ref="67090642" role=""/>
+  <member type="way" ref="67090638" role=""/>
+  <member type="way" ref="67090657" role=""/>
+  <member type="way" ref="160944957" role=""/>
+  <member type="way" ref="68829596" role=""/>
+  <member type="way" ref="309990631" role=""/>
+  <member type="way" ref="309990611" role=""/>
+  <member type="way" ref="43979194" role=""/>
+  <tag k="distance" v="12"/>
+  <tag k="name" v="Etapa 4b: Variante de Hospitales"/>
+  <tag k="network" v="nwn"/>
+  <tag k="osmc:symbol" v="blue:blue:shell_modern"/>
+  <tag k="pilgrimage" v="yes"/>
+  <tag k="religion" v="christian"/>
+  <tag k="roundtrip" v="no"/>
+  <tag k="route" v="hiking"/>
+  <tag k="stage" v="4"/>
+  <tag k="symbol" v="yellow shell on blue;yellow arrow"/>
+  <tag k="type" v="route"/>
+  <tag k="wiki:symbol" v="Symbol_Jakobsweg.png"/>
+ </relation>
+ <relation id="19586859" visible="true" version="1" changeset="171733654" timestamp="2025-09-10T12:29:19Z" user="Hugoren Martinako" uid="3392826">
+  <member type="way" ref="494528532" role=""/>
+  <member type="way" ref="494528608" role=""/>
+  <member type="way" ref="86773541" role=""/>
+  <member type="way" ref="1167169539" role=""/>
+  <member type="way" ref="23023640" role=""/>
+  <member type="way" ref="454659776" role=""/>
+  <member type="way" ref="70185721" role=""/>
+  <member type="way" ref="70174579" role=""/>
+  <member type="way" ref="86943740" role=""/>
+  <member type="way" ref="86960023" role=""/>
+  <member type="way" ref="86943744" role=""/>
+  <member type="way" ref="86943738" role=""/>
+  <member type="way" ref="86960021" role=""/>
+  <member type="way" ref="86960026" role=""/>
+  <member type="way" ref="161567973" role=""/>
+  <member type="way" ref="1167371499" role=""/>
+  <member type="way" ref="70174723" role=""/>
+  <member type="way" ref="43979192" role=""/>
+  <member type="way" ref="43979193" role=""/>
+  <member type="way" ref="722633651" role=""/>
+  <member type="way" ref="70175391" role=""/>
+  <member type="way" ref="70175456" role=""/>
+  <member type="way" ref="977450449" role=""/>
+  <member type="way" ref="70175625" role=""/>
+  <member type="way" ref="977453851" role=""/>
+  <member type="way" ref="722631861" role=""/>
+  <member type="way" ref="977453852" role=""/>
+  <member type="way" ref="309990619" role=""/>
+  <member type="way" ref="161567971" role=""/>
+  <member type="way" ref="1167371503" role=""/>
+  <member type="way" ref="68830413" role=""/>
+  <member type="way" ref="977668485" role=""/>
+  <member type="way" ref="977668486" role=""/>
+  <member type="way" ref="68830437" role=""/>
+  <member type="way" ref="630372687" role=""/>
+  <member type="way" ref="977458179" role=""/>
+  <member type="way" ref="70178696" role=""/>
+  <member type="way" ref="161567961" role=""/>
+  <member type="way" ref="160944969" role=""/>
+  <member type="way" ref="70178288" role=""/>
+  <member type="way" ref="70178994" role=""/>
+  <member type="way" ref="700038732" role=""/>
+  <member type="way" ref="69012846" role=""/>
+  <tag k="distance" v="21"/>
+  <tag k="name" v="Etapa 5: Pola de Allande - A Mesa"/>
+  <tag k="network" v="nwn"/>
+  <tag k="osmc:symbol" v="blue:blue:shell_modern"/>
+  <tag k="pilgrimage" v="yes"/>
+  <tag k="religion" v="christian"/>
+  <tag k="roundtrip" v="no"/>
+  <tag k="route" v="hiking"/>
+  <tag k="stage" v="5"/>
+  <tag k="symbol" v="yellow shell on blue;yellow arrow"/>
+  <tag k="type" v="route"/>
+  <tag k="wiki:symbol" v="Symbol_Jakobsweg.png"/>
+ </relation>
+ <relation id="19586860" visible="true" version="1" changeset="171733654" timestamp="2025-09-10T12:29:19Z" user="Hugoren Martinako" uid="3392826">
+  <member type="way" ref="261118427" role=""/>
+  <member type="way" ref="1348065056" role=""/>
+  <member type="way" ref="66943032" role=""/>
+  <member type="way" ref="261118418" role=""/>
+  <member type="way" ref="261118419" role=""/>
+  <member type="way" ref="261118424" role=""/>
+  <member type="way" ref="261118423" role=""/>
+  <member type="way" ref="261118421" role=""/>
+  <member type="way" ref="275128640" role=""/>
+  <member type="way" ref="275128643" role=""/>
+  <member type="way" ref="275128645" role=""/>
+  <member type="way" ref="275128647" role=""/>
+  <member type="way" ref="66943030" role=""/>
+  <member type="way" ref="66966916" role=""/>
+  <member type="way" ref="67186540" role=""/>
+  <member type="way" ref="160939603" role=""/>
+  <member type="way" ref="160939727" role=""/>
+  <member type="way" ref="68566333" role=""/>
+  <member type="way" ref="68566660" role=""/>
+  <member type="way" ref="68566862" role=""/>
+  <member type="way" ref="68566855" role=""/>
+  <member type="way" ref="68566980" role=""/>
+  <member type="way" ref="67186537" role=""/>
+  <member type="way" ref="370297914" role=""/>
+  <member type="way" ref="370297915" role=""/>
+  <member type="way" ref="68569118" role=""/>
+  <member type="way" ref="67010603" role=""/>
+  <member type="way" ref="67010625" role=""/>
+  <member type="way" ref="160918951" role=""/>
+  <member type="way" ref="67010571" role=""/>
+  <member type="way" ref="1201171423" role=""/>
+  <member type="way" ref="160918924" role=""/>
+  <member type="way" ref="23086998" role=""/>
+  <member type="way" ref="67010666" role=""/>
+  <member type="way" ref="1201209300" role=""/>
+  <member type="way" ref="1201171421" role=""/>
+  <member type="way" ref="163631272" role=""/>
+  <member type="way" ref="1164250490" role=""/>
+  <member type="way" ref="1201209298" role=""/>
+  <member type="way" ref="1306604864" role=""/>
+  <member type="way" ref="68811245" role=""/>
+  <member type="way" ref="160918946" role=""/>
+  <member type="way" ref="160918942" role=""/>
+  <member type="way" ref="160918950" role=""/>
+  <member type="way" ref="309990620" role=""/>
+  <member type="way" ref="309990601" role=""/>
+  <member type="way" ref="309990605" role=""/>
+  <member type="way" ref="309990600" role=""/>
+  <member type="way" ref="68811318" role=""/>
+  <member type="way" ref="67010562" role=""/>
+  <member type="way" ref="67010583" role=""/>
+  <member type="way" ref="67010530" role=""/>
+  <member type="way" ref="67010514" role=""/>
+  <member type="way" ref="67010510" role=""/>
+  <member type="way" ref="67010681" role=""/>
+  <member type="way" ref="195303255" role=""/>
+  <tag k="distance" v="20"/>
+  <tag k="name" v="Etapa 3: Salas - Tinéu"/>
+  <tag k="network" v="nwn"/>
+  <tag k="osmc:symbol" v="blue:blue:shell_modern"/>
+  <tag k="pilgrimage" v="yes"/>
+  <tag k="religion" v="christian"/>
+  <tag k="roundtrip" v="no"/>
+  <tag k="route" v="hiking"/>
+  <tag k="stage" v="3"/>
+  <tag k="symbol" v="yellow shell on blue;yellow arrow"/>
+  <tag k="type" v="route"/>
+  <tag k="wiki:symbol" v="Symbol_Jakobsweg.png"/>
+ </relation>
+ <relation id="19586861" visible="true" version="1" changeset="171733654" timestamp="2025-09-10T12:29:19Z" user="Hugoren Martinako" uid="3392826">
+  <member type="way" ref="625405276" role=""/>
+  <member type="way" ref="300462009" role=""/>
+  <member type="way" ref="329481768" role=""/>
+  <member type="way" ref="89942680" role=""/>
+  <member type="way" ref="160939644" role=""/>
+  <member type="way" ref="299469109" role=""/>
+  <member type="way" ref="160939615" role=""/>
+  <member type="way" ref="23261872" role=""/>
+  <member type="way" ref="160939539" role=""/>
+  <member type="way" ref="300352587" role=""/>
+  <member type="way" ref="80340321" role=""/>
+  <member type="way" ref="80340316" role=""/>
+  <member type="way" ref="66918241" role=""/>
+  <member type="way" ref="80340325" role=""/>
+  <member type="way" ref="89942738" role=""/>
+  <member type="way" ref="89942736" role=""/>
+  <member type="way" ref="300352597" role=""/>
+  <member type="way" ref="1300843069" role=""/>
+  <member type="way" ref="66918288" role=""/>
+  <member type="way" ref="66918211" role=""/>
+  <member type="way" ref="361453242" role=""/>
+  <member type="way" ref="309844242" role=""/>
+  <member type="way" ref="160939623" role=""/>
+  <member type="way" ref="309844239" role=""/>
+  <member type="way" ref="80336254" role=""/>
+  <member type="way" ref="80336237" role=""/>
+  <member type="way" ref="66918308" role=""/>
+  <member type="way" ref="931212919" role=""/>
+  <member type="way" ref="66918431" role=""/>
+  <member type="way" ref="931211242" role=""/>
+  <member type="way" ref="66918204" role=""/>
+  <member type="way" ref="68563417" role=""/>
+  <member type="way" ref="931215305" role=""/>
+  <member type="way" ref="931215304" role=""/>
+  <member type="way" ref="80336240" role=""/>
+  <member type="way" ref="80336245" role=""/>
+  <member type="way" ref="160939565" role=""/>
+  <member type="way" ref="1165950412" role=""/>
+  <member type="way" ref="1165950413" role=""/>
+  <member type="way" ref="160939595" role=""/>
+  <member type="way" ref="160939728" role=""/>
+  <member type="way" ref="309844225" role=""/>
+  <member type="way" ref="160939621" role=""/>
+  <member type="way" ref="160939589" role=""/>
+  <member type="way" ref="1200957407" role=""/>
+  <member type="way" ref="309844245" role=""/>
+  <member type="way" ref="66918149" role=""/>
+  <member type="way" ref="1200957406" role=""/>
+  <member type="way" ref="160939571" role=""/>
+  <member type="way" ref="66941313" role=""/>
+  <member type="way" ref="309844238" role=""/>
+  <member type="way" ref="66666767" role=""/>
+  <member type="way" ref="66941320" role=""/>
+  <member type="way" ref="62691931" role=""/>
+  <member type="way" ref="62691900" role=""/>
+  <member type="way" ref="66941319" role=""/>
+  <member type="way" ref="940878875" role=""/>
+  <member type="way" ref="395820489" role=""/>
+  <member type="way" ref="16029383" role=""/>
+  <member type="way" ref="454659775" role=""/>
+  <member type="way" ref="16029389" role=""/>
+  <member type="way" ref="23425587" role=""/>
+  <member type="way" ref="23425588" role=""/>
+  <member type="way" ref="160939613" role=""/>
+  <member type="way" ref="23425589" role=""/>
+  <member type="way" ref="160939717" role=""/>
+  <member type="way" ref="533390601" role=""/>
+  <member type="way" ref="533390602" role=""/>
+  <member type="way" ref="309980605" role=""/>
+  <member type="way" ref="68565771" role=""/>
+  <member type="way" ref="68565878" role=""/>
+  <member type="way" ref="309846399" role=""/>
+  <member type="way" ref="160939685" role=""/>
+  <member type="way" ref="66943052" role=""/>
+  <member type="way" ref="66943050" role=""/>
+  <member type="way" ref="160939657" role=""/>
+  <member type="way" ref="261042768" role=""/>
+  <member type="way" ref="261042767" role=""/>
+  <member type="way" ref="160939582" role=""/>
+  <member type="way" ref="66943039" role=""/>
+  <member type="way" ref="66943063" role=""/>
+  <member type="way" ref="261041813" role=""/>
+  <member type="way" ref="261041812" role=""/>
+  <member type="way" ref="309980649" role=""/>
+  <member type="way" ref="309980658" role=""/>
+  <member type="way" ref="66943036" role=""/>
+  <member type="way" ref="160939636" role=""/>
+  <member type="way" ref="160939707" role=""/>
+  <member type="way" ref="66943034" role=""/>
+  <member type="way" ref="66943060" role=""/>
+  <member type="way" ref="160939630" role=""/>
+  <member type="way" ref="66943047" role=""/>
+  <member type="way" ref="160939518" role=""/>
+  <member type="way" ref="70316113" role=""/>
+  <member type="way" ref="68566125" role=""/>
+  <tag k="distance" v="22"/>
+  <tag k="name" v="Etapa 2: Grau/Grado - Salas"/>
+  <tag k="network" v="nwn"/>
+  <tag k="osmc:symbol" v="blue:blue:shell_modern"/>
+  <tag k="pilgrimage" v="yes"/>
+  <tag k="religion" v="christian"/>
+  <tag k="roundtrip" v="no"/>
+  <tag k="route" v="hiking"/>
+  <tag k="stage" v="2"/>
+  <tag k="symbol" v="yellow shell on blue;yellow arrow"/>
+  <tag k="type" v="route"/>
+  <tag k="wiki:symbol" v="Symbol_Jakobsweg.png"/>
+ </relation>
+ <relation id="19586862" visible="true" version="2" changeset="176019825" timestamp="2025-12-16T19:02:29Z" user="JESUS27" uid="23619664">
+  <member type="way" ref="67010560" role=""/>
+  <member type="way" ref="309990610" role=""/>
+  <member type="way" ref="67186541" role=""/>
+  <member type="way" ref="67186547" role=""/>
+  <member type="way" ref="160918934" role=""/>
+  <member type="way" ref="161568037" role=""/>
+  <member type="way" ref="68820027" role=""/>
+  <member type="way" ref="309990606" role=""/>
+  <member type="way" ref="160944965" role=""/>
+  <member type="way" ref="646121113" role=""/>
+  <member type="way" ref="646120702" role=""/>
+  <member type="way" ref="646120701" role=""/>
+  <member type="way" ref="646120694" role=""/>
+  <member type="way" ref="160944895" role=""/>
+  <member type="way" ref="160944904" role=""/>
+  <member type="way" ref="67192788" role=""/>
+  <member type="way" ref="68827978" role=""/>
+  <member type="way" ref="68822147" role=""/>
+  <member type="way" ref="1202078304" role=""/>
+  <member type="way" ref="68828464" role=""/>
+  <member type="way" ref="67192785" role=""/>
+  <member type="way" ref="68827680" role=""/>
+  <member type="way" ref="23081393" role=""/>
+  <member type="way" ref="68829293" role=""/>
+  <member type="way" ref="421257748" role=""/>
+  <member type="way" ref="1202078303" role=""/>
+  <member type="way" ref="68829306" role=""/>
+  <member type="way" ref="67014492" role=""/>
+  <member type="way" ref="67086219" role=""/>
+  <member type="way" ref="70170043" role=""/>
+  <member type="way" ref="70164276" role=""/>
+  <member type="way" ref="486307397" role=""/>
+  <member type="way" ref="1167169527" role=""/>
+  <member type="way" ref="486307399" role=""/>
+  <member type="way" ref="70165516" role=""/>
+  <member type="way" ref="598829351" role=""/>
+  <member type="way" ref="1167169515" role=""/>
+  <member type="way" ref="1167169533" role=""/>
+  <member type="way" ref="1167169530" role=""/>
+  <member type="way" ref="1167169518" role=""/>
+  <member type="way" ref="1167169520" role=""/>
+  <member type="way" ref="1167169519" role=""/>
+  <member type="way" ref="1167169521" role=""/>
+  <member type="way" ref="1167169517" role=""/>
+  <member type="way" ref="1167169516" role=""/>
+  <member type="way" ref="1294630532" role=""/>
+  <member type="way" ref="193937398" role=""/>
+  <member type="way" ref="1167169535" role=""/>
+  <member type="way" ref="1167169522" role=""/>
+  <member type="way" ref="598828142" role=""/>
+  <member type="way" ref="70166714" role=""/>
+  <member type="way" ref="90589391" role=""/>
+  <member type="way" ref="90589394" role=""/>
+  <member type="way" ref="70168146" role=""/>
+  <member type="way" ref="70167941" role=""/>
+  <member type="way" ref="1167169524" role=""/>
+  <member type="way" ref="1167169525" role=""/>
+  <member type="way" ref="86938847" role=""/>
+  <member type="way" ref="1167169538" role=""/>
+  <member type="way" ref="86773575" role=""/>
+  <member type="way" ref="494528539" role=""/>
+  <member type="relation" ref="19968654" role=""/>
+  <member type="relation" ref="19968654" role=""/>
+  <tag k="distance" v="29"/>
+  <tag k="name" v="Etapa 4: Tinéu - Pola de Allande"/>
+  <tag k="network" v="nwn"/>
+  <tag k="osmc:symbol" v="blue:blue:shell_modern"/>
+  <tag k="pilgrimage" v="yes"/>
+  <tag k="religion" v="christian"/>
+  <tag k="roundtrip" v="no"/>
+  <tag k="route" v="hiking"/>
+  <tag k="stage" v="4"/>
+  <tag k="symbol" v="yellow shell on blue;yellow arrow"/>
+  <tag k="type" v="route"/>
+  <tag k="wiki:symbol" v="Symbol_Jakobsweg.png"/>
+ </relation>
+</osm>

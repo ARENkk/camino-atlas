@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="openstreetmap-cgimap 2.1.0 (202845 spike-06.openstreetmap.org)" copyright="OpenStreetMap and contributors" attribution="http://www.openstreetmap.org/copyright" license="http://opendatacommons.org/licenses/odbl/1-0/">
+ <node id="13381946914" visible="true" version="1" changeset="176019825" timestamp="2025-12-16T19:02:29Z" user="JESUS27" uid="23619664" lat="43.3354750" lon="-6.5371045"/>
+ <node id="13381946915" visible="true" version="1" changeset="176019825" timestamp="2025-12-16T19:02:29Z" user="JESUS27" uid="23619664" lat="43.3353870" lon="-6.5370018"/>
+ <node id="13381946916" visible="true" version="1" changeset="176019825" timestamp="2025-12-16T19:02:29Z" user="JESUS27" uid="23619664" lat="43.3352907" lon="-6.5371798"/>
+ <node id="13381946917" visible="true" version="1" changeset="176019825" timestamp="2025-12-16T19:02:29Z" user="JESUS27" uid="23619664" lat="43.3353720" lon="-6.5372757"/>
+ <way id="1459117376" visible="true" version="1" changeset="176019825" timestamp="2025-12-16T19:02:29Z" user="JESUS27" uid="23619664">
+  <nd ref="13381946914"/>
+  <nd ref="13381946915"/>
+  <nd ref="13381946916"/>
+  <nd ref="13381946917"/>
+  <nd ref="13381946914"/>
+  <tag k="addr:city" v="El Freisnu"/>
+  <tag k="addr:housenumber" v="8"/>
+  <tag k="addr:place" v="El Freisnu"/>
+  <tag k="addr:postcode" v="33878"/>
+  <tag k="building" v="house"/>
+  <tag k="building:levels" v="2"/>
+  <tag k="height" v="5"/>
+  <tag k="house" v="detached"/>
+  <tag k="name" v="el fresno 8"/>
+ </way>
+ <relation id="19968654" visible="true" version="1" changeset="176019825" timestamp="2025-12-16T19:02:29Z" user="JESUS27" uid="23619664">
+  <member type="way" ref="1459117376" role="house"/>
+  <member type="way" ref="1459117376" role=""/>
+  <tag k="type" v="site"/>
+ </relation>
+</osm>
