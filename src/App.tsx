@@ -10,6 +10,12 @@ import { FAVORITES_STORAGE_KEY, normalizeFavoriteVariantIds, readFavoriteIdsFrom
 
 const atlasData = routesData as AtlasData;
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mjgawgza';
+const ENABLE_ROUTE_DEBUG = false;
+
+function routeDebug(...args: unknown[]) {
+  if (!ENABLE_ROUTE_DEBUG) return;
+  console.log('[RouteDebug][App]', ...args);
+}
 
 function getGroupDefaultVariantId(
   groupId: string,
@@ -46,8 +52,8 @@ export default function App() {
   const validVariantIds = useMemo(() => new Set(variants.map((item) => item.id)), [variants]);
 
   const [activeGroupId, setActiveGroupId] = useState(initialGroupId);
-  const [activeVariantId, setActiveVariantId] = useState(initialVariantId);
-  const [displayedMapVariantId, setDisplayedMapVariantId] = useState(initialVariantId);
+  const [selectedVariantId, setSelectedVariantId] = useState(initialVariantId);
+  const [renderedVariantId, setRenderedVariantId] = useState('');
   const [favoriteIds, setFavoriteIds] = useState<string[]>(() => readFavoriteIdsFromStorage(validVariantIds));
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [historyOpen, setHistoryOpen] = useState(false);
@@ -68,23 +74,23 @@ export default function App() {
     contact: '',
   });
 
-  const selectedVariant = variantsById[activeVariantId] ?? null;
+  const selectedVariant = variantsById[selectedVariantId] ?? null;
   const selectedGroup = selectedVariant ? groupsById[selectedVariant.group_id] : null;
-  const isRouteSwitching = Boolean(selectedVariant && displayedMapVariantId !== selectedVariant.id);
+  const isRouteSwitching = Boolean(selectedVariant && renderedVariantId !== selectedVariant.id);
 
   function handleSelectGroup(groupId: string) {
     setActiveGroupId(groupId);
     const group = groupsById[groupId];
     const nextVariantId = getGroupDefaultVariantId(groupId, variants, group?.default_variant_id);
     if (nextVariantId) {
-      setActiveVariantId(nextVariantId);
+      setSelectedVariantId(nextVariantId);
     }
   }
 
   function handleSelectVariant(variantId: string) {
     const variant = variantsById[variantId];
     if (!variant) return;
-    setActiveVariantId(variantId);
+    setSelectedVariantId(variantId);
     setActiveGroupId(variant.group_id);
   }
 
@@ -99,9 +105,13 @@ export default function App() {
   }, [validVariantIds]);
 
   useEffect(() => {
-    if (validVariantIds.has(displayedMapVariantId)) return;
-    setDisplayedMapVariantId((prev) => (validVariantIds.has(prev) ? prev : activeVariantId));
-  }, [activeVariantId, displayedMapVariantId, validVariantIds]);
+    if (!renderedVariantId || validVariantIds.has(renderedVariantId)) return;
+    setRenderedVariantId('');
+  }, [renderedVariantId, validVariantIds]);
+
+  useEffect(() => {
+    routeDebug('selection state', { selectedVariantId, renderedVariantId });
+  }, [renderedVariantId, selectedVariantId]);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -160,7 +170,7 @@ export default function App() {
     setDetailError('');
     setSubmitError('');
     setIsSubmitting(true);
-    const currentRouteId = selectedVariant?.id || activeVariantId || '';
+    const currentRouteId = selectedVariant?.id || selectedVariantId || '';
     const currentRouteSlug = currentRouteId || '';
     const routeTitle = selectedGroup?.name_zh || selectedVariant?.variant_name_zh || '';
     const routeSubtitle = selectedVariant
@@ -359,9 +369,9 @@ export default function App() {
               groups={groups}
               variantsById={variantsById}
               selectedGroupId={activeGroupId}
-              selectedVariantId={activeVariantId}
+              selectedVariantId={selectedVariantId}
               favoriteIds={favoriteIds}
-              switchingVariantId={isRouteSwitching ? activeVariantId : null}
+              switchingVariantId={isRouteSwitching ? selectedVariantId : null}
               onSelectGroup={(groupId) => {
                 handleSelectGroup(groupId);
                 if (window.matchMedia('(max-width: 768px)').matches) {
@@ -420,9 +430,12 @@ export default function App() {
         <section className="map-area glass-panel">
           <MapView
             variant={selectedVariant}
-            isSwitchingRoute={isRouteSwitching}
-            onRouteSettled={(settledVariantId) => {
-              setDisplayedMapVariantId((prev) => (prev === settledVariantId ? prev : settledVariantId));
+            selectedVariantId={selectedVariantId}
+            renderedVariantId={renderedVariantId}
+            onRenderedVariantChange={(nextRenderedVariantId) => {
+              setRenderedVariantId((prev) =>
+                prev === nextRenderedVariantId ? prev : nextRenderedVariantId,
+              );
             }}
           />
         </section>

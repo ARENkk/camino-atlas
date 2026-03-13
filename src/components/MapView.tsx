@@ -18,8 +18,9 @@ type FeatureCollection = {
 
 type Props = {
   variant: RouteVariant | null;
-  isSwitchingRoute?: boolean;
-  onRouteSettled?: (variantId: string) => void;
+  selectedVariantId: string;
+  renderedVariantId: string;
+  onRenderedVariantChange?: (variantId: string) => void;
 };
 
 type MobileTerminalInfo = {
@@ -38,6 +39,13 @@ type PreparedRouteData = {
   renderedEnd: LngLat;
 };
 
+type ActiveRouteRequest = {
+  token: number;
+  variantId: string;
+  geometryPath: string;
+  controller: AbortController;
+};
+
 const SOURCE_ID = 'route-source';
 const LINE_LAYER_ID = 'route-line';
 const TERMINAL_SOURCE_ID = 'route-terminals';
@@ -53,6 +61,16 @@ const DESKTOP_HOVER_QUERY = '(hover: hover) and (pointer: fine)';
 const NON_HOVER_QUERY = '(hover: none), (pointer: coarse)';
 const DESKTOP_FIT_BOUNDS_DURATION = 820;
 const MOBILE_FIT_BOUNDS_DURATION = 0;
+const ROUTE_BADGE_DELAY_MS = 300;
+const ROUTE_SLOW_HINT_MS = 4000;
+const ROUTE_RETRY_HINT_MS = 8000;
+const ROUTE_SETTLE_TIMEOUT_MS = 2200;
+const ENABLE_ROUTE_DEBUG = false;
+
+function routeDebug(...args: unknown[]) {
+  if (!ENABLE_ROUTE_DEBUG) return;
+  console.log('[RouteDebug][MapView]', ...args);
+}
 
 function isAbortLikeError(err: unknown): boolean {
   if (err instanceof DOMException && err.name === 'AbortError') return true;
@@ -450,7 +468,12 @@ function prepareRouteData(variant: RouteVariant, rawGeojson: unknown): PreparedR
   };
 }
 
-export function MapView({ variant, isSwitchingRoute = false, onRouteSettled }: Props) {
+export function MapView({
+  variant,
+  selectedVariantId,
+  renderedVariantId,
+  onRenderedVariantChange,
+}: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const popupRef = useRef<maplibregl.Popup | null>(null);
@@ -464,9 +487,11 @@ export function MapView({ variant, isSwitchingRoute = false, onRouteSettled }: P
   const hidePopupTimerRef = useRef<number | null>(null);
   const requestSeqRef = useRef(0);
   const routeCacheRef = useRef<Map<string, PreparedRouteData>>(new Map());
-  const activeRequestRef = useRef<AbortController | null>(null);
+  const activeRequestRef = useRef<ActiveRouteRequest | null>(null);
+  const settleWatcherCleanupRef = useRef<(() => void) | null>(null);
+  const badgeTimersRef = useRef<number[]>([]);
   const lastAppliedPathRef = useRef<string | null>(null);
-  const onRouteSettledRef = useRef<Props['onRouteSettled']>(onRouteSettled);
+  const onRenderedVariantChangeRef = useRef<Props['onRenderedVariantChange']>(onRenderedVariantChange);
   const onTerminalEnterRef = useRef<((e: any) => void) | null>(null);
   const onTerminalLeaveRef = useRef<((e: any) => void) | null>(null);
   const onTerminalClickRef = useRef<((e: any) => void) | null>(null);
@@ -475,12 +500,20 @@ export function MapView({ variant, isSwitchingRoute = false, onRouteSettled }: P
   const [isDesktopHoverCapable, setIsDesktopHoverCapable] = useState(true);
   const [mobileActiveTerminal, setMobileActiveTerminal] = useState<MobileTerminalInfo | null>(null);
   const [prefersReducedRouteMotion, setPrefersReducedRouteMotion] = useState(false);
-  const [isLoadingRoute, setIsLoadingRoute] = useState(false);
+  const [isRouteRequestPending, setIsRouteRequestPending] = useState(false);
+  const [hasAppliedSelectedRoute, setHasAppliedSelectedRoute] = useState(false);
+  const [showLoadingBadge, setShowLoadingBadge] = useState(false);
+  const [showSlowHint, setShowSlowHint] = useState(false);
+  const [showRetryHint, setShowRetryHint] = useState(false);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    onRouteSettledRef.current = onRouteSettled;
-  }, [onRouteSettled]);
+    onRenderedVariantChangeRef.current = onRenderedVariantChange;
+  }, [onRenderedVariantChange]);
+
+  useEffect(() => {
+    routeDebug('variant state', { selectedVariantId, renderedVariantId });
+  }, [renderedVariantId, selectedVariantId]);
 
   const clearTerminalState = (map?: maplibregl.Map | null) => {
     const currentMap = map ?? mapRef.current;
@@ -521,6 +554,110 @@ export function MapView({ variant, isSwitchingRoute = false, onRouteSettled }: P
       suppressNextMapClickTimerRef.current = null;
     }, 400);
   };
+
+  const clearBadgeTimers = () => {
+    badgeTimersRef.current.forEach((timerId) => window.clearTimeout(timerId));
+    badgeTimersRef.current = [];
+  };
+
+  const clearSettleWatcher = () => {
+    settleWatcherCleanupRef.current?.();
+    settleWatcherCleanupRef.current = null;
+  };
+
+  const isCurrentRequest = (token: number) => {
+    return requestSeqRef.current === token && activeRequestRef.current?.token === token;
+  };
+
+  const beginRequestProgress = (token: number) => {
+    clearBadgeTimers();
+    setHasAppliedSelectedRoute(false);
+    setShowLoadingBadge(false);
+    setShowSlowHint(false);
+    setShowRetryHint(false);
+
+    badgeTimersRef.current = [
+      window.setTimeout(() => {
+        if (!isCurrentRequest(token)) return;
+        setShowLoadingBadge(true);
+      }, ROUTE_BADGE_DELAY_MS),
+      window.setTimeout(() => {
+        if (!isCurrentRequest(token)) return;
+        setShowSlowHint(true);
+      }, ROUTE_SLOW_HINT_MS),
+      window.setTimeout(() => {
+        if (!isCurrentRequest(token)) return;
+        setShowRetryHint(true);
+      }, ROUTE_RETRY_HINT_MS),
+    ];
+  };
+
+  const finalizeRequestProgress = (token: number) => {
+    if (!isCurrentRequest(token)) return;
+    clearBadgeTimers();
+    setIsRouteRequestPending(false);
+    setHasAppliedSelectedRoute(true);
+    setShowLoadingBadge(false);
+    setShowSlowHint(false);
+    setShowRetryHint(false);
+  };
+
+  const abortActiveRequest = (reason: string) => {
+    const active = activeRequestRef.current;
+    if (!active) return;
+    routeDebug('fetch abort', {
+      token: active.token,
+      variantId: active.variantId,
+      reason,
+    });
+    active.controller.abort();
+    activeRequestRef.current = null;
+    clearSettleWatcher();
+  };
+
+  const waitForRouteRenderSettlement = (map: maplibregl.Map, token: number) =>
+    new Promise<void>((resolve) => {
+      let completed = false;
+      let rafA: number | null = null;
+      let rafB: number | null = null;
+      let timeoutId: number | null = null;
+
+      const cleanup = () => {
+        map.off('idle', onIdle);
+        map.off('render', onRender);
+        if (rafA !== null) window.cancelAnimationFrame(rafA);
+        if (rafB !== null) window.cancelAnimationFrame(rafB);
+        if (timeoutId !== null) window.clearTimeout(timeoutId);
+      };
+
+      const finish = (reason: string) => {
+        if (completed) return;
+        completed = true;
+        cleanup();
+        if (settleWatcherCleanupRef.current === cleanup) {
+          settleWatcherCleanupRef.current = null;
+        }
+        routeDebug('render settled', { token, reason });
+        resolve();
+      };
+
+      const onIdle = () => finish('idle');
+      const onRender = () => {
+        if (rafA !== null) window.cancelAnimationFrame(rafA);
+        if (rafB !== null) window.cancelAnimationFrame(rafB);
+        rafA = window.requestAnimationFrame(() => {
+          rafB = window.requestAnimationFrame(() => {
+            if (!map.isMoving()) finish('render-frame');
+          });
+        });
+      };
+
+      settleWatcherCleanupRef.current = cleanup;
+      map.on('idle', onIdle);
+      map.on('render', onRender);
+      timeoutId = window.setTimeout(() => finish('settle-timeout'), ROUTE_SETTLE_TIMEOUT_MS);
+      onRender();
+    });
 
   const renderTerminalPopup = (map: maplibregl.Map, feature: any) => {
     const coords = (feature?.geometry?.coordinates || []) as LngLat;
@@ -725,8 +862,9 @@ export function MapView({ variant, isSwitchingRoute = false, onRouteSettled }: P
 
     return () => {
       window.removeEventListener('resize', handleResize);
-      activeRequestRef.current?.abort();
-      activeRequestRef.current = null;
+      abortActiveRequest('map unmount');
+      clearBadgeTimers();
+      clearSettleWatcher();
       clearTerminalPopup();
       clearMapClickSuppression();
       removeTerminalTapMarkers();
@@ -744,40 +882,61 @@ export function MapView({ variant, isSwitchingRoute = false, onRouteSettled }: P
   useEffect(() => {
     const map = mapRef.current;
     if (!map || !variant?.geometry_path) {
-      setIsLoadingRoute(false);
+      setIsRouteRequestPending(false);
+      setHasAppliedSelectedRoute(false);
+      clearBadgeTimers();
+      clearSettleWatcher();
+      setShowLoadingBadge(false);
+      setShowSlowHint(false);
+      setShowRetryHint(false);
       return;
     }
+
     if (lastAppliedPathRef.current === variant.geometry_path) {
       setError('');
-      setIsLoadingRoute(false);
-      onRouteSettledRef.current?.(variant.id);
+      setIsRouteRequestPending(false);
+      setHasAppliedSelectedRoute(true);
+      clearBadgeTimers();
+      setShowLoadingBadge(false);
+      setShowSlowHint(false);
+      setShowRetryHint(false);
+      onRenderedVariantChangeRef.current?.(variant.id);
+      routeDebug('renderedVariantId sync', {
+        token: requestSeqRef.current,
+        renderedVariantId: variant.id,
+        source: 'already-applied',
+      });
       return;
     }
-    const requestId = ++requestSeqRef.current;
-    let isActive = true;
-    activeRequestRef.current?.abort();
-    const abortController = new AbortController();
-    activeRequestRef.current = abortController;
-    setError('');
-    setIsLoadingRoute(true);
 
-    const applyPreparedRoute = (prepared: PreparedRouteData) => {
+    const requestId = requestSeqRef.current + 1;
+    requestSeqRef.current = requestId;
+    abortActiveRequest(`superseded by ${requestId}`);
+    const abortController = new AbortController();
+    activeRequestRef.current = {
+      token: requestId,
+      variantId: variant.id,
+      geometryPath: variant.geometry_path,
+      controller: abortController,
+    };
+    setError('');
+    setIsRouteRequestPending(true);
+    beginRequestProgress(requestId);
+    routeDebug('request start', {
+      token: requestId,
+      selectedVariantId,
+      renderedVariantId,
+      geometryPath: variant.geometry_path,
+    });
+
+    const applyPreparedRoute = async (prepared: PreparedRouteData) => {
       const currentMap = mapRef.current;
-      if (!currentMap || !isActive || requestId !== requestSeqRef.current) return;
+      if (!currentMap || !isCurrentRequest(requestId)) return;
       clearTerminalPopup();
       clearMapClickSuppression();
       clearTerminalState(currentMap);
       setMobileActiveTerminal(null);
       removeTerminalTapMarkers();
-
-      const settleAppliedRoute = () => {
-        if (!isActive || requestId !== requestSeqRef.current) return;
-        lastAppliedPathRef.current = variant.geometry_path;
-        setIsLoadingRoute(false);
-        onRouteSettledRef.current?.(variant.id);
-      };
-
-      currentMap.once('idle', settleAppliedRoute);
 
       const source = currentMap.getSource(SOURCE_ID) as maplibregl.GeoJSONSource | undefined;
       if (source) {
@@ -1005,14 +1164,32 @@ export function MapView({ variant, isSwitchingRoute = false, onRouteSettled }: P
         }
       }
 
+      if (!isCurrentRequest(requestId)) return;
+      routeDebug('setData applied', {
+        token: requestId,
+        variantId: variant.id,
+      });
+      setIsRouteRequestPending(false);
       currentMap.fitBounds(prepared.renderedBounds, {
         padding: 40,
         duration: prefersReducedRouteMotion ? MOBILE_FIT_BOUNDS_DURATION : DESKTOP_FIT_BOUNDS_DURATION,
       });
+
+      await waitForRouteRenderSettlement(currentMap, requestId);
+      if (!isCurrentRequest(requestId)) return;
+      lastAppliedPathRef.current = variant.geometry_path;
+      finalizeRequestProgress(requestId);
+      routeDebug('renderedVariantId sync', {
+        token: requestId,
+        renderedVariantId: variant.id,
+        source: 'render-settled',
+      });
+      onRenderedVariantChangeRef.current?.(variant.id);
+      activeRequestRef.current = null;
     };
 
     const finalizePreparedRoute = (prepared: PreparedRouteData) => {
-      if (!isActive || requestId !== requestSeqRef.current) return;
+      if (!isCurrentRequest(requestId)) return;
       const apply = () => applyPreparedRoute(prepared);
       if (!map.isStyleLoaded()) map.once('load', apply);
       else window.requestAnimationFrame(apply);
@@ -1022,40 +1199,79 @@ export function MapView({ variant, isSwitchingRoute = false, onRouteSettled }: P
     if (cached) {
       finalizePreparedRoute(cached);
     } else {
+      routeDebug('fetch start', {
+        token: requestId,
+        variantId: variant.id,
+        geometryPath: variant.geometry_path,
+      });
       fetch(variant.geometry_path, { signal: abortController.signal })
         .then((res) => {
           if (!res.ok) throw new Error(`HTTP ${res.status}`);
           return res.json();
         })
         .then((rawGeojson) => {
-          if (!isActive || requestId !== requestSeqRef.current) return;
+          if (!isCurrentRequest(requestId)) return;
+          routeDebug('fetch success', {
+            token: requestId,
+            variantId: variant.id,
+          });
           const prepared = prepareRouteData(variant, rawGeojson);
           routeCacheRef.current.set(variant.geometry_path, prepared);
           finalizePreparedRoute(prepared);
         })
       .catch((err: unknown) => {
-        if (!isActive || requestId !== requestSeqRef.current) return;
-        if (isAbortLikeError(err)) return;
-        setError('地图数据读取失败');
-        setIsLoadingRoute(false);
+        if (isAbortLikeError(err)) {
+          routeDebug('fetch abort', {
+            token: requestId,
+            variantId: variant.id,
+            reason: 'AbortController',
+          });
+          return;
+        }
+        if (!isCurrentRequest(requestId)) return;
+        clearSettleWatcher();
+        setError('新线路加载失败，请重试');
+        setIsRouteRequestPending(false);
+        setHasAppliedSelectedRoute(false);
+        routeDebug('fetch error', {
+          token: requestId,
+          variantId: variant.id,
+          message: err instanceof Error ? err.message : String(err),
+        });
       });
     }
 
     return () => {
-      isActive = false;
-      if (activeRequestRef.current === abortController) {
-        activeRequestRef.current.abort();
+      clearSettleWatcher();
+      if (activeRequestRef.current?.token === requestId) {
+        routeDebug('fetch abort', {
+          token: requestId,
+          variantId: variant.id,
+          reason: 'effect cleanup',
+        });
+        activeRequestRef.current.controller.abort();
         activeRequestRef.current = null;
       }
     };
-  }, [prefersReducedRouteMotion, variant]);
+  }, [prefersReducedRouteMotion, renderedVariantId, selectedVariantId, variant]);
+
+  const hasPendingMapWork =
+    selectedVariantId !== renderedVariantId || isRouteRequestPending || !hasAppliedSelectedRoute;
+  const showStatusBadge = hasPendingMapWork && (selectedVariantId !== renderedVariantId || showLoadingBadge);
 
   return (
     <div className="map-view">
       <div className="map-canvas real-map" ref={containerRef}>
         {error ? <div className="map-placeholder">{error}</div> : null}
-        <div className={`map-status-badge ${(isSwitchingRoute || isLoadingRoute) ? 'visible' : ''}`} aria-hidden={!isSwitchingRoute && !isLoadingRoute}>
-          {isSwitchingRoute ? '切换中' : '加载中'}
+        <div
+          className={`map-status-badge ${showStatusBadge ? 'visible' : ''}`}
+          aria-hidden={!showStatusBadge}
+          aria-live="polite"
+          role="status"
+        >
+          <span className="map-status-badge-title">切换中</span>
+          {showSlowHint ? <span className="map-status-badge-note">线路较长，正在加载</span> : null}
+          {showRetryHint ? <span className="map-status-badge-note">网络较慢，可再试一次</span> : null}
         </div>
         {ENABLE_TERMINALS && !isDesktopHoverCapable && mobileActiveTerminal ? (
           <div

@@ -588,6 +588,48 @@ body {
   color: var(--muted);
 }
 
+.map-status-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 14;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(9, 18, 34, 0.76);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 22px rgba(3, 9, 18, 0.18);
+  color: rgba(244, 248, 255, 0.94);
+  font-size: 0.72rem;
+  line-height: 1.2;
+  letter-spacing: 0.03em;
+  text-align: right;
+  max-width: min(220px, calc(100% - 24px));
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.map-status-badge.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.map-status-badge-title {
+  font-weight: 600;
+}
+
+.map-status-badge-note {
+  color: rgba(214, 226, 244, 0.76);
+  font-size: 0.68rem;
+  letter-spacing: 0.02em;
+}
+
 .route-marker-popup .maplibregl-popup-content {
   background: rgba(9, 18, 34, 0.94);
   color: #ffffff;
