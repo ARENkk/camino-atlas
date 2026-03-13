@@ -18,6 +18,8 @@ type FeatureCollection = {
 
 type Props = {
   variant: RouteVariant | null;
+  isSwitchingRoute?: boolean;
+  onRouteSettled?: (variantId: string) => void;
 };
 
 type MobileTerminalInfo = {
@@ -26,6 +28,14 @@ type MobileTerminalInfo = {
   zh: string;
   en: string;
   note: string;
+};
+
+type PreparedRouteData = {
+  routeData: any;
+  terminalData: any;
+  renderedBounds: LngLatBounds;
+  renderedStart: LngLat;
+  renderedEnd: LngLat;
 };
 
 const SOURCE_ID = 'route-source';
@@ -40,6 +50,18 @@ const TERMINAL_HOVER_SCALE = 1.05;
 const TERMINAL_HOVER_DURATION = 140;
 const TERMINAL_POPUP_HIDE_DELAY = 100;
 const DESKTOP_HOVER_QUERY = '(hover: hover) and (pointer: fine)';
+const NON_HOVER_QUERY = '(hover: none), (pointer: coarse)';
+const DESKTOP_FIT_BOUNDS_DURATION = 820;
+const MOBILE_FIT_BOUNDS_DURATION = 0;
+
+function isAbortLikeError(err: unknown): boolean {
+  if (err instanceof DOMException && err.name === 'AbortError') return true;
+  const name = typeof (err as { name?: unknown })?.name === 'string' ? (err as { name: string }).name : '';
+  if (name === 'AbortError') return true;
+  const message =
+    typeof (err as { message?: unknown })?.message === 'string' ? (err as { message: string }).message : '';
+  return /abort(?:ed)?|signal is aborted/i.test(message);
+}
 
 function ensureFeatureCollection(input: any): FeatureCollection {
   if (input?.type === 'FeatureCollection' && Array.isArray(input.features)) {
@@ -366,7 +388,69 @@ function escapeHtml(text: string): string {
     .replace(/'/g, '&#039;');
 }
 
-export function MapView({ variant }: Props) {
+function prepareRouteData(variant: RouteVariant, rawGeojson: unknown): PreparedRouteData {
+  const input = ensureFeatureCollection(rawGeojson);
+  const declaredStartCoord = readDeclaredCoord(variant, 'start');
+  const declaredEndCoord = readDeclaredCoord(variant, 'end');
+  const mainRoute = buildOrderedMainRoute(input, declaredStartCoord, declaredEndCoord);
+  const routeData = {
+    type: 'FeatureCollection',
+    features: [
+      {
+        type: 'Feature',
+        geometry: {
+          type: 'LineString',
+          coordinates: mainRoute.orderedCoords,
+        },
+      },
+    ],
+  } as any;
+  const renderedFeature = routeData.features[0];
+  const renderedLineCoords = (renderedFeature?.geometry?.coordinates || []) as LngLat[];
+  if (renderedLineCoords.length < 2) throw new Error('invalid rendered line coords');
+  const renderedStart = renderedLineCoords[0];
+  const renderedEnd = renderedLineCoords[renderedLineCoords.length - 1];
+  const renderedBounds = renderedLineCoords.reduce(
+    (acc, p) => acc.extend(p),
+    new LngLatBounds(renderedStart, renderedStart),
+  );
+
+  return {
+    routeData,
+    terminalData: {
+      type: 'FeatureCollection',
+      features: [
+        {
+          type: 'Feature',
+          id: 'start',
+          properties: {
+            kind: 'start',
+            label: '起点',
+            zh: variant.start_place?.zh || '起点',
+            en: variant.start_place?.en || '',
+          },
+          geometry: { type: 'Point', coordinates: renderedStart },
+        },
+        {
+          type: 'Feature',
+          id: 'end',
+          properties: {
+            kind: 'end',
+            label: '终点',
+            zh: variant.end_place?.zh || '终点',
+            en: variant.end_place?.en || '',
+          },
+          geometry: { type: 'Point', coordinates: renderedEnd },
+        },
+      ],
+    } as any,
+    renderedBounds,
+    renderedStart,
+    renderedEnd,
+  };
+}
+
+export function MapView({ variant, isSwitchingRoute = false, onRouteSettled }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const popupRef = useRef<maplibregl.Popup | null>(null);
@@ -379,6 +463,10 @@ export function MapView({ variant }: Props) {
   const lastMobileTapRef = useRef<{ id: string | number; time: number } | null>(null);
   const hidePopupTimerRef = useRef<number | null>(null);
   const requestSeqRef = useRef(0);
+  const routeCacheRef = useRef<Map<string, PreparedRouteData>>(new Map());
+  const activeRequestRef = useRef<AbortController | null>(null);
+  const lastAppliedPathRef = useRef<string | null>(null);
+  const onRouteSettledRef = useRef<Props['onRouteSettled']>(onRouteSettled);
   const onTerminalEnterRef = useRef<((e: any) => void) | null>(null);
   const onTerminalLeaveRef = useRef<((e: any) => void) | null>(null);
   const onTerminalClickRef = useRef<((e: any) => void) | null>(null);
@@ -386,7 +474,13 @@ export function MapView({ variant }: Props) {
   const onMapDragStartRef = useRef<(() => void) | null>(null);
   const [isDesktopHoverCapable, setIsDesktopHoverCapable] = useState(true);
   const [mobileActiveTerminal, setMobileActiveTerminal] = useState<MobileTerminalInfo | null>(null);
+  const [prefersReducedRouteMotion, setPrefersReducedRouteMotion] = useState(false);
+  const [isLoadingRoute, setIsLoadingRoute] = useState(false);
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    onRouteSettledRef.current = onRouteSettled;
+  }, [onRouteSettled]);
 
   const clearTerminalState = (map?: maplibregl.Map | null) => {
     const currentMap = map ?? mapRef.current;
@@ -538,7 +632,6 @@ export function MapView({ variant }: Props) {
       const lastTap = lastMobileTapRef.current;
       if (lastTap && lastTap.id === terminalId && now - lastTap.time < 450) return;
       lastMobileTapRef.current = { id: terminalId, time: now };
-      console.log('[marker-tap]', terminal.id, event.type);
       suppressUpcomingMapClick();
       if (selectedTerminalIdRef.current === terminalId) {
         clearTerminalPopup();
@@ -589,6 +682,30 @@ export function MapView({ variant }: Props) {
   }, []);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const coarseMedia =
+      typeof window.matchMedia === 'function' ? window.matchMedia(NON_HOVER_QUERY) : null;
+
+    const sync = () => {
+      const nav = typeof navigator !== 'undefined' ? (navigator as Navigator & { msMaxTouchPoints?: number }) : null;
+      const hasTouch =
+        Boolean(nav) && ((nav?.maxTouchPoints ?? 0) > 0 || (nav?.msMaxTouchPoints ?? 0) > 0);
+      const shouldReduceMotion = Boolean(coarseMedia?.matches) || hasTouch;
+      setPrefersReducedRouteMotion(shouldReduceMotion);
+    };
+
+    sync();
+    if (!coarseMedia) return;
+    if (typeof coarseMedia.addEventListener === 'function') {
+      coarseMedia.addEventListener('change', sync);
+      return () => coarseMedia.removeEventListener('change', sync);
+    }
+    coarseMedia.addListener(sync);
+    return () => coarseMedia.removeListener(sync);
+  }, []);
+
+  useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
     const map = new maplibregl.Map({
       container: containerRef.current,
@@ -608,6 +725,8 @@ export function MapView({ variant }: Props) {
 
     return () => {
       window.removeEventListener('resize', handleResize);
+      activeRequestRef.current?.abort();
+      activeRequestRef.current = null;
       clearTerminalPopup();
       clearMapClickSuppression();
       removeTerminalTapMarkers();
@@ -624,323 +743,320 @@ export function MapView({ variant }: Props) {
 
   useEffect(() => {
     const map = mapRef.current;
-    if (!map || !variant?.geometry_path) return;
+    if (!map || !variant?.geometry_path) {
+      setIsLoadingRoute(false);
+      return;
+    }
+    if (lastAppliedPathRef.current === variant.geometry_path) {
+      setError('');
+      setIsLoadingRoute(false);
+      onRouteSettledRef.current?.(variant.id);
+      return;
+    }
     const requestId = ++requestSeqRef.current;
     let isActive = true;
+    activeRequestRef.current?.abort();
+    const abortController = new AbortController();
+    activeRequestRef.current = abortController;
     setError('');
+    setIsLoadingRoute(true);
 
-    fetch(variant.geometry_path)
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return res.json();
-      })
-      .then((rawGeojson) => {
-        if (!isActive || requestId !== requestSeqRef.current || !mapRef.current) return;
-        const input = ensureFeatureCollection(rawGeojson);
-        const declaredStartCoord = readDeclaredCoord(variant, 'start');
-        const declaredEndCoord = readDeclaredCoord(variant, 'end');
-        const mainRoute = buildOrderedMainRoute(input, declaredStartCoord, declaredEndCoord);
-        const routeData = {
-          type: 'FeatureCollection',
-          features: [
-            {
-              type: 'Feature',
-              geometry: {
-                type: 'LineString',
-                coordinates: mainRoute.orderedCoords,
-              },
-            },
-          ],
-        } as any;
-        const renderedFeature = routeData.features[0];
-        const renderedLineCoords = (renderedFeature?.geometry?.coordinates || []) as LngLat[];
-        if (renderedLineCoords.length < 2) throw new Error('invalid rendered line coords');
-        const renderedStart = renderedLineCoords[0];
-        const renderedEnd = renderedLineCoords[renderedLineCoords.length - 1];
-        const renderedBounds = renderedLineCoords.reduce(
-          (acc, p) => acc.extend(p),
-          new LngLatBounds(renderedStart, renderedStart),
-        );
+    const applyPreparedRoute = (prepared: PreparedRouteData) => {
+      const currentMap = mapRef.current;
+      if (!currentMap || !isActive || requestId !== requestSeqRef.current) return;
+      clearTerminalPopup();
+      clearMapClickSuppression();
+      clearTerminalState(currentMap);
+      setMobileActiveTerminal(null);
+      removeTerminalTapMarkers();
 
-        const apply = () => {
-          const currentMap = mapRef.current;
-          if (!currentMap) return;
-          clearTerminalPopup();
-          clearMapClickSuppression();
-          clearTerminalState(currentMap);
-          setMobileActiveTerminal(null);
-          removeTerminalTapMarkers();
+      const settleAppliedRoute = () => {
+        if (!isActive || requestId !== requestSeqRef.current) return;
+        lastAppliedPathRef.current = variant.geometry_path;
+        setIsLoadingRoute(false);
+        onRouteSettledRef.current?.(variant.id);
+      };
 
-          const source = currentMap.getSource(SOURCE_ID) as maplibregl.GeoJSONSource | undefined;
-          if (source) {
-            source.setData(routeData);
-          } else {
-            currentMap.addSource(SOURCE_ID, { type: 'geojson', data: routeData });
-            currentMap.addLayer({
-              id: LINE_LAYER_ID,
-              type: 'line',
-              source: SOURCE_ID,
-              paint: {
-                'line-color': '#3f8cff',
-                'line-width': 4,
-                'line-opacity': 0.92,
-              },
-              layout: {
-                'line-cap': 'round',
-                'line-join': 'round',
-              },
-            });
-          }
+      currentMap.once('idle', settleAppliedRoute);
 
-          if (ENABLE_TERMINALS) {
-            const startZh = variant.start_place?.zh || '起点';
-            const startEn = variant.start_place?.en || '';
-            const endZh = variant.end_place?.zh || '终点';
-            const endEn = variant.end_place?.en || '';
-            const terminalData = {
-              type: 'FeatureCollection',
-              features: [
-                {
-                  type: 'Feature',
-                  id: 'start',
-                  properties: { kind: 'start', label: '起点', zh: startZh, en: startEn },
-                  geometry: { type: 'Point', coordinates: renderedStart },
-                },
-                {
-                  type: 'Feature',
-                  id: 'end',
-                  properties: { kind: 'end', label: '终点', zh: endZh, en: endEn },
-                  geometry: { type: 'Point', coordinates: renderedEnd },
-                },
+      const source = currentMap.getSource(SOURCE_ID) as maplibregl.GeoJSONSource | undefined;
+      if (source) {
+        source.setData(prepared.routeData);
+      } else {
+        currentMap.addSource(SOURCE_ID, { type: 'geojson', data: prepared.routeData });
+        currentMap.addLayer({
+          id: LINE_LAYER_ID,
+          type: 'line',
+          source: SOURCE_ID,
+          paint: {
+            'line-color': '#3f8cff',
+            'line-width': 4,
+            'line-opacity': 0.92,
+          },
+          layout: {
+            'line-cap': 'round',
+            'line-join': 'round',
+          },
+        });
+      }
+
+      if (ENABLE_TERMINALS) {
+        const terminalSource = currentMap.getSource(TERMINAL_SOURCE_ID) as maplibregl.GeoJSONSource | undefined;
+        if (terminalSource) {
+          terminalSource.setData(prepared.terminalData);
+        } else {
+          currentMap.addSource(TERMINAL_SOURCE_ID, { type: 'geojson', data: prepared.terminalData });
+          currentMap.addLayer({
+            id: TERMINAL_GLOW_LAYER_ID,
+            type: 'circle',
+            source: TERMINAL_SOURCE_ID,
+            paint: {
+              'circle-radius': [
+                'case',
+                ['boolean', ['feature-state', 'hover'], false],
+                ['match', ['get', 'kind'], 'start', 9.8 * TERMINAL_HOVER_SCALE, 9.8 * TERMINAL_HOVER_SCALE],
+                ['match', ['get', 'kind'], 'start', 9.8, 9.8],
               ],
-            } as any;
-
-            const terminalSource = currentMap.getSource(TERMINAL_SOURCE_ID) as maplibregl.GeoJSONSource | undefined;
-            if (terminalSource) {
-              terminalSource.setData(terminalData);
-            } else {
-              currentMap.addSource(TERMINAL_SOURCE_ID, { type: 'geojson', data: terminalData });
-              currentMap.addLayer({
-                id: TERMINAL_GLOW_LAYER_ID,
-                type: 'circle',
-                source: TERMINAL_SOURCE_ID,
-                paint: {
-                  'circle-radius': [
-                    'case',
-                    ['boolean', ['feature-state', 'hover'], false],
-                    ['match', ['get', 'kind'], 'start', 11.1 * TERMINAL_HOVER_SCALE, 11.7 * TERMINAL_HOVER_SCALE],
-                    ['match', ['get', 'kind'], 'start', 11.1, 11.7],
-                  ],
-                  'circle-color': [
-                    'case',
-                    ['boolean', ['feature-state', 'hover'], false],
-                    ['match', ['get', 'kind'], 'start', 'rgba(61, 127, 224, 0.19)', 'rgba(243, 106, 52, 0.19)'],
-                    ['match', ['get', 'kind'], 'start', 'rgba(61, 127, 224, 0.16)', 'rgba(243, 106, 52, 0.16)'],
-                  ],
-                  'circle-opacity': 1,
-                  'circle-blur': 0.36,
-                },
-              });
-              currentMap.addLayer({
-                id: TERMINAL_INNER_LAYER_ID,
-                type: 'circle',
-                source: TERMINAL_SOURCE_ID,
-                paint: {
-                  'circle-radius': [
-                    'case',
-                    ['boolean', ['feature-state', 'hover'], false],
-                    ['match', ['get', 'kind'], 'start', 5.2 * TERMINAL_HOVER_SCALE, 5.4 * TERMINAL_HOVER_SCALE],
-                    ['match', ['get', 'kind'], 'start', 5.2, 5.4],
-                  ],
-                  'circle-color': ['match', ['get', 'kind'], 'start', '#3D7FE0', '#FF9A5C'],
-                  'circle-opacity': 0.32,
-                  'circle-blur': 0.18,
-                },
-              });
-              currentMap.addLayer({
-                id: TERMINAL_CORE_LAYER_ID,
-                type: 'circle',
-                source: TERMINAL_SOURCE_ID,
-                paint: {
-                  'circle-radius': [
-                    'case',
-                    ['boolean', ['feature-state', 'hover'], false],
-                    ['match', ['get', 'kind'], 'start', 6.6 * TERMINAL_HOVER_SCALE, 6.9 * TERMINAL_HOVER_SCALE],
-                    ['match', ['get', 'kind'], 'start', 6.6, 6.9],
-                  ],
-                  'circle-color': ['match', ['get', 'kind'], 'start', '#1155AD', '#F36A34'],
-                  'circle-stroke-color': [
-                    'case',
-                    ['boolean', ['feature-state', 'hover'], false],
-                    ['match', ['get', 'kind'], 'start', 'rgba(214, 230, 255, 0.8)', 'rgba(255, 232, 214, 0.82)'],
-                    ['match', ['get', 'kind'], 'start', 'rgba(214, 230, 255, 0.72)', 'rgba(255, 232, 214, 0.74)'],
-                  ],
-                  'circle-stroke-width': 1.5,
-                },
-              });
-              (currentMap as any).setPaintProperty(
-                TERMINAL_GLOW_LAYER_ID,
-                'circle-radius-transition',
-                { duration: TERMINAL_HOVER_DURATION, delay: 0 },
-              );
-              (currentMap as any).setPaintProperty(
-                TERMINAL_INNER_LAYER_ID,
-                'circle-radius-transition',
-                { duration: TERMINAL_HOVER_DURATION, delay: 0 },
-              );
-              (currentMap as any).setPaintProperty(
-                TERMINAL_CORE_LAYER_ID,
-                'circle-radius-transition',
-                { duration: TERMINAL_HOVER_DURATION, delay: 0 },
-              );
-            }
-
-            if (SHOW_DEBUG_TERMINALS) {
-              const debugData = {
-                type: 'FeatureCollection',
-                features: [
-                  { type: 'Feature', properties: { kind: 'start' }, geometry: { type: 'Point', coordinates: renderedStart } },
-                  { type: 'Feature', properties: { kind: 'end' }, geometry: { type: 'Point', coordinates: renderedEnd } },
-                ],
-              } as any;
-              const debugSource = currentMap.getSource('route-terminals-debug') as maplibregl.GeoJSONSource | undefined;
-              if (debugSource) debugSource.setData(debugData);
-              else {
-                currentMap.addSource('route-terminals-debug', { type: 'geojson', data: debugData });
-                currentMap.addLayer({
-                  id: 'route-terminals-debug-layer',
-                  type: 'circle',
-                  source: 'route-terminals-debug',
-                  paint: {
-                    'circle-radius': 3,
-                    'circle-color': ['match', ['get', 'kind'], 'start', '#00ff00', '#ff0000'],
-                  },
-                });
-              }
-            } else {
-              if (currentMap.getLayer('route-terminals-debug-layer')) currentMap.removeLayer('route-terminals-debug-layer');
-              if (currentMap.getSource('route-terminals-debug')) currentMap.removeSource('route-terminals-debug');
-            }
-
-            terminalData.features.forEach((terminal: any) => {
-              const tapMarker = new maplibregl.Marker({
-                element: createTerminalTapTarget(terminal),
-                anchor: 'center',
-              })
-                .setLngLat(terminal.geometry.coordinates as LngLat)
-                .addTo(currentMap);
-              terminalTapMarkersRef.current.push(tapMarker);
-            });
-
-            if (!onTerminalEnterRef.current) {
-              const onEnter = (e: any) => {
-                if (!desktopHoverCapableRef.current) return;
-                if (hidePopupTimerRef.current !== null) {
-                  window.clearTimeout(hidePopupTimerRef.current);
-                  hidePopupTimerRef.current = null;
-                }
-                const feature = e?.features?.[0];
-                if (!feature) return;
-                const id = feature.id as string | number | undefined;
-                if (selectedTerminalIdRef.current !== null) return;
-                if (hoveredTerminalIdRef.current !== null && hoveredTerminalIdRef.current !== id) {
-                  currentMap.setFeatureState(
-                    { source: TERMINAL_SOURCE_ID, id: hoveredTerminalIdRef.current },
-                    { hover: false },
-                  );
-                }
-                if (id !== undefined) {
-                  hoveredTerminalIdRef.current = id;
-                  currentMap.setFeatureState({ source: TERMINAL_SOURCE_ID, id }, { hover: true });
-                }
-                currentMap.getCanvas().style.cursor = 'pointer';
-                renderTerminalPopup(currentMap, feature);
-              };
-              const onLeave = (e: any) => {
-                if (!desktopHoverCapableRef.current) return;
-                const feature = e?.features?.[0];
-                const id = feature?.id as string | number | undefined;
-                if (id !== undefined) {
-                  currentMap.setFeatureState({ source: TERMINAL_SOURCE_ID, id }, { hover: false });
-                  if (hoveredTerminalIdRef.current === id) hoveredTerminalIdRef.current = null;
-                }
-                currentMap.getCanvas().style.cursor = '';
-                if (hidePopupTimerRef.current !== null) {
-                  window.clearTimeout(hidePopupTimerRef.current);
-                }
-                hidePopupTimerRef.current = window.setTimeout(() => {
-                  clearTerminalPopup();
-                }, TERMINAL_POPUP_HIDE_DELAY);
-              };
-              const onTerminalClick = (e: any) => {
-                const feature = e?.features?.[0];
-                if (!feature || desktopHoverCapableRef.current) return;
-                if (typeof e?.preventDefault === 'function') e.preventDefault();
-                suppressUpcomingMapClick();
-                setSelectedTerminal(currentMap, feature);
-              };
-              const onMapClick = (e: any) => {
-                if (desktopHoverCapableRef.current) return;
-                if (suppressNextMapClickRef.current) {
-                  clearMapClickSuppression();
-                  return;
-                }
-                const features = currentMap.queryRenderedFeatures(e.point, { layers: [TERMINAL_CORE_LAYER_ID] });
-                if (features.length) return;
-                clearTerminalPopup();
-                clearTerminalState(currentMap);
-                setMobileActiveTerminal(null);
-              };
-              const onMapDragStart = () => {
-                if (desktopHoverCapableRef.current) return;
-                clearTerminalPopup();
-                clearTerminalState(currentMap);
-                setMobileActiveTerminal(null);
-              };
-              currentMap.on('mouseenter', TERMINAL_CORE_LAYER_ID, onEnter);
-              currentMap.on('mouseleave', TERMINAL_CORE_LAYER_ID, onLeave);
-              currentMap.on('click', TERMINAL_CORE_LAYER_ID, onTerminalClick);
-              currentMap.on('click', onMapClick);
-              currentMap.on('dragstart', onMapDragStart);
-              onTerminalEnterRef.current = onEnter;
-              onTerminalLeaveRef.current = onLeave;
-              onTerminalClickRef.current = onTerminalClick;
-              onMapClickRef.current = onMapClick;
-              onMapDragStartRef.current = onMapDragStart;
-            }
-          }
-
-          currentMap.fitBounds(renderedBounds, {
-            padding: 40,
-            duration: 820,
+              'circle-color': ['match', ['get', 'kind'], 'start', 'rgba(95, 149, 255, 0.18)', 'rgba(255, 155, 92, 0.18)'],
+              'circle-opacity': 1,
+              'circle-blur': 0.42,
+            },
           });
-        };
+          currentMap.addLayer({
+            id: TERMINAL_INNER_LAYER_ID,
+            type: 'circle',
+            source: TERMINAL_SOURCE_ID,
+            paint: {
+              'circle-radius': [
+                'case',
+                ['boolean', ['feature-state', 'hover'], false],
+                ['match', ['get', 'kind'], 'start', 6.1 * TERMINAL_HOVER_SCALE, 6.2 * TERMINAL_HOVER_SCALE],
+                ['match', ['get', 'kind'], 'start', 6.1, 6.2],
+              ],
+              'circle-color': ['match', ['get', 'kind'], 'start', '#5f95ff', '#ff9b5c'],
+              'circle-opacity': 0.96,
+            },
+          });
+          currentMap.addLayer({
+            id: TERMINAL_CORE_LAYER_ID,
+            type: 'circle',
+            source: TERMINAL_SOURCE_ID,
+            paint: {
+              'circle-radius': [
+                'case',
+                ['boolean', ['feature-state', 'hover'], false],
+                ['match', ['get', 'kind'], 'start', 3.5 * TERMINAL_HOVER_SCALE, 3.6 * TERMINAL_HOVER_SCALE],
+                ['match', ['get', 'kind'], 'start', 3.5, 3.6],
+              ],
+              'circle-color': ['match', ['get', 'kind'], 'start', '#bcd3ff', '#ffd0a8'],
+              'circle-stroke-color': 'rgba(255, 255, 255, 0.18)',
+              'circle-stroke-width': 0.5,
+            },
+          });
+          currentMap.addLayer({
+            id: `${TERMINAL_CORE_LAYER_ID}-highlight`,
+            type: 'circle',
+            source: TERMINAL_SOURCE_ID,
+            paint: {
+              'circle-radius': [
+                'case',
+                ['boolean', ['feature-state', 'hover'], false],
+                ['match', ['get', 'kind'], 'start', 1.38 * TERMINAL_HOVER_SCALE, 1.46 * TERMINAL_HOVER_SCALE],
+                ['match', ['get', 'kind'], 'start', 1.38, 1.46],
+              ],
+              'circle-color': ['match', ['get', 'kind'], 'start', '#eef4ff', '#fff4ea'],
+              'circle-opacity': 0.98,
+            },
+          });
+          (currentMap as any).setPaintProperty(
+            TERMINAL_GLOW_LAYER_ID,
+            'circle-radius-transition',
+            { duration: TERMINAL_HOVER_DURATION, delay: 0 },
+          );
+          (currentMap as any).setPaintProperty(
+            TERMINAL_INNER_LAYER_ID,
+            'circle-radius-transition',
+            { duration: TERMINAL_HOVER_DURATION, delay: 0 },
+          );
+          (currentMap as any).setPaintProperty(
+            TERMINAL_CORE_LAYER_ID,
+            'circle-radius-transition',
+            { duration: TERMINAL_HOVER_DURATION, delay: 0 },
+          );
+          (currentMap as any).setPaintProperty(
+            `${TERMINAL_CORE_LAYER_ID}-highlight`,
+            'circle-radius-transition',
+            { duration: TERMINAL_HOVER_DURATION, delay: 0 },
+          );
+        }
 
-        if (!map.isStyleLoaded()) map.once('load', apply);
-        else apply();
-      })
+        if (SHOW_DEBUG_TERMINALS) {
+          const debugData = {
+            type: 'FeatureCollection',
+            features: [
+              { type: 'Feature', properties: { kind: 'start' }, geometry: { type: 'Point', coordinates: prepared.renderedStart } },
+              { type: 'Feature', properties: { kind: 'end' }, geometry: { type: 'Point', coordinates: prepared.renderedEnd } },
+            ],
+          } as any;
+          const debugSource = currentMap.getSource('route-terminals-debug') as maplibregl.GeoJSONSource | undefined;
+          if (debugSource) debugSource.setData(debugData);
+          else {
+            currentMap.addSource('route-terminals-debug', { type: 'geojson', data: debugData });
+            currentMap.addLayer({
+              id: 'route-terminals-debug-layer',
+              type: 'circle',
+              source: 'route-terminals-debug',
+              paint: {
+                'circle-radius': 3,
+                'circle-color': ['match', ['get', 'kind'], 'start', '#00ff00', '#ff0000'],
+              },
+            });
+          }
+        } else {
+          if (currentMap.getLayer('route-terminals-debug-layer')) currentMap.removeLayer('route-terminals-debug-layer');
+          if (currentMap.getSource('route-terminals-debug')) currentMap.removeSource('route-terminals-debug');
+        }
+
+        prepared.terminalData.features.forEach((terminal: any) => {
+          const tapMarker = new maplibregl.Marker({
+            element: createTerminalTapTarget(terminal),
+            anchor: 'center',
+          })
+            .setLngLat(terminal.geometry.coordinates as LngLat)
+            .addTo(currentMap);
+          terminalTapMarkersRef.current.push(tapMarker);
+        });
+
+        if (!onTerminalEnterRef.current) {
+          const onEnter = (e: any) => {
+            if (!desktopHoverCapableRef.current) return;
+            if (hidePopupTimerRef.current !== null) {
+              window.clearTimeout(hidePopupTimerRef.current);
+              hidePopupTimerRef.current = null;
+            }
+            const feature = e?.features?.[0];
+            if (!feature) return;
+            const id = feature.id as string | number | undefined;
+            if (selectedTerminalIdRef.current !== null) return;
+            if (hoveredTerminalIdRef.current !== null && hoveredTerminalIdRef.current !== id) {
+              currentMap.setFeatureState(
+                { source: TERMINAL_SOURCE_ID, id: hoveredTerminalIdRef.current },
+                { hover: false },
+              );
+            }
+            if (id !== undefined) {
+              hoveredTerminalIdRef.current = id;
+              currentMap.setFeatureState({ source: TERMINAL_SOURCE_ID, id }, { hover: true });
+            }
+            currentMap.getCanvas().style.cursor = 'pointer';
+            renderTerminalPopup(currentMap, feature);
+          };
+          const onLeave = (e: any) => {
+            if (!desktopHoverCapableRef.current) return;
+            const feature = e?.features?.[0];
+            const id = feature?.id as string | number | undefined;
+            if (id !== undefined) {
+              currentMap.setFeatureState({ source: TERMINAL_SOURCE_ID, id }, { hover: false });
+              if (hoveredTerminalIdRef.current === id) hoveredTerminalIdRef.current = null;
+            }
+            currentMap.getCanvas().style.cursor = '';
+            if (hidePopupTimerRef.current !== null) {
+              window.clearTimeout(hidePopupTimerRef.current);
+            }
+            hidePopupTimerRef.current = window.setTimeout(() => {
+              clearTerminalPopup();
+            }, TERMINAL_POPUP_HIDE_DELAY);
+          };
+          const onTerminalClick = (e: any) => {
+            const feature = e?.features?.[0];
+            if (!feature || desktopHoverCapableRef.current) return;
+            if (typeof e?.preventDefault === 'function') e.preventDefault();
+            suppressUpcomingMapClick();
+            setSelectedTerminal(currentMap, feature);
+          };
+          const onMapClick = (e: any) => {
+            if (desktopHoverCapableRef.current) return;
+            if (suppressNextMapClickRef.current) {
+              clearMapClickSuppression();
+              return;
+            }
+            const features = currentMap.queryRenderedFeatures(e.point, { layers: [TERMINAL_CORE_LAYER_ID] });
+            if (features.length) return;
+            clearTerminalPopup();
+            clearTerminalState(currentMap);
+            setMobileActiveTerminal(null);
+          };
+          const onMapDragStart = () => {
+            if (desktopHoverCapableRef.current) return;
+            clearTerminalPopup();
+            clearTerminalState(currentMap);
+            setMobileActiveTerminal(null);
+          };
+          currentMap.on('mouseenter', TERMINAL_CORE_LAYER_ID, onEnter);
+          currentMap.on('mouseleave', TERMINAL_CORE_LAYER_ID, onLeave);
+          currentMap.on('click', TERMINAL_CORE_LAYER_ID, onTerminalClick);
+          currentMap.on('click', onMapClick);
+          currentMap.on('dragstart', onMapDragStart);
+          onTerminalEnterRef.current = onEnter;
+          onTerminalLeaveRef.current = onLeave;
+          onTerminalClickRef.current = onTerminalClick;
+          onMapClickRef.current = onMapClick;
+          onMapDragStartRef.current = onMapDragStart;
+        }
+      }
+
+      currentMap.fitBounds(prepared.renderedBounds, {
+        padding: 40,
+        duration: prefersReducedRouteMotion ? MOBILE_FIT_BOUNDS_DURATION : DESKTOP_FIT_BOUNDS_DURATION,
+      });
+    };
+
+    const finalizePreparedRoute = (prepared: PreparedRouteData) => {
+      if (!isActive || requestId !== requestSeqRef.current) return;
+      const apply = () => applyPreparedRoute(prepared);
+      if (!map.isStyleLoaded()) map.once('load', apply);
+      else window.requestAnimationFrame(apply);
+    };
+
+    const cached = routeCacheRef.current.get(variant.geometry_path);
+    if (cached) {
+      finalizePreparedRoute(cached);
+    } else {
+      fetch(variant.geometry_path, { signal: abortController.signal })
+        .then((res) => {
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          return res.json();
+        })
+        .then((rawGeojson) => {
+          if (!isActive || requestId !== requestSeqRef.current) return;
+          const prepared = prepareRouteData(variant, rawGeojson);
+          routeCacheRef.current.set(variant.geometry_path, prepared);
+          finalizePreparedRoute(prepared);
+        })
       .catch((err: unknown) => {
         if (!isActive || requestId !== requestSeqRef.current) return;
-        if (err instanceof DOMException && err.name === 'AbortError') return;
-        if ((err as any)?.name === 'AbortError') return;
-        if (typeof (err as any)?.message === 'string' && /abort/i.test((err as any).message)) return;
+        if (isAbortLikeError(err)) return;
         setError('地图数据读取失败');
+        setIsLoadingRoute(false);
       });
+    }
 
     return () => {
       isActive = false;
-      clearTerminalPopup();
-      clearMapClickSuppression();
-      removeTerminalTapMarkers();
-      setMobileActiveTerminal(null);
-      clearTerminalState();
+      if (activeRequestRef.current === abortController) {
+        activeRequestRef.current.abort();
+        activeRequestRef.current = null;
+      }
     };
-  }, [variant?.geometry_path]);
+  }, [prefersReducedRouteMotion, variant]);
 
   return (
     <div className="map-view">
       <div className="map-canvas real-map" ref={containerRef}>
         {error ? <div className="map-placeholder">{error}</div> : null}
+        <div className={`map-status-badge ${(isSwitchingRoute || isLoadingRoute) ? 'visible' : ''}`} aria-hidden={!isSwitchingRoute && !isLoadingRoute}>
+          {isSwitchingRoute ? '切换中' : '加载中'}
+        </div>
         {ENABLE_TERMINALS && !isDesktopHoverCapable && mobileActiveTerminal ? (
           <div
             onClick={(event) => event.stopPropagation()}

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import routesData from '../data/routes.json';
 import { FavoritesDrawer } from './components/FavoritesDrawer';
 import { MapView } from './components/MapView';
+import { CaminoHistoryModal } from './components/CaminoHistoryModal';
 import { RouteDetail } from './components/RouteDetail';
 import { RouteList } from './components/RouteList';
 import type { AtlasData, RouteVariant } from './types/routes';
@@ -46,8 +47,10 @@ export default function App() {
 
   const [activeGroupId, setActiveGroupId] = useState(initialGroupId);
   const [activeVariantId, setActiveVariantId] = useState(initialVariantId);
+  const [displayedMapVariantId, setDisplayedMapVariantId] = useState(initialVariantId);
   const [favoriteIds, setFavoriteIds] = useState<string[]>(() => readFavoriteIdsFromStorage(validVariantIds));
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [historyOpen, setHistoryOpen] = useState(false);
   const [mobileRouteListOpen, setMobileRouteListOpen] = useState(false);
   const [isMobileViewport, setIsMobileViewport] = useState(false);
   const [introReady, setIntroReady] = useState(false);
@@ -67,6 +70,7 @@ export default function App() {
 
   const selectedVariant = variantsById[activeVariantId] ?? null;
   const selectedGroup = selectedVariant ? groupsById[selectedVariant.group_id] : null;
+  const isRouteSwitching = Boolean(selectedVariant && displayedMapVariantId !== selectedVariant.id);
 
   function handleSelectGroup(groupId: string) {
     setActiveGroupId(groupId);
@@ -93,6 +97,11 @@ export default function App() {
   useEffect(() => {
     setFavoriteIds((prev) => prev.filter((id) => validVariantIds.has(id)));
   }, [validVariantIds]);
+
+  useEffect(() => {
+    if (validVariantIds.has(displayedMapVariantId)) return;
+    setDisplayedMapVariantId((prev) => (validVariantIds.has(prev) ? prev : activeVariantId));
+  }, [activeVariantId, displayedMapVariantId, validVariantIds]);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -124,6 +133,11 @@ export default function App() {
   function closeDrawer() {
     blurActiveElementWithin('.drawer-root');
     setDrawerOpen(false);
+  }
+
+  function closeHistoryModal() {
+    blurActiveElementWithin('.history-modal-root');
+    setHistoryOpen(false);
   }
 
   function resetFeedbackForm() {
@@ -263,23 +277,26 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const isMobile = window.matchMedia('(max-width: 768px)').matches;
-    if (!isMobile) return;
-    if (drawerOpen) {
-      bodyOverflowRef.current = document.body.style.overflow;
+    if (typeof document === 'undefined') return;
+    const shouldLockScroll = historyOpen || feedbackOpen || (isMobileViewport && drawerOpen);
+    if (shouldLockScroll) {
+      if (bodyOverflowRef.current === null) {
+        bodyOverflowRef.current = document.body.style.overflow;
+      }
       document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = bodyOverflowRef.current ?? '';
+      return () => {
+        if (!historyOpen && !feedbackOpen && !(isMobileViewport && drawerOpen) && bodyOverflowRef.current !== null) {
+          document.body.style.overflow = bodyOverflowRef.current;
+          bodyOverflowRef.current = null;
+        }
+      };
+    }
+
+    if (bodyOverflowRef.current !== null) {
+      document.body.style.overflow = bodyOverflowRef.current;
       bodyOverflowRef.current = null;
     }
-    return () => {
-      if (bodyOverflowRef.current !== null) {
-        document.body.style.overflow = bodyOverflowRef.current;
-        bodyOverflowRef.current = null;
-      }
-    };
-  }, [drawerOpen]);
+  }, [drawerOpen, feedbackOpen, historyOpen, isMobileViewport]);
 
   return (
     <div className={`app-shell page-intro ${introReady ? 'is-ready' : ''}`}>
@@ -289,22 +306,38 @@ export default function App() {
             <h1 className="brand-title">Camino Atlas · 朝圣路书</h1>
             <p className="brand-subtitle">选择你的朝圣之路，放进贝壳袋</p>
           </div>
-          <button
-            className="shell-bag-entry-icononly"
-            onClick={() => setDrawerOpen(true)}
-            type="button"
-            aria-label="打开贝壳袋"
-          >
-            <span className="shell-bag-icon">
-              <img
-                className="shell-bag-custom-icon"
-                src="/geo/icons/shell.png"
-                alt=""
-                aria-hidden="true"
-              />
-            </span>
-            <span className="shell-bag-count">{favoriteIds.length}</span>
-          </button>
+          <div className="brand-actions">
+            <button
+              className="header-icon-button history-entry-button"
+              onClick={() => setHistoryOpen(true)}
+              type="button"
+              aria-label="朝圣之路简史"
+            >
+              <span className="header-icon-button-icon">
+                <img
+                  className="history-entry-icon-image"
+                  src="/geo/icons/book5.png"
+                  alt="朝圣之路简史"
+                />
+              </span>
+            </button>
+            <button
+              className="shell-bag-entry-icononly"
+              onClick={() => setDrawerOpen(true)}
+              type="button"
+              aria-label="打开贝壳袋"
+            >
+              <span className="shell-bag-icon">
+                <img
+                  className="shell-bag-custom-icon"
+                  src="/geo/icons/shell.png"
+                  alt=""
+                  aria-hidden="true"
+                />
+              </span>
+              <span className="shell-bag-count">{favoriteIds.length}</span>
+            </button>
+          </div>
         </div>
 
         <div className="sidebar-scroll-region">
@@ -328,6 +361,7 @@ export default function App() {
               selectedGroupId={activeGroupId}
               selectedVariantId={activeVariantId}
               favoriteIds={favoriteIds}
+              switchingVariantId={isRouteSwitching ? activeVariantId : null}
               onSelectGroup={(groupId) => {
                 handleSelectGroup(groupId);
                 if (window.matchMedia('(max-width: 768px)').matches) {
@@ -384,7 +418,13 @@ export default function App() {
 
       <main className="right-main">
         <section className="map-area glass-panel">
-          <MapView variant={selectedVariant} />
+          <MapView
+            variant={selectedVariant}
+            isSwitchingRoute={isRouteSwitching}
+            onRouteSettled={(settledVariantId) => {
+              setDisplayedMapVariantId((prev) => (prev === settledVariantId ? prev : settledVariantId));
+            }}
+          />
         </section>
         <section className="detail-area glass-panel">
           <RouteDetail
@@ -410,6 +450,8 @@ export default function App() {
         onRemoveFavorite={toggleFavorite}
         onClearAll={() => setFavoriteIds([])}
       />
+
+      <CaminoHistoryModal open={historyOpen} onClose={closeHistoryModal} />
 
       <div className={`feedback-modal-root ${feedbackOpen ? 'open' : ''}`} aria-hidden={!feedbackOpen}>
         <button

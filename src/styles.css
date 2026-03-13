@@ -67,6 +67,13 @@ body {
   margin-bottom: 11px;
 }
 
+.brand-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  flex-shrink: 0;
+}
+
 .brand-copy {
   min-width: 0;
   flex: 1;
@@ -404,9 +411,10 @@ body {
   cursor: pointer;
 }
 
+.header-icon-button,
 .shell-bag-entry-icononly {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   padding: 0;
   margin-top: 0;
   border: none;
@@ -421,9 +429,41 @@ body {
   transition: opacity 140ms ease, transform 140ms ease;
 }
 
+.header-icon-button:hover,
 .shell-bag-entry-icononly:hover {
   opacity: 0.92;
   transform: translateY(-1px);
+}
+
+.header-icon-button {
+  color: rgba(169, 197, 236, 0.78);
+}
+
+.header-icon-button-icon {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-icon-button-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.history-entry-icon-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  object-position: center;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+.history-entry-button {
+  margin-right: -2px;
 }
 
 .shell-bag-icon {
@@ -1055,6 +1095,243 @@ body {
   text-align: center;
 }
 
+.history-modal-root {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  pointer-events: none;
+  z-index: 46;
+}
+
+.history-modal-root.open {
+  pointer-events: auto;
+}
+
+.history-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgba(4, 10, 19, 0.68);
+  backdrop-filter: blur(5px);
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
+.history-modal-root.open .history-modal-backdrop {
+  opacity: 1;
+}
+
+.history-modal-panel {
+  position: relative;
+  width: min(980px, 94vw);
+  max-height: 78vh;
+  display: flex;
+  flex-direction: column;
+  border-radius: 22px;
+  border: 1px solid rgba(164, 203, 255, 0.18);
+  background: linear-gradient(160deg, rgba(19, 35, 58, 0.94), rgba(11, 22, 39, 0.92));
+  box-shadow: 0 30px 64px rgba(3, 10, 21, 0.42), 0 0 0 1px rgba(104, 151, 213, 0.06);
+  backdrop-filter: blur(14px);
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 220ms ease,
+    transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+  overflow: hidden;
+}
+
+.history-modal-root.open .history-modal-panel {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.history-modal-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 28px;
+  align-items: flex-start;
+  padding: 28px 34px 20px 38px;
+  border-bottom: 1px solid rgba(164, 203, 255, 0.12);
+}
+
+.history-modal-heading {
+  min-width: 0;
+  max-width: 720px;
+  margin-left: 54px;
+}
+
+.history-modal-kicker {
+  margin: 0 0 12px;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(176, 198, 228, 0.5);
+}
+
+.history-modal-header h3 {
+  margin: 0;
+  max-width: 12ch;
+  font-size: 18px;
+  line-height: 1.14;
+  letter-spacing: 0.12em;
+  color: #f5f9ff;
+  text-wrap: balance;
+}
+
+.history-modal-subtitle {
+  margin: 14px 0 0;
+  max-width: 40ch;
+  font-size: 0.78rem;
+  line-height: 1.58;
+  letter-spacing: 0.01em;
+  color: rgba(192, 210, 233, 0.62);
+  text-wrap: pretty;
+}
+
+.history-modal-close {
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(164, 203, 255, 0.18);
+  border-radius: 10px;
+  background: rgba(15, 28, 46, 0.62);
+  color: rgba(214, 228, 247, 0.74);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.history-modal-close:hover {
+  border-color: rgba(164, 203, 255, 0.26);
+  background: rgba(20, 36, 58, 0.78);
+  color: rgba(231, 240, 252, 0.9);
+  transform: translateY(-1px);
+}
+
+.history-modal-close svg {
+  width: 12px;
+  height: 12px;
+  display: block;
+}
+
+.history-modal-body {
+  overflow: auto;
+  padding: 18px 38px 34px 38px;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(171, 191, 217, 0.22) rgba(8, 16, 28, 0.18);
+}
+
+.history-modal-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.history-modal-body::-webkit-scrollbar-track {
+  background: rgba(8, 16, 28, 0.16);
+  border-radius: 999px;
+}
+
+.history-modal-body::-webkit-scrollbar-thumb {
+  background: rgba(171, 191, 217, 0.22);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.history-modal-body::-webkit-scrollbar-thumb:hover {
+  background: rgba(186, 204, 227, 0.3);
+  background-clip: content-box;
+}
+
+.history-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 6px 0 0;
+  display: grid;
+  gap: 0;
+}
+
+.history-timeline-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 26px;
+  padding: 0 0 42px;
+}
+
+.history-timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.history-timeline-item::after {
+  content: '';
+  position: absolute;
+  top: 16px;
+  left: 10px;
+  bottom: -8px;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(136, 180, 240, 0.52), rgba(136, 180, 240, 0.08));
+}
+
+.history-timeline-item:last-child::after {
+  display: none;
+}
+
+.history-timeline-marker {
+  width: 17px;
+  height: 17px;
+  margin-top: 3px;
+  border-radius: 999px;
+  border: 1px solid rgba(188, 215, 249, 0.6);
+  background:
+    radial-gradient(circle at center, rgba(226, 237, 255, 0.95) 0 26%, rgba(107, 158, 227, 0.9) 27% 62%, rgba(21, 42, 69, 0.98) 63%);
+  box-shadow: 0 0 0 5px rgba(63, 140, 255, 0.08);
+  position: relative;
+  z-index: 1;
+}
+
+.history-timeline-content {
+  padding-top: 1px;
+  max-width: 900px;
+  padding-right: 18px;
+}
+
+.history-timeline-content h4 {
+  margin: 0;
+  max-width: 28ch;
+  font-size: 0.98rem;
+  line-height: 1.48;
+  letter-spacing: 0.01em;
+  color: #f2f7ff;
+  text-wrap: pretty;
+}
+
+.history-timeline-content p {
+  margin: 15px 0 0;
+  max-width: 58em;
+  font-size: 0.92rem;
+  line-height: 1.9;
+  letter-spacing: 0.01em;
+  color: rgba(210, 224, 243, 0.82);
+  text-wrap: pretty;
+  text-align: justify;
+  text-justify: inter-ideograph;
+  text-align-last: left;
+}
+
+.history-timeline-content p + p {
+  margin-top: 16px;
+}
+
 .feedback-modal-root {
   position: fixed;
   inset: 0;
@@ -1335,6 +1612,10 @@ body {
     align-items: center;
   }
 
+  .brand-actions {
+    gap: 1px;
+  }
+
   .brand-title {
     white-space: normal;
     font-size: 0.94rem;
@@ -1347,10 +1628,16 @@ body {
     font-size: 0.72rem;
   }
 
+  .header-icon-button,
   .shell-bag-entry-icononly {
-    width: 38px;
-    height: 38px;
+    width: 42px;
+    height: 42px;
     flex-shrink: 0;
+  }
+
+  .header-icon-button-icon {
+    width: 25px;
+    height: 25px;
   }
 
   .shell-bag-entry-icononly .shell-bag-icon {
@@ -1680,6 +1967,70 @@ body {
     font-size: 13px;
   }
 
+  .history-modal-root {
+    padding: 14px;
+  }
+
+  .history-modal-panel {
+    width: 93vw;
+    max-height: 78vh;
+    border-radius: 18px;
+  }
+
+  .history-modal-header {
+    padding: 22px 24px 16px 26px;
+    gap: 16px;
+  }
+
+  .history-modal-header h3 {
+    max-width: none;
+    font-size: 1.24rem;
+  }
+
+  .history-modal-heading {
+    margin-left: 20px;
+  }
+
+  .history-modal-subtitle {
+    margin-top: 12px;
+    max-width: 34ch;
+    font-size: 0.74rem;
+    line-height: 1.62;
+    text-wrap: balance;
+    word-break: keep-all;
+    overflow-wrap: normal;
+  }
+
+  .history-modal-body {
+    padding: 12px 26px 24px 26px;
+  }
+
+  .history-timeline-item {
+    grid-template-columns: 24px minmax(0, 1fr);
+    gap: 18px;
+    padding-bottom: 30px;
+  }
+
+  .history-timeline-item::after {
+    left: 8px;
+    bottom: -6px;
+  }
+
+  .history-timeline-marker {
+    width: 15px;
+    height: 15px;
+  }
+
+  .history-timeline-content h4 {
+    font-size: 0.99rem;
+  }
+
+  .history-timeline-content p {
+    margin-top: 12px;
+    font-size: 0.9rem;
+    line-height: 1.84;
+  }
+
   .feedback-modal-root {
     padding: 10px;
     align-items: end;
@@ -1771,6 +2122,23 @@ body {
 
   .route-hook-text {
     font-size: 13px;
+  }
+
+  .history-modal-root {
+    padding: 10px;
+  }
+
+  .history-modal-panel {
+    width: 92vw;
+    border-radius: 16px;
+  }
+
+  .history-modal-header {
+    padding: 18px 16px 14px;
+  }
+
+  .history-modal-body {
+    padding: 10px 16px 20px 18px;
   }
 
   .feedback-modal-panel {

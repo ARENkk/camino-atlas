@@ -13,6 +13,8 @@ type Props = {
   selectedGroupId: string;
   selectedVariantId: string;
   favoriteIds: string[];
+  isSwitching?: boolean;
+  switchingVariantId?: string | null;
   onSelectGroup: (groupId: string) => void;
   onSelectVariant: (variantId: string) => void;
 };
@@ -47,6 +49,8 @@ export function RouteList({
   selectedGroupId,
   selectedVariantId,
   favoriteIds,
+  isSwitching = false,
+  switchingVariantId = null,
   onSelectGroup,
   onSelectVariant,
 }: Props) {
@@ -69,9 +73,13 @@ export function RouteList({
           <section key={group.id} className={`route-group ${isActiveGroup ? 'active' : ''}`}>
             <button
               type="button"
-              className="route-group-button"
-              onClick={() => onSelectGroup(group.id)}
+              className={`route-group-button ${isSwitching ? 'is-locked' : ''}`}
+              onClick={() => {
+                if (isSwitching) return;
+                onSelectGroup(group.id);
+              }}
               aria-pressed={isActiveGroup}
+              aria-disabled={isSwitching}
             >
               <div>
                 <h3 className="group-zh">{groupZh || '未命名路线'}</h3>
@@ -85,6 +93,7 @@ export function RouteList({
                 const variant = variantsById[variantId];
                 if (!variant) return null;
                 const isActive = variant.id === selectedVariantId;
+                const isSwitchingTarget = switchingVariantId === variant.id;
                 const favored = favoriteIds.includes(variant.id);
                 const variantDisplay = SIDEBAR_VARIANT_DISPLAY[variant.id];
                 const variantZhRaw = variantDisplay?.zh ?? variant.variant_name_zh;
@@ -96,9 +105,13 @@ export function RouteList({
                   <button
                     key={variant.id}
                     type="button"
-                    className={`variant-card ${isActive ? 'active' : ''}`}
-                    onClick={() => onSelectVariant(variant.id)}
+                    className={`variant-card ${isActive ? 'active' : ''} ${isSwitching ? 'is-locked' : ''} ${isSwitchingTarget ? 'is-switching-target' : ''}`}
+                    onClick={() => {
+                      if (isSwitching) return;
+                      onSelectVariant(variant.id);
+                    }}
                     aria-pressed={isActive}
+                    aria-disabled={isSwitching}
                   >
                     <div className="variant-head">
                       <strong>{variantZh || '未命名子线路'}</strong>
