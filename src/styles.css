@@ -464,6 +464,7 @@ body {
 
 .history-entry-button {
   margin-right: -2px;
+  top: 1px;
 }
 
 .shell-bag-icon {

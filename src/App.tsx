@@ -6,6 +6,7 @@ import { CaminoHistoryModal } from './components/CaminoHistoryModal';
 import { RouteDetail } from './components/RouteDetail';
 import { RouteList } from './components/RouteList';
 import type { AtlasData, RouteVariant } from './types/routes';
+import { HEAVY_ROUTE_GEOMETRY_PATHS, prefetchRouteGeometries } from './data/routeGeometry';
 import { FAVORITES_STORAGE_KEY, normalizeFavoriteVariantIds, readFavoriteIdsFromStorage } from './utils/favorites';
 
 const atlasData = routesData as AtlasData;
@@ -83,6 +84,12 @@ export default function App() {
     const group = groupsById[groupId];
     const nextVariantId = getGroupDefaultVariantId(groupId, variants, group?.default_variant_id);
     if (nextVariantId) {
+      routeDebug('switch requested', {
+        nextVariantId,
+        source: 'group',
+        selectedVariantId,
+        renderedVariantId,
+      });
       setSelectedVariantId(nextVariantId);
     }
   }
@@ -90,6 +97,12 @@ export default function App() {
   function handleSelectVariant(variantId: string) {
     const variant = variantsById[variantId];
     if (!variant) return;
+    routeDebug('switch requested', {
+      nextVariantId: variantId,
+      source: 'variant',
+      selectedVariantId,
+      renderedVariantId,
+    });
     setSelectedVariantId(variantId);
     setActiveGroupId(variant.group_id);
   }
@@ -112,6 +125,64 @@ export default function App() {
   useEffect(() => {
     routeDebug('selection state', { selectedVariantId, renderedVariantId });
   }, [renderedVariantId, selectedVariantId]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const siblingPaths = (groupsById[activeGroupId]?.variants ?? [])
+      .map((variantId) => variantsById[variantId]?.geometry_path)
+      .filter((geometryPath): geometryPath is string => Boolean(geometryPath));
+    if (!siblingPaths.length) return;
+
+    const pathsToPrefetch = siblingPaths.filter((geometryPath) => geometryPath !== selectedVariant?.geometry_path);
+    if (!pathsToPrefetch.length) return;
+
+    const idleWindow = window as Window & {
+      requestIdleCallback?: (callback: IdleRequestCallback, options?: IdleRequestOptions) => number;
+      cancelIdleCallback?: (handle: number) => void;
+    };
+
+    const prefetch = () => {
+      routeDebug('prefetch siblings', { activeGroupId, pathsToPrefetch });
+      prefetchRouteGeometries(pathsToPrefetch);
+    };
+
+    if (typeof idleWindow.requestIdleCallback === 'function') {
+      const handle = idleWindow.requestIdleCallback(() => prefetch(), { timeout: 1400 });
+      return () => idleWindow.cancelIdleCallback?.(handle);
+    }
+
+    const timer = window.setTimeout(prefetch, 900);
+    return () => window.clearTimeout(timer);
+  }, [activeGroupId, groupsById, selectedVariant?.geometry_path, variantsById]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    if (!HEAVY_ROUTE_GEOMETRY_PATHS.length) return;
+
+    const nav = navigator as Navigator & {
+      connection?: { saveData?: boolean; effectiveType?: string };
+    };
+    if (nav.connection?.saveData) return;
+    if (nav.connection?.effectiveType === 'slow-2g' || nav.connection?.effectiveType === '2g') return;
+
+    const idleWindow = window as Window & {
+      requestIdleCallback?: (callback: IdleRequestCallback, options?: IdleRequestOptions) => number;
+      cancelIdleCallback?: (handle: number) => void;
+    };
+
+    const prefetchHeavy = () => {
+      routeDebug('prefetch heavy routes', { paths: HEAVY_ROUTE_GEOMETRY_PATHS });
+      prefetchRouteGeometries(HEAVY_ROUTE_GEOMETRY_PATHS);
+    };
+
+    if (typeof idleWindow.requestIdleCallback === 'function') {
+      const handle = idleWindow.requestIdleCallback(() => prefetchHeavy(), { timeout: 2800 });
+      return () => idleWindow.cancelIdleCallback?.(handle);
+    }
+
+    const timer = window.setTimeout(prefetchHeavy, 1800);
+    return () => window.clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
