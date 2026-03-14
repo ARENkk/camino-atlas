@@ -65,10 +65,10 @@ const TERMINAL_HOVER_DURATION = 140;
 const TERMINAL_POPUP_HIDE_DELAY = 100;
 const DESKTOP_HOVER_QUERY = '(hover: hover) and (pointer: fine)';
 const NON_HOVER_QUERY = '(hover: none), (pointer: coarse)';
-const DESKTOP_FIT_BOUNDS_DURATION = 820;
+const DESKTOP_FIT_BOUNDS_DURATION = 420;
 const MOBILE_FIT_BOUNDS_DURATION = 0;
-const ROUTE_SLOW_HINT_MS = 600;
-const ROUTE_RETRY_HINT_MS = 8000;
+const ROUTE_SLOW_HINT_MS = 900;
+const ROUTE_RETRY_HINT_MS = 12000;
 const ROUTE_SETTLE_TIMEOUT_MS = 2200;
 const ENABLE_ROUTE_DEBUG = false;
 
@@ -710,7 +710,7 @@ export function MapView({
   };
 
   const waitForRouteRenderSettlement = (_map: maplibregl.Map, token: number, signal: AbortSignal) =>
-    waitForAnimationFrames(2, signal).then(() => {
+    waitForAnimationFrames(1, signal).then(() => {
       routeDebug('render settled', { token, reason: 'render-frame' });
     });
 
@@ -1312,7 +1312,7 @@ export function MapView({
           try {
             const currentMap = mapRef.current;
             if (!currentMap) throw createAbortError();
-            await waitForAnimationFrames(2, abortController.signal);
+            await waitForAnimationFrames(1, abortController.signal);
             ensureLatestRouteRequest(requestId, nextVariant.geometry_path, abortController.signal);
             await waitForMapStyleLoad(currentMap, abortController.signal);
             ensureLatestRouteRequest(requestId, nextVariant.geometry_path, abortController.signal);
