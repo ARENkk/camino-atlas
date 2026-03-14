@@ -556,7 +556,6 @@ export function MapView({
   const routeCacheRef = useRef<Map<string, PreparedRouteData>>(new Map());
   const activeRequestRef = useRef<ActiveRouteRequest | null>(null);
   const requestedSwitchRef = useRef<QueuedRouteSwitch | null>(null);
-  const queuedSwitchRef = useRef<QueuedRouteSwitch | null>(null);
   const switchInFlightRef = useRef(false);
   const processLoopPromiseRef = useRef<Promise<void> | null>(null);
   const settleWatcherCleanupRef = useRef<(() => void) | null>(null);
@@ -571,6 +570,7 @@ export function MapView({
   const [isDesktopHoverCapable, setIsDesktopHoverCapable] = useState(true);
   const [mobileActiveTerminal, setMobileActiveTerminal] = useState<MobileTerminalInfo | null>(null);
   const [prefersReducedRouteMotion, setPrefersReducedRouteMotion] = useState(false);
+  const [isMapReady, setIsMapReady] = useState(false);
   const [isRouteRequestPending, setIsRouteRequestPending] = useState(false);
   const [hasAppliedSelectedRoute, setHasAppliedSelectedRoute] = useState(false);
   const [showLoadingBadge, setShowLoadingBadge] = useState(false);
@@ -659,14 +659,40 @@ export function MapView({
     ];
   };
 
-  const finalizeRequestProgress = (token: number) => {
-    if (!isCurrentRequest(token)) return;
+  const resetRouteRequestUi = ({
+    token,
+    hasAppliedSelectedRoute: hasApplied,
+    force = false,
+  }: {
+    token?: number;
+    hasAppliedSelectedRoute: boolean;
+    force?: boolean;
+  }) => {
+    if (!force && typeof token === 'number' && requestSeqRef.current !== token) return false;
     clearBadgeTimers();
     setIsRouteRequestPending(false);
-    setHasAppliedSelectedRoute(true);
+    setHasAppliedSelectedRoute(hasApplied);
     setShowLoadingBadge(false);
     setShowSlowHint(false);
     setShowRetryHint(false);
+    return true;
+  };
+
+  const finalizeRequestProgress = (token: number) => {
+    if (!isCurrentRequest(token)) return;
+    resetRouteRequestUi({ token, hasAppliedSelectedRoute: true });
+  };
+
+  const ensureLatestRouteRequest = (token: number, geometryPath: string, signal: AbortSignal) => {
+    throwIfAborted(signal);
+    const active = activeRequestRef.current;
+    if (!active || active.token !== token || active.geometryPath !== geometryPath) {
+      throw createAbortError();
+    }
+    const pending = requestedSwitchRef.current;
+    if (pending && pending.variant.geometry_path !== geometryPath) {
+      throw createAbortError();
+    }
   };
 
   const abortActiveRequest = (reason: string) => {
@@ -683,48 +709,9 @@ export function MapView({
     switchInFlightRef.current = false;
   };
 
-  const waitForRouteRenderSettlement = (map: maplibregl.Map, token: number) =>
-    new Promise<void>((resolve) => {
-      let completed = false;
-      let rafA: number | null = null;
-      let rafB: number | null = null;
-      let timeoutId: number | null = null;
-
-      const cleanup = () => {
-        map.off('idle', onIdle);
-        map.off('render', onRender);
-        if (rafA !== null) window.cancelAnimationFrame(rafA);
-        if (rafB !== null) window.cancelAnimationFrame(rafB);
-        if (timeoutId !== null) window.clearTimeout(timeoutId);
-      };
-
-      const finish = (reason: string) => {
-        if (completed) return;
-        completed = true;
-        cleanup();
-        if (settleWatcherCleanupRef.current === cleanup) {
-          settleWatcherCleanupRef.current = null;
-        }
-        routeDebug('render settled', { token, reason });
-        resolve();
-      };
-
-      const onIdle = () => finish('idle');
-      const onRender = () => {
-        if (rafA !== null) window.cancelAnimationFrame(rafA);
-        if (rafB !== null) window.cancelAnimationFrame(rafB);
-        rafA = window.requestAnimationFrame(() => {
-          rafB = window.requestAnimationFrame(() => {
-            if (!map.isMoving()) finish('render-frame');
-          });
-        });
-      };
-
-      settleWatcherCleanupRef.current = cleanup;
-      map.on('idle', onIdle);
-      map.on('render', onRender);
-      timeoutId = window.setTimeout(() => finish('settle-timeout'), ROUTE_SETTLE_TIMEOUT_MS);
-      onRender();
+  const waitForRouteRenderSettlement = (_map: maplibregl.Map, token: number, signal: AbortSignal) =>
+    waitForAnimationFrames(2, signal).then(() => {
+      routeDebug('render settled', { token, reason: 'render-frame' });
     });
 
   const renderTerminalPopup = (map: maplibregl.Map, feature: any) => {
@@ -924,12 +911,20 @@ export function MapView({
     map.touchZoomRotate.enable();
     map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
     mapRef.current = map;
+    const handleMapReady = () => setIsMapReady(true);
+    if (map.isStyleLoaded()) {
+      handleMapReady();
+    } else {
+      map.on('load', handleMapReady);
+    }
 
     const handleResize = () => map.resize();
     window.addEventListener('resize', handleResize);
 
     return () => {
       window.removeEventListener('resize', handleResize);
+      map.off('load', handleMapReady);
+      setIsMapReady(false);
       abortActiveRequest('map unmount');
       clearBadgeTimers();
       clearSettleWatcher();
@@ -949,16 +944,10 @@ export function MapView({
 
   useEffect(() => {
     const map = mapRef.current;
-    if (!map || !variant?.geometry_path) {
+    if (!isMapReady || !map || !variant?.geometry_path) {
       requestedSwitchRef.current = null;
-      queuedSwitchRef.current = null;
-      setIsRouteRequestPending(false);
-      setHasAppliedSelectedRoute(false);
-      clearBadgeTimers();
       clearSettleWatcher();
-      setShowLoadingBadge(false);
-      setShowSlowHint(false);
-      setShowRetryHint(false);
+      resetRouteRequestUi({ hasAppliedSelectedRoute: false, force: true });
       return;
     }
 
@@ -970,12 +959,7 @@ export function MapView({
 
     if (!switchInFlightRef.current && lastAppliedPathRef.current === variant.geometry_path) {
       setError('');
-      setIsRouteRequestPending(false);
-      setHasAppliedSelectedRoute(true);
-      clearBadgeTimers();
-      setShowLoadingBadge(false);
-      setShowSlowHint(false);
-      setShowRetryHint(false);
+      resetRouteRequestUi({ hasAppliedSelectedRoute: true, force: true });
       onRenderedVariantChangeRef.current?.(variant.id);
       routeDebug('renderedVariantId sync', {
         token: requestSeqRef.current,
@@ -988,13 +972,13 @@ export function MapView({
     if (switchInFlightRef.current) {
       const active = activeRequestRef.current;
       if (active && active.variantId !== variant.id) {
-        queuedSwitchRef.current = { variant, reason: 'queued' };
         routeDebug('queued replacement set', {
           activeVariantId: active.variantId,
           queuedVariantId: variant.id,
           selectedVariantId,
           renderedVariantId,
         });
+        abortActiveRequest('queued replacement');
       }
       return;
     }
@@ -1004,7 +988,9 @@ export function MapView({
       requestId: number,
       nextVariant: RouteVariant,
       prepared: PreparedRouteData,
+      signal: AbortSignal,
     ) => {
+      ensureLatestRouteRequest(requestId, nextVariant.geometry_path, signal);
       clearTerminalPopup();
       clearMapClickSuppression();
       clearTerminalState(currentMap);
@@ -1241,11 +1227,12 @@ export function MapView({
         token: requestId,
         variantId: nextVariant.id,
       });
+      ensureLatestRouteRequest(requestId, nextVariant.geometry_path, signal);
       currentMap.fitBounds(prepared.renderedBounds, {
         padding: 40,
         duration: prefersReducedRouteMotion ? MOBILE_FIT_BOUNDS_DURATION : DESKTOP_FIT_BOUNDS_DURATION,
       });
-      await waitForRouteRenderSettlement(currentMap, requestId);
+      await waitForRouteRenderSettlement(currentMap, requestId, signal);
     };
 
     const loadPreparedRoute = async (
@@ -1283,18 +1270,12 @@ export function MapView({
         while (requestedSwitchRef.current?.variant.geometry_path) {
           const pending = requestedSwitchRef.current;
           requestedSwitchRef.current = null;
-          queuedSwitchRef.current = null;
           if (!pending) break;
 
           const nextVariant = pending.variant;
           if (lastAppliedPathRef.current === nextVariant.geometry_path) {
             setError('');
-            setIsRouteRequestPending(false);
-            setHasAppliedSelectedRoute(true);
-            clearBadgeTimers();
-            setShowLoadingBadge(false);
-            setShowSlowHint(false);
-            setShowRetryHint(false);
+            resetRouteRequestUi({ hasAppliedSelectedRoute: true, force: true });
             onRenderedVariantChangeRef.current?.(nextVariant.id);
             routeDebug('renderedVariantId sync', {
               token: requestSeqRef.current,
@@ -1327,17 +1308,21 @@ export function MapView({
             geometryPath: nextVariant.geometry_path,
           });
 
+          let didSucceed = false;
           try {
             const currentMap = mapRef.current;
             if (!currentMap) throw createAbortError();
             await waitForAnimationFrames(2, abortController.signal);
+            ensureLatestRouteRequest(requestId, nextVariant.geometry_path, abortController.signal);
             await waitForMapStyleLoad(currentMap, abortController.signal);
+            ensureLatestRouteRequest(requestId, nextVariant.geometry_path, abortController.signal);
             const prepared = await loadPreparedRoute(requestId, nextVariant, abortController.signal);
-            throwIfAborted(abortController.signal);
-            await applyPreparedRoute(currentMap, requestId, nextVariant, prepared);
-            throwIfAborted(abortController.signal);
+            ensureLatestRouteRequest(requestId, nextVariant.geometry_path, abortController.signal);
+            await applyPreparedRoute(currentMap, requestId, nextVariant, prepared, abortController.signal);
+            ensureLatestRouteRequest(requestId, nextVariant.geometry_path, abortController.signal);
             lastAppliedPathRef.current = nextVariant.geometry_path;
             finalizeRequestProgress(requestId);
+            didSucceed = true;
             routeDebug('map settled', {
               token: requestId,
               variantId: nextVariant.id,
@@ -1350,32 +1335,32 @@ export function MapView({
             onRenderedVariantChangeRef.current?.(nextVariant.id);
           } catch (err: unknown) {
             if (isAbortLikeError(err)) {
-              routeDebug('fetch abort', {
-                token: requestId,
-                variantId: nextVariant.id,
-                reason: 'AbortController',
-              });
-            } else {
-              clearSettleWatcher();
-              setError('新线路加载失败，请重试');
-              setIsRouteRequestPending(false);
-              setHasAppliedSelectedRoute(false);
-              routeDebug('fetch error', {
-                token: requestId,
-                variantId: nextVariant.id,
-                message: err instanceof Error ? err.message : String(err),
-              });
+              resetRouteRequestUi({ token: requestId, hasAppliedSelectedRoute: false });
+              if (ENABLE_ROUTE_DEBUG) {
+                routeDebug('fetch abort', {
+                  token: requestId,
+                  variantId: nextVariant.id,
+                  reason: 'AbortController',
+                });
+              }
+              return;
             }
+            clearSettleWatcher();
+            setError('新线路加载失败，请重试');
+            resetRouteRequestUi({ token: requestId, hasAppliedSelectedRoute: false });
+            routeDebug('fetch error', {
+              token: requestId,
+              variantId: nextVariant.id,
+              message: err instanceof Error ? err.message : String(err),
+            });
           } finally {
             clearSettleWatcher();
             if (activeRequestRef.current?.token === requestId) {
               activeRequestRef.current = null;
             }
             switchInFlightRef.current = false;
-            const queued = queuedSwitchRef.current as QueuedRouteSwitch | null;
-            if (queued && queued.variant.id !== nextVariant.id) {
-              requestedSwitchRef.current = queued;
-              queuedSwitchRef.current = null;
+            if (!didSucceed && !requestedSwitchRef.current) {
+              resetRouteRequestUi({ token: requestId, hasAppliedSelectedRoute: false });
             }
           }
         }
@@ -1387,7 +1372,7 @@ export function MapView({
     };
 
     void runSwitchLoop();
-  }, [prefersReducedRouteMotion, renderedVariantId, selectedVariantId, variant]);
+  }, [isMapReady, prefersReducedRouteMotion, renderedVariantId, selectedVariantId, variant]);
 
   const hasPendingMapWork =
     selectedVariantId !== renderedVariantId || isRouteRequestPending || !hasAppliedSelectedRoute;
