@@ -706,6 +706,7 @@ export function MapView({
     active.controller.abort();
     activeRequestRef.current = null;
     clearSettleWatcher();
+    mapRef.current?.stop();
     switchInFlightRef.current = false;
   };
 
@@ -969,6 +970,10 @@ export function MapView({
       return;
     }
 
+    if (lastAppliedPathRef.current !== variant.geometry_path) {
+      map.stop();
+    }
+
     if (switchInFlightRef.current) {
       const active = activeRequestRef.current;
       if (active && active.variantId !== variant.id) {
@@ -991,6 +996,7 @@ export function MapView({
       signal: AbortSignal,
     ) => {
       ensureLatestRouteRequest(requestId, nextVariant.geometry_path, signal);
+      currentMap.stop();
       clearTerminalPopup();
       clearMapClickSuppression();
       clearTerminalState(currentMap);
@@ -1232,7 +1238,6 @@ export function MapView({
         padding: 40,
         duration: prefersReducedRouteMotion ? MOBILE_FIT_BOUNDS_DURATION : DESKTOP_FIT_BOUNDS_DURATION,
       });
-      await waitForRouteRenderSettlement(currentMap, requestId, signal);
     };
 
     const loadPreparedRoute = async (
