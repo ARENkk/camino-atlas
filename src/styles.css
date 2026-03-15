@@ -567,7 +567,7 @@ body {
   flex: 1;
   border-radius: 12px;
   border: 1px solid rgba(123, 164, 219, 0.2);
-  background: rgba(7, 12, 18, 0.35);
+  background: linear-gradient(180deg, #eceff2 0%, #e3e8ed 52%, #dde4ea 100%);
   overflow: hidden;
   position: relative;
 }
@@ -578,8 +578,76 @@ body {
   height: 100% !important;
 }
 
+.real-map.is-masked .maplibregl-canvas-container,
+.real-map.is-masked .maplibregl-control-container {
+  opacity: 0;
+}
+
+.real-map.is-live .maplibregl-canvas-container,
+.real-map.is-live .maplibregl-control-container {
+  opacity: 1;
+  transition: opacity 220ms ease;
+}
+
 .real-map .maplibregl-ctrl-bottom-right {
   margin: 0 8px 8px 0;
+}
+
+.map-loading-placeholder {
+  position: absolute;
+  inset: 0;
+  z-index: 9;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 220ms ease, visibility 220ms ease;
+}
+
+.map-loading-placeholder.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.map-loading-placeholder.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.map-loading-backdrop {
+  position: absolute;
+  inset: 0;
+  background: inherit;
+}
+
+.map-loading-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(246, 248, 250, 0.54), rgba(233, 238, 242, 0.6)),
+    rgba(225, 232, 238, 0.34);
+  backdrop-filter: blur(1.5px);
+  animation: map-loading-breathe 2.8s ease-in-out infinite;
+}
+
+.map-loading-skeleton {
+  position: absolute;
+  left: 50%;
+  top: 58%;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  align-items: start;
+  padding: 0;
+}
+
+.map-loading-copy {
+  margin: 0;
+  color: rgba(95, 109, 124, 0.58);
+  font-size: 0.66rem;
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
 }
 
 .map-placeholder {
@@ -2113,6 +2181,14 @@ body {
     min-height: 38px;
   }
 
+  .map-loading-skeleton {
+    top: 60%;
+  }
+
+  .map-loading-copy {
+    font-size: 0.62rem;
+  }
+
 }
 
 @media (min-width: 769px) {
@@ -2190,6 +2266,14 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .real-map.is-live .maplibregl-canvas-container,
+  .real-map.is-live .maplibregl-control-container,
+  .map-loading-placeholder,
+  .map-loading-scrim {
+    transition: none;
+    animation: none;
+  }
+
   .page-intro .brand-subtitle,
   .page-intro .route-list-wrap,
   .page-intro .map-area,
@@ -2254,5 +2338,16 @@ body {
   .right-main::-webkit-scrollbar-thumb:active {
     background: rgba(200, 218, 238, 0.42);
     background-clip: content-box;
+  }
+}
+
+@keyframes map-loading-breathe {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.94;
   }
 }

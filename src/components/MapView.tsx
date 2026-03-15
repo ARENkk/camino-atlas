@@ -573,6 +573,7 @@ export function MapView({
   const [isMapReady, setIsMapReady] = useState(false);
   const [isRouteRequestPending, setIsRouteRequestPending] = useState(false);
   const [hasAppliedSelectedRoute, setHasAppliedSelectedRoute] = useState(false);
+  const [hasPresentedRealMap, setHasPresentedRealMap] = useState(false);
   const [showLoadingBadge, setShowLoadingBadge] = useState(false);
   const [showSlowHint, setShowSlowHint] = useState(false);
   const [showRetryHint, setShowRetryHint] = useState(false);
@@ -681,6 +682,7 @@ export function MapView({
   const finalizeRequestProgress = (token: number) => {
     if (!isCurrentRequest(token)) return;
     resetRouteRequestUi({ token, hasAppliedSelectedRoute: true });
+    setHasPresentedRealMap(true);
   };
 
   const ensureLatestRouteRequest = (token: number, geometryPath: string, signal: AbortSignal) => {
@@ -926,6 +928,7 @@ export function MapView({
       window.removeEventListener('resize', handleResize);
       map.off('load', handleMapReady);
       setIsMapReady(false);
+      setHasPresentedRealMap(false);
       abortActiveRequest('map unmount');
       clearBadgeTimers();
       clearSettleWatcher();
@@ -1382,10 +1385,22 @@ export function MapView({
   const hasPendingMapWork =
     selectedVariantId !== renderedVariantId || isRouteRequestPending || !hasAppliedSelectedRoute;
   const showStatusBadge = hasPendingMapWork && (selectedVariantId !== renderedVariantId || showLoadingBadge);
+  const showInitialPlaceholder = !error && !hasPresentedRealMap;
+  const placeholderLabel = isMapReady ? '正在展开路线' : '地图加载中';
 
   return (
     <div className="map-view">
-      <div className="map-canvas real-map" ref={containerRef}>
+      <div className={`map-canvas real-map ${hasPresentedRealMap ? 'is-live' : 'is-masked'}`} ref={containerRef}>
+        <div
+          className={`map-loading-placeholder ${showInitialPlaceholder ? 'visible' : 'hidden'}`}
+          aria-hidden={!showInitialPlaceholder}
+        >
+          <div className="map-loading-backdrop" />
+          <div className="map-loading-scrim" />
+          <div className="map-loading-skeleton">
+            <p className="map-loading-copy">{placeholderLabel}</p>
+          </div>
+        </div>
         {error ? <div className="map-placeholder">{error}</div> : null}
         <div
           className={`map-status-badge ${showStatusBadge ? 'visible' : ''}`}
