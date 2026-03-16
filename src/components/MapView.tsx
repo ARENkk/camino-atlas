@@ -1504,7 +1504,7 @@ export function MapView({
     };
 
     const runSwitchLoop = () => {
-      if (processLoopPromiseRef.current) return;
+      if (processLoopPromiseRef.current && activeRequestRef.current) return;
       processLoopPromiseRef.current = (async () => {
         routeDebug('loop start', {
           latestRequestedVariantId: latestRequestedVariantRef.current?.id ?? null,
