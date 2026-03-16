@@ -562,6 +562,7 @@ export function MapView({
   const processLoopPromiseRef = useRef<Promise<void> | null>(null);
   const runSwitchLoopRef = useRef<(() => void) | null>(null);
   const drainKickScheduledRef = useRef(false);
+  const drainRetryTimerRef = useRef<number | null>(null);
   const requestedVariantKeyRef = useRef<string | null>(getVariantRequestKey(variant));
   const settleWatcherCleanupRef = useRef<(() => void) | null>(null);
   const badgeTimersRef = useRef<number[]>([]);
@@ -764,6 +765,22 @@ export function MapView({
       routeDebug('render settled', { token, reason: 'render-frame' });
     });
 
+  const clearDrainRetryTimer = () => {
+    if (drainRetryTimerRef.current !== null) {
+      window.clearTimeout(drainRetryTimerRef.current);
+      drainRetryTimerRef.current = null;
+    }
+  };
+
+  const hasActiveTargetRequest = (targetPath: string | null) => {
+    if (!targetPath) return false;
+    return Boolean(
+      processLoopPromiseRef.current &&
+      activeRequestRef.current &&
+      activeRequestRef.current.geometryPath === targetPath,
+    );
+  };
+
   const scheduleDrainLoop = (reason: string) => {
     if (drainKickScheduledRef.current) return;
     drainKickScheduledRef.current = true;
@@ -779,6 +796,35 @@ export function MapView({
       });
       runSwitchLoopRef.current?.();
     });
+  };
+
+  const ensureDrainLoopScheduled = (reason: string) => {
+    const targetPath = getLatestRequestedPath();
+    if (!targetPath) {
+      clearDrainRetryTimer();
+      return;
+    }
+    if (targetPath === lastAppliedPathRef.current || hasActiveTargetRequest(targetPath)) {
+      clearDrainRetryTimer();
+      return;
+    }
+    scheduleDrainLoop(reason);
+    if (drainRetryTimerRef.current !== null) return;
+    drainRetryTimerRef.current = window.setTimeout(function retryDrainKick() {
+      drainRetryTimerRef.current = null;
+      const latestTargetPath = getLatestRequestedPath();
+      if (!latestTargetPath) return;
+      if (latestTargetPath === lastAppliedPathRef.current || hasActiveTargetRequest(latestTargetPath)) return;
+      routeDebug('drain retry', {
+        reason,
+        latestRequestedVariantId: latestRequestedVariantRef.current?.id ?? null,
+        latestRequestedPath: latestTargetPath,
+        renderedPath: lastAppliedPathRef.current,
+        hasLoop: Boolean(processLoopPromiseRef.current),
+        activeVariantId: activeRequestRef.current?.variantId ?? null,
+      });
+      ensureDrainLoopScheduled(`${reason}-retry`);
+    }, 120);
   };
 
   const renderTerminalPopup = (map: maplibregl.Map, feature: any) => {
@@ -1411,9 +1457,15 @@ export function MapView({
       signal: AbortSignal,
     ) => {
       throwIfAborted(signal);
+      const geometryCacheState = getRouteGeometryCacheState(nextVariant.geometry_path);
+      perfLog('MapView', 'geometry load start', {
+        revisionId: requestId,
+        variantId: nextVariant.id,
+        geometryPath: nextVariant.geometry_path,
+        ...geometryCacheState,
+      });
       const cached = routeCacheRef.current.get(nextVariant.geometry_path);
       const geometrySummary = getRouteGeometryDebugSummary(nextVariant.geometry_path);
-      const geometryCacheState = getRouteGeometryCacheState(nextVariant.geometry_path);
       if (cached) {
         perfLog('MapView', 'geometry load end', {
           revisionId: requestId,
@@ -1425,12 +1477,6 @@ export function MapView({
         return cached;
       }
       const geometryLoadStart = perfMarkStart();
-      perfLog('MapView', 'geometry load start', {
-        revisionId: requestId,
-        variantId: nextVariant.id,
-        geometryPath: nextVariant.geometry_path,
-        ...geometryCacheState,
-      });
       routeDebug('fetch start', {
         token: requestId,
         variantId: nextVariant.id,
@@ -1494,6 +1540,7 @@ export function MapView({
             geometryPath: targetPath,
             controller: abortController,
           };
+          clearDrainRetryTimer();
           if (requestSeqRef.current === requestId) {
             setCurrentRenderingVariantId(nextVariant.id);
           }
@@ -1514,9 +1561,9 @@ export function MapView({
           try {
             await waitForAnimationFrames(1, abortController.signal);
             ensureLatestRouteRequest(requestId, targetPath, abortController.signal);
-            await waitForMapStyleLoad(currentMap, abortController.signal);
-            ensureLatestRouteRequest(requestId, targetPath, abortController.signal);
             const prepared = await loadPreparedRoute(requestId, nextVariant, abortController.signal);
+            ensureLatestRouteRequest(requestId, targetPath, abortController.signal);
+            await waitForMapStyleLoad(currentMap, abortController.signal);
             ensureLatestRouteRequest(requestId, targetPath, abortController.signal);
             await applyPreparedRoute(currentMap, requestId, nextVariant, prepared, abortController.signal);
             ensureLatestRouteRequest(requestId, targetPath, abortController.signal);
@@ -1590,7 +1637,7 @@ export function MapView({
             latestRequestedPath: latestRequestedVariantRef.current.geometry_path,
             renderedPath: lastAppliedPathRef.current,
           });
-          scheduleDrainLoop('loop-end');
+          ensureDrainLoopScheduled('loop-end');
         }
       });
     };
@@ -1601,16 +1648,15 @@ export function MapView({
 
   useEffect(() => {
     const targetPath = variant?.geometry_path ?? null;
-    if (!isMapReady || !mapRef.current || !targetPath) return;
-    if (targetPath === lastAppliedPathRef.current) return;
-    const activeRequest = activeRequestRef.current;
-    const hasActiveTargetRequest = Boolean(
-      processLoopPromiseRef.current &&
-      activeRequest &&
-      activeRequest.geometryPath === targetPath,
-    );
-    if (hasActiveTargetRequest) return;
-    scheduleDrainLoop('pending-target');
+    if (!isMapReady || !mapRef.current || !targetPath) {
+      clearDrainRetryTimer();
+      return;
+    }
+    if (targetPath === lastAppliedPathRef.current) {
+      clearDrainRetryTimer();
+      return;
+    }
+    ensureDrainLoopScheduled('pending-target');
   }, [currentRenderingVariantId, isMapReady, selectedVariantId, variant]);
 
   const hasPendingMapWork =
