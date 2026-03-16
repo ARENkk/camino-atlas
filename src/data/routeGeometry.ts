@@ -5,6 +5,7 @@ import caminoPortuguesLisbon from './route-geo/camino-portugues-lisbon.optimized
 import caminoPortuguesPorto from './route-geo/camino-portugues-porto.optimized.json';
 import caminoPrimitivo from './route-geo/camino-primitivo.optimized.json';
 import routeGeometryStats from './route-geometry-stats.json';
+import { perfLog, perfMarkEnd, perfMarkStart } from '../utils/perfDebug';
 
 export type RouteGeometryStatsEntry = {
   filename: string;
@@ -51,12 +52,12 @@ const lazyGeometryByPath: Record<string, GeometryLoader> = {
   '/geo/via-de-la-plata.geojson': () => import('./route-geo/via-de-la-plata.optimized.json').then((mod) => mod.default as GeometryData),
 };
 
-
 export const HEAVY_ROUTE_GEOMETRY_PATHS = (routeGeometryStats as RouteGeometryStatsFile).routes
   .filter((entry) => entry.sourceFileBytes >= 300000)
   .map((entry) => entry.routePath);
 
 const geometryPromiseCache = new Map<string, Promise<GeometryData>>();
+const geometryDataCache = new Map<string, GeometryData>();
 const summaryLoggedPaths = new Set<string>();
 let summaryTableLogged = false;
 
@@ -68,15 +69,35 @@ function fallbackFetch(path: string): Promise<GeometryData> {
 }
 
 function loadViaManifest(path: string): Promise<GeometryData> {
+  const cachedData = geometryDataCache.get(path);
+  if (cachedData) return Promise.resolve(cachedData);
   const eager = eagerGeometryByPath[path];
-  if (eager) return Promise.resolve(eager);
+  if (eager) {
+    geometryDataCache.set(path, eager);
+    return Promise.resolve(eager);
+  }
   const lazy = lazyGeometryByPath[path];
-  if (lazy) return lazy();
-  return fallbackFetch(path);
+  if (lazy) {
+    return lazy().then((data) => {
+      geometryDataCache.set(path, data);
+      return data;
+    });
+  }
+  return fallbackFetch(path).then((data) => {
+    geometryDataCache.set(path, data);
+    return data;
+  });
 }
 
 export function getRouteGeometryDebugSummary(path: string): RouteGeometryStatsEntry | null {
   return statsByPath.get(path) ?? null;
+}
+
+export function getRouteGeometryCacheState(path: string) {
+  return {
+    dataCacheHit: geometryDataCache.has(path),
+    promiseCacheHit: geometryPromiseCache.has(path),
+  };
 }
 
 export function logRouteGeometrySummary(path: string, enabled: boolean) {
@@ -113,17 +134,67 @@ export function logRouteGeometryTable(enabled: boolean) {
 }
 
 export function loadRouteGeometry(path: string): Promise<GeometryData> {
-  const cached = geometryPromiseCache.get(path);
-  if (cached) return cached;
-  const next = loadViaManifest(path).catch((err) => {
-    geometryPromiseCache.delete(path);
-    throw err;
+  const summary = getRouteGeometryDebugSummary(path);
+  const cachedData = geometryDataCache.get(path);
+  if (cachedData) {
+    perfLog('Geometry', 'geometry cache hit', {
+      path,
+      cacheType: 'data',
+      optimizedBytes: summary?.optimizedFileBytes ?? null,
+    });
+    return Promise.resolve(cachedData);
+  }
+
+  const cachedPromise = geometryPromiseCache.get(path);
+  if (cachedPromise) {
+    perfLog('Geometry', 'geometry cache hit', {
+      path,
+      cacheType: 'promise',
+      optimizedBytes: summary?.optimizedFileBytes ?? null,
+    });
+    return cachedPromise;
+  }
+
+  const loadStart = perfMarkStart();
+  perfLog('Geometry', 'geometry load start', {
+    path,
+    source:
+      eagerGeometryByPath[path]
+        ? 'eager-manifest'
+        : lazyGeometryByPath[path]
+          ? 'lazy-manifest'
+          : 'fetch',
+    optimizedBytes: summary?.optimizedFileBytes ?? null,
   });
+
+  const next = loadViaManifest(path)
+    .then((data) => {
+      geometryDataCache.set(path, data);
+      perfMarkEnd('Geometry', 'geometry load end', loadStart, {
+        path,
+        featureCount: Array.isArray(data?.features) ? data.features.length : null,
+        optimizedBytes: summary?.optimizedFileBytes ?? null,
+      });
+      return data;
+    })
+    .catch((err) => {
+      geometryPromiseCache.delete(path);
+      perfLog('Geometry', 'geometry load error', {
+        path,
+        message: err instanceof Error ? err.message : String(err),
+      });
+      throw err;
+    });
+
   geometryPromiseCache.set(path, next);
   return next;
 }
 
 export function prefetchRouteGeometry(path: string) {
+  perfLog('Geometry', 'geometry prefetch scheduled', {
+    path,
+    ...getRouteGeometryCacheState(path),
+  });
   void loadRouteGeometry(path).catch(() => {
     geometryPromiseCache.delete(path);
   });
@@ -131,8 +202,13 @@ export function prefetchRouteGeometry(path: string) {
 
 export function prefetchRouteGeometries(paths: string[]) {
   const unique = Array.from(new Set(paths.filter(Boolean)));
+  if (unique.length) {
+    perfLog('Geometry', 'geometry prefetch batch', {
+      paths: unique,
+      count: unique.length,
+    });
+  }
   unique.forEach((path) => {
     prefetchRouteGeometry(path);
   });
 }
-

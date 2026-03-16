@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import maplibregl, { LngLatBounds } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
-import { getRouteGeometryDebugSummary, loadRouteGeometry, logRouteGeometrySummary, logRouteGeometryTable } from '../data/routeGeometry';
+import { getRouteGeometryCacheState, getRouteGeometryDebugSummary, loadRouteGeometry, logRouteGeometrySummary, logRouteGeometryTable } from '../data/routeGeometry';
+import { perfLog, perfMarkEnd, perfMarkStart } from '../utils/perfDebug';
 import type { RouteVariant } from '../types/routes';
 
 type LngLat = [number, number];
@@ -40,11 +41,6 @@ type PreparedRouteData = {
   renderedEnd: LngLat;
 };
 
-type QueuedRouteSwitch = {
-  variant: RouteVariant;
-  reason: 'requested' | 'queued';
-};
-
 type ActiveRouteRequest = {
   token: number;
   variantId: string;
@@ -65,12 +61,18 @@ const TERMINAL_HOVER_DURATION = 140;
 const TERMINAL_POPUP_HIDE_DELAY = 100;
 const DESKTOP_HOVER_QUERY = '(hover: hover) and (pointer: fine)';
 const NON_HOVER_QUERY = '(hover: none), (pointer: coarse)';
-const DESKTOP_FIT_BOUNDS_DURATION = 420;
+const INITIAL_FIT_BOUNDS_DURATION = 0;
+const DESKTOP_FIT_BOUNDS_DURATION = 220;
 const MOBILE_FIT_BOUNDS_DURATION = 0;
 const ROUTE_SLOW_HINT_MS = 900;
 const ROUTE_RETRY_HINT_MS = 12000;
 const ROUTE_SETTLE_TIMEOUT_MS = 2200;
 const ENABLE_ROUTE_DEBUG = false;
+
+function getVariantRequestKey(variant: RouteVariant | null) {
+  if (!variant?.geometry_path) return null;
+  return `${variant.id}::${variant.geometry_path}`;
+}
 
 function routeDebug(...args: unknown[]) {
   if (!ENABLE_ROUTE_DEBUG) return;
@@ -555,26 +557,35 @@ export function MapView({
   const requestSeqRef = useRef(0);
   const routeCacheRef = useRef<Map<string, PreparedRouteData>>(new Map());
   const activeRequestRef = useRef<ActiveRouteRequest | null>(null);
-  const requestedSwitchRef = useRef<QueuedRouteSwitch | null>(null);
-  const switchInFlightRef = useRef(false);
+  const latestRequestedVariantRef = useRef<RouteVariant | null>(variant);
+  const latestRequestedRevisionRef = useRef(0);
   const processLoopPromiseRef = useRef<Promise<void> | null>(null);
+  const runSwitchLoopRef = useRef<(() => void) | null>(null);
+  const drainKickScheduledRef = useRef(false);
+  const requestedVariantKeyRef = useRef<string | null>(getVariantRequestKey(variant));
   const settleWatcherCleanupRef = useRef<(() => void) | null>(null);
   const badgeTimersRef = useRef<number[]>([]);
   const lastAppliedPathRef = useRef<string | null>(null);
+  const hasCompletedInitialFitRef = useRef(false);
+  const isMapReadyRef = useRef(false);
+  const selectedVariantIdRef = useRef(selectedVariantId);
+  const renderedVariantIdRef = useRef(renderedVariantId);
   const onRenderedVariantChangeRef = useRef<Props['onRenderedVariantChange']>(onRenderedVariantChange);
   const onTerminalEnterRef = useRef<((e: any) => void) | null>(null);
   const onTerminalLeaveRef = useRef<((e: any) => void) | null>(null);
   const onTerminalClickRef = useRef<((e: any) => void) | null>(null);
   const onMapClickRef = useRef<((e: any) => void) | null>(null);
   const onMapDragStartRef = useRef<(() => void) | null>(null);
+  const overlayVisibilityRef = useRef<boolean | null>(null);
+  const badgeVisibilityRef = useRef<boolean | null>(null);
   const [isDesktopHoverCapable, setIsDesktopHoverCapable] = useState(true);
   const [mobileActiveTerminal, setMobileActiveTerminal] = useState<MobileTerminalInfo | null>(null);
   const [prefersReducedRouteMotion, setPrefersReducedRouteMotion] = useState(false);
+  const prefersReducedRouteMotionRef = useRef(false);
   const [isMapReady, setIsMapReady] = useState(false);
-  const [isRouteRequestPending, setIsRouteRequestPending] = useState(false);
+  const [currentRenderingVariantId, setCurrentRenderingVariantId] = useState<string | null>(null);
   const [hasAppliedSelectedRoute, setHasAppliedSelectedRoute] = useState(false);
   const [hasPresentedRealMap, setHasPresentedRealMap] = useState(false);
-  const [showLoadingBadge, setShowLoadingBadge] = useState(false);
   const [showSlowHint, setShowSlowHint] = useState(false);
   const [showRetryHint, setShowRetryHint] = useState(false);
   const [error, setError] = useState('');
@@ -582,6 +593,36 @@ export function MapView({
   useEffect(() => {
     onRenderedVariantChangeRef.current = onRenderedVariantChange;
   }, [onRenderedVariantChange]);
+
+  useEffect(() => {
+    perfLog('MapView', 'MapView mount start', {
+      selectedVariantId,
+      variantId: variant?.id ?? null,
+    });
+    return () => {
+      perfLog('MapView', 'MapView unmount');
+    };
+  }, []);
+
+  useEffect(() => {
+    selectedVariantIdRef.current = selectedVariantId;
+  }, [selectedVariantId]);
+
+  useEffect(() => {
+    renderedVariantIdRef.current = renderedVariantId;
+  }, [renderedVariantId]);
+
+  useEffect(() => {
+    latestRequestedVariantRef.current = variant;
+  }, [variant]);
+
+  useEffect(() => {
+    isMapReadyRef.current = isMapReady;
+  }, [isMapReady]);
+
+  useEffect(() => {
+    prefersReducedRouteMotionRef.current = prefersReducedRouteMotion;
+  }, [prefersReducedRouteMotion]);
 
   useEffect(() => {
     routeDebug('variant state', { selectedVariantId, renderedVariantId });
@@ -628,6 +669,9 @@ export function MapView({
   };
 
   const clearBadgeTimers = () => {
+    if (badgeTimersRef.current.length) {
+      routeDebug('timer cancel', { count: badgeTimersRef.current.length, revisionId: requestSeqRef.current });
+    }
     badgeTimersRef.current.forEach((timerId) => window.clearTimeout(timerId));
     badgeTimersRef.current = [];
   };
@@ -641,12 +685,15 @@ export function MapView({
     return requestSeqRef.current === token && activeRequestRef.current?.token === token;
   };
 
+  const getLatestRequestedPath = () => latestRequestedVariantRef.current?.geometry_path ?? null;
+
   const beginRequestProgress = (token: number) => {
     clearBadgeTimers();
+    if (requestSeqRef.current !== token) return;
     setHasAppliedSelectedRoute(false);
-    setShowLoadingBadge(true);
     setShowSlowHint(false);
     setShowRetryHint(false);
+    routeDebug('timer start', { revisionId: token });
 
     badgeTimersRef.current = [
       window.setTimeout(() => {
@@ -671,9 +718,8 @@ export function MapView({
   }) => {
     if (!force && typeof token === 'number' && requestSeqRef.current !== token) return false;
     clearBadgeTimers();
-    setIsRouteRequestPending(false);
     setHasAppliedSelectedRoute(hasApplied);
-    setShowLoadingBadge(false);
+    setCurrentRenderingVariantId(null);
     setShowSlowHint(false);
     setShowRetryHint(false);
     return true;
@@ -687,12 +733,14 @@ export function MapView({
 
   const ensureLatestRouteRequest = (token: number, geometryPath: string, signal: AbortSignal) => {
     throwIfAborted(signal);
+    if (latestRequestedRevisionRef.current !== token) {
+      throw createAbortError();
+    }
     const active = activeRequestRef.current;
     if (!active || active.token !== token || active.geometryPath !== geometryPath) {
       throw createAbortError();
     }
-    const pending = requestedSwitchRef.current;
-    if (pending && pending.variant.geometry_path !== geometryPath) {
+    if (getLatestRequestedPath() !== geometryPath) {
       throw createAbortError();
     }
   };
@@ -701,7 +749,7 @@ export function MapView({
     const active = activeRequestRef.current;
     if (!active) return;
     routeDebug('fetch abort', {
-      token: active.token,
+      revisionId: active.token,
       variantId: active.variantId,
       reason,
     });
@@ -709,13 +757,29 @@ export function MapView({
     activeRequestRef.current = null;
     clearSettleWatcher();
     mapRef.current?.stop();
-    switchInFlightRef.current = false;
   };
 
   const waitForRouteRenderSettlement = (_map: maplibregl.Map, token: number, signal: AbortSignal) =>
     waitForAnimationFrames(1, signal).then(() => {
       routeDebug('render settled', { token, reason: 'render-frame' });
     });
+
+  const scheduleDrainLoop = (reason: string) => {
+    if (drainKickScheduledRef.current) return;
+    drainKickScheduledRef.current = true;
+    Promise.resolve().then(() => {
+      drainKickScheduledRef.current = false;
+      routeDebug('drain kick', {
+        reason,
+        latestRequestedVariantId: latestRequestedVariantRef.current?.id ?? null,
+        latestRequestedPath: getLatestRequestedPath(),
+        renderedPath: lastAppliedPathRef.current,
+        hasLoop: Boolean(processLoopPromiseRef.current),
+        activeVariantId: activeRequestRef.current?.variantId ?? null,
+      });
+      runSwitchLoopRef.current?.();
+    });
+  };
 
   const renderTerminalPopup = (map: maplibregl.Map, feature: any) => {
     const coords = (feature?.geometry?.coordinates || []) as LngLat;
@@ -902,6 +966,12 @@ export function MapView({
 
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
+    perfLog('MapView', 'style load start', {
+      styleSource: 'remote-style',
+      style: 'https://tiles.openfreemap.org/styles/positron',
+    });
+    const mapCreateStart = perfMarkStart();
+    perfLog('MapView', 'map instance create start');
     const map = new maplibregl.Map({
       container: containerRef.current,
       style: 'https://tiles.openfreemap.org/styles/positron',
@@ -914,7 +984,11 @@ export function MapView({
     map.touchZoomRotate.enable();
     map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
     mapRef.current = map;
-    const handleMapReady = () => setIsMapReady(true);
+    perfMarkEnd('MapView', 'map instance create end', mapCreateStart);
+    const handleMapReady = () => {
+      perfLog('MapView', 'style load end', { isStyleLoaded: map.isStyleLoaded() });
+      setIsMapReady(true);
+    };
     if (map.isStyleLoaded()) {
       handleMapReady();
     } else {
@@ -928,6 +1002,7 @@ export function MapView({
       window.removeEventListener('resize', handleResize);
       map.off('load', handleMapReady);
       setIsMapReady(false);
+      isMapReadyRef.current = false;
       setHasPresentedRealMap(false);
       abortActiveRequest('map unmount');
       clearBadgeTimers();
@@ -948,25 +1023,56 @@ export function MapView({
 
   useEffect(() => {
     const map = mapRef.current;
-    if (!isMapReady || !map || !variant?.geometry_path) {
-      requestedSwitchRef.current = null;
+    if (!variant?.geometry_path) {
+      requestedVariantKeyRef.current = null;
+      latestRequestedVariantRef.current = null;
+      latestRequestedRevisionRef.current += 1;
+      requestSeqRef.current = latestRequestedRevisionRef.current;
       clearSettleWatcher();
       resetRouteRequestUi({ hasAppliedSelectedRoute: false, force: true });
       return;
     }
 
-    const nextSwitch: QueuedRouteSwitch = {
-      variant,
-      reason: switchInFlightRef.current ? 'queued' : 'requested',
-    };
-    requestedSwitchRef.current = nextSwitch;
+    latestRequestedVariantRef.current = variant;
+    const requestKey = getVariantRequestKey(variant);
+    const isNewTarget = requestKey !== requestedVariantKeyRef.current;
+    if (isNewTarget) {
+      requestedVariantKeyRef.current = requestKey;
+      latestRequestedRevisionRef.current += 1;
+      requestSeqRef.current = latestRequestedRevisionRef.current;
+      routeDebug('click target', {
+        revisionId: latestRequestedRevisionRef.current,
+        requestedVariantId: variant.id,
+        requestedGeometryPath: variant.geometry_path,
+        selectedVariantId,
+        renderedVariantId,
+      });
+    } else {
+      routeDebug('request retained', {
+        revisionId: latestRequestedRevisionRef.current,
+        requestedVariantId: variant.id,
+        requestedGeometryPath: variant.geometry_path,
+        reason: !isMapReady || !map ? 'deferred-resume' : 'effect-rerun',
+      });
+    }
 
-    if (!switchInFlightRef.current && lastAppliedPathRef.current === variant.geometry_path) {
+    const revisionId = latestRequestedRevisionRef.current;
+
+    if (!isMapReady || !map) {
+      routeDebug('switch deferred', {
+        reason: !map ? 'no-map' : 'map-not-ready',
+        revisionId,
+        requestedVariantId: variant.id,
+      });
+      return;
+    }
+
+    if (!processLoopPromiseRef.current && lastAppliedPathRef.current === variant.geometry_path) {
       setError('');
       resetRouteRequestUi({ hasAppliedSelectedRoute: true, force: true });
       onRenderedVariantChangeRef.current?.(variant.id);
       routeDebug('renderedVariantId sync', {
-        token: requestSeqRef.current,
+        revisionId,
         renderedVariantId: variant.id,
         source: 'already-applied',
       });
@@ -977,19 +1083,29 @@ export function MapView({
       map.stop();
     }
 
-    if (switchInFlightRef.current) {
-      const active = activeRequestRef.current;
-      if (active && active.variantId !== variant.id) {
-        routeDebug('queued replacement set', {
-          activeVariantId: active.variantId,
-          queuedVariantId: variant.id,
-          selectedVariantId,
-          renderedVariantId,
-        });
-        abortActiveRequest('queued replacement');
-      }
-      return;
+    const active = activeRequestRef.current;
+    if (active && active.geometryPath !== variant.geometry_path) {
+      routeDebug('abort stale active request', {
+        revisionId,
+        activeVariantId: active.variantId,
+        latestRequestedVariantId: variant.id,
+        selectedVariantId,
+        renderedVariantId,
+      });
+      abortActiveRequest('superseded by latest target');
     }
+
+    const syncRenderedVariant = (nextVariant: RouteVariant, source: string, token: number) => {
+      if (requestSeqRef.current !== token) return;
+      setError('');
+      resetRouteRequestUi({ token, hasAppliedSelectedRoute: true });
+      onRenderedVariantChangeRef.current?.(nextVariant.id);
+      routeDebug('renderedVariantId sync', {
+        revisionId: token,
+        renderedVariantId: nextVariant.id,
+        source,
+      });
+    };
 
     const applyPreparedRoute = async (
       currentMap: maplibregl.Map,
@@ -999,6 +1115,12 @@ export function MapView({
       signal: AbortSignal,
     ) => {
       ensureLatestRouteRequest(requestId, nextVariant.geometry_path, signal);
+      const setDataStart = perfMarkStart();
+      perfLog('MapView', 'source setData start', {
+        revisionId: requestId,
+        variantId: nextVariant.id,
+        geometryPath: nextVariant.geometry_path,
+      });
       currentMap.stop();
       clearTerminalPopup();
       clearMapClickSuppression();
@@ -1232,15 +1354,55 @@ export function MapView({
         }
       }
 
+      perfMarkEnd('MapView', 'source setData end', setDataStart, {
+        revisionId: requestId,
+        variantId: nextVariant.id,
+        geometryPath: nextVariant.geometry_path,
+      });
+
       routeDebug('route data applied', {
         token: requestId,
         variantId: nextVariant.id,
       });
       ensureLatestRouteRequest(requestId, nextVariant.geometry_path, signal);
+      const fitDuration = !hasCompletedInitialFitRef.current
+        ? INITIAL_FIT_BOUNDS_DURATION
+        : prefersReducedRouteMotionRef.current
+          ? MOBILE_FIT_BOUNDS_DURATION
+          : DESKTOP_FIT_BOUNDS_DURATION;
+      const fitBoundsStart = perfMarkStart();
+      perfLog('MapView', 'fitBounds start', {
+        revisionId: requestId,
+        variantId: nextVariant.id,
+        duration: fitDuration,
+      });
       currentMap.fitBounds(prepared.renderedBounds, {
         padding: 40,
-        duration: prefersReducedRouteMotion ? MOBILE_FIT_BOUNDS_DURATION : DESKTOP_FIT_BOUNDS_DURATION,
+        duration: fitDuration,
       });
+      void waitForRouteRenderSettlement(currentMap, requestId, signal)
+        .then(() => {
+          perfLog('MapView', 'first line rendered', {
+            revisionId: requestId,
+            variantId: nextVariant.id,
+            geometryPath: nextVariant.geometry_path,
+          });
+          perfMarkEnd('MapView', 'fitBounds end', fitBoundsStart, {
+            revisionId: requestId,
+            variantId: nextVariant.id,
+            duration: fitDuration,
+          });
+        })
+        .catch((err: unknown) => {
+          if (isAbortLikeError(err)) return;
+          perfLog('MapView', 'fitBounds end', {
+            revisionId: requestId,
+            variantId: nextVariant.id,
+            aborted: false,
+            message: err instanceof Error ? err.message : String(err),
+          });
+        });
+      hasCompletedInitialFitRef.current = true;
     };
 
     const loadPreparedRoute = async (
@@ -1251,7 +1413,24 @@ export function MapView({
       throwIfAborted(signal);
       const cached = routeCacheRef.current.get(nextVariant.geometry_path);
       const geometrySummary = getRouteGeometryDebugSummary(nextVariant.geometry_path);
-      if (cached) return cached;
+      const geometryCacheState = getRouteGeometryCacheState(nextVariant.geometry_path);
+      if (cached) {
+        perfLog('MapView', 'geometry load end', {
+          revisionId: requestId,
+          variantId: nextVariant.id,
+          geometryPath: nextVariant.geometry_path,
+          cacheHit: 'prepared-route-cache',
+          ...geometryCacheState,
+        });
+        return cached;
+      }
+      const geometryLoadStart = perfMarkStart();
+      perfLog('MapView', 'geometry load start', {
+        revisionId: requestId,
+        variantId: nextVariant.id,
+        geometryPath: nextVariant.geometry_path,
+        ...geometryCacheState,
+      });
       routeDebug('fetch start', {
         token: requestId,
         variantId: nextVariant.id,
@@ -1262,6 +1441,12 @@ export function MapView({
       });
       const rawGeojson = await loadRouteGeometry(nextVariant.geometry_path);
       throwIfAborted(signal);
+      perfMarkEnd('MapView', 'geometry load end', geometryLoadStart, {
+        revisionId: requestId,
+        variantId: nextVariant.id,
+        geometryPath: nextVariant.geometry_path,
+        ...geometryCacheState,
+      });
       routeDebug('fetch success', {
         token: requestId,
         variantId: nextVariant.id,
@@ -1272,121 +1457,197 @@ export function MapView({
       return prepared;
     };
 
-    const runSwitchLoop = async () => {
-      if (processLoopPromiseRef.current || switchInFlightRef.current) return;
+    const runSwitchLoop = () => {
+      if (processLoopPromiseRef.current) return;
       processLoopPromiseRef.current = (async () => {
-        while (requestedSwitchRef.current?.variant.geometry_path) {
-          const pending = requestedSwitchRef.current;
-          requestedSwitchRef.current = null;
-          if (!pending) break;
+        routeDebug('loop start', {
+          latestRequestedVariantId: latestRequestedVariantRef.current?.id ?? null,
+          renderedVariantId: renderedVariantIdRef.current,
+          renderedPath: lastAppliedPathRef.current,
+        });
 
-          const nextVariant = pending.variant;
-          if (lastAppliedPathRef.current === nextVariant.geometry_path) {
-            setError('');
-            resetRouteRequestUi({ hasAppliedSelectedRoute: true, force: true });
-            onRenderedVariantChangeRef.current?.(nextVariant.id);
-            routeDebug('renderedVariantId sync', {
-              token: requestSeqRef.current,
-              renderedVariantId: nextVariant.id,
-              source: 'already-applied',
+        while (true) {
+          const currentMap = mapRef.current;
+          const nextVariant = latestRequestedVariantRef.current;
+          const targetRevision = latestRequestedRevisionRef.current;
+          const targetPath = nextVariant?.geometry_path ?? null;
+
+          if (!currentMap || !isMapReadyRef.current || !nextVariant || !targetPath) {
+            routeDebug('loop break', {
+              reason: !currentMap ? 'no-map' : !isMapReadyRef.current ? 'map-not-ready' : 'no-target',
+              latestRequestedVariantId: nextVariant?.id ?? null,
+              renderedVariantId: renderedVariantIdRef.current,
             });
-            continue;
+            break;
           }
 
-          const requestId = requestSeqRef.current + 1;
-          requestSeqRef.current = requestId;
+          if (lastAppliedPathRef.current === targetPath) {
+            syncRenderedVariant(nextVariant, 'already-applied', targetRevision);
+            break;
+          }
+
+          const requestId = targetRevision;
           const abortController = new AbortController();
           activeRequestRef.current = {
             token: requestId,
             variantId: nextVariant.id,
-            geometryPath: nextVariant.geometry_path,
+            geometryPath: targetPath,
             controller: abortController,
           };
-          switchInFlightRef.current = true;
+          if (requestSeqRef.current === requestId) {
+            setCurrentRenderingVariantId(nextVariant.id);
+          }
           setError('');
-          setIsRouteRequestPending(true);
           beginRequestProgress(requestId);
           logRouteGeometryTable(ENABLE_ROUTE_DEBUG);
-          logRouteGeometrySummary(nextVariant.geometry_path, ENABLE_ROUTE_DEBUG);
-          routeDebug(pending.reason === 'queued' ? 'queued switch started' : 'switch started', {
-            token: requestId,
-            selectedVariantId,
-            renderedVariantId,
-            variantId: nextVariant.id,
-            geometryPath: nextVariant.geometry_path,
+          logRouteGeometrySummary(targetPath, ENABLE_ROUTE_DEBUG);
+          routeDebug('loop iteration start', {
+            revisionId: requestId,
+            latestRequestedVariantId: nextVariant.id,
+            renderedVariantId: renderedVariantIdRef.current,
+            targetPath,
           });
 
           let didSucceed = false;
+          let stopLoop = false;
+
           try {
-            const currentMap = mapRef.current;
-            if (!currentMap) throw createAbortError();
             await waitForAnimationFrames(1, abortController.signal);
-            ensureLatestRouteRequest(requestId, nextVariant.geometry_path, abortController.signal);
+            ensureLatestRouteRequest(requestId, targetPath, abortController.signal);
             await waitForMapStyleLoad(currentMap, abortController.signal);
-            ensureLatestRouteRequest(requestId, nextVariant.geometry_path, abortController.signal);
+            ensureLatestRouteRequest(requestId, targetPath, abortController.signal);
             const prepared = await loadPreparedRoute(requestId, nextVariant, abortController.signal);
-            ensureLatestRouteRequest(requestId, nextVariant.geometry_path, abortController.signal);
+            ensureLatestRouteRequest(requestId, targetPath, abortController.signal);
             await applyPreparedRoute(currentMap, requestId, nextVariant, prepared, abortController.signal);
-            ensureLatestRouteRequest(requestId, nextVariant.geometry_path, abortController.signal);
-            lastAppliedPathRef.current = nextVariant.geometry_path;
+            ensureLatestRouteRequest(requestId, targetPath, abortController.signal);
+            lastAppliedPathRef.current = targetPath;
             finalizeRequestProgress(requestId);
             didSucceed = true;
-            routeDebug('map settled', {
-              token: requestId,
+            syncRenderedVariant(nextVariant, 'render-settled', targetRevision);
+            routeDebug('request success', {
+              revisionId: requestId,
               variantId: nextVariant.id,
+              renderedPath: lastAppliedPathRef.current,
             });
-            routeDebug('renderedVariantId sync', {
-              token: requestId,
-              renderedVariantId: nextVariant.id,
-              source: 'render-settled',
-            });
-            onRenderedVariantChangeRef.current?.(nextVariant.id);
           } catch (err: unknown) {
             if (isAbortLikeError(err)) {
-              resetRouteRequestUi({ token: requestId, hasAppliedSelectedRoute: false });
-              if (ENABLE_ROUTE_DEBUG) {
-                routeDebug('fetch abort', {
-                  token: requestId,
-                  variantId: nextVariant.id,
-                  reason: 'AbortController',
-                });
-              }
-              return;
+              routeDebug('request abort', {
+                revisionId: requestId,
+                variantId: nextVariant.id,
+                latestRequestedVariantId: latestRequestedVariantRef.current?.id ?? null,
+                latestRequestedPath: getLatestRequestedPath(),
+              });
+            } else {
+              clearSettleWatcher();
+              setError('新线路加载失败，请重试');
+              routeDebug('request error', {
+                revisionId: requestId,
+                variantId: nextVariant.id,
+                message: err instanceof Error ? err.message : String(err),
+              });
+              stopLoop = true;
             }
-            clearSettleWatcher();
-            setError('新线路加载失败，请重试');
-            resetRouteRequestUi({ token: requestId, hasAppliedSelectedRoute: false });
-            routeDebug('fetch error', {
-              token: requestId,
-              variantId: nextVariant.id,
-              message: err instanceof Error ? err.message : String(err),
-            });
           } finally {
             clearSettleWatcher();
             if (activeRequestRef.current?.token === requestId) {
               activeRequestRef.current = null;
             }
-            switchInFlightRef.current = false;
-            if (!didSucceed && !requestedSwitchRef.current) {
+            const latestRequestedPath = getLatestRequestedPath();
+            const shouldContinue = Boolean(
+              !stopLoop &&
+              latestRequestedPath &&
+              latestRequestedPath !== lastAppliedPathRef.current
+            );
+            routeDebug('loop iteration finally', {
+              revisionId: requestId,
+              didSucceed,
+              shouldContinue,
+              latestRequestedVariantId: latestRequestedVariantRef.current?.id ?? null,
+              latestRequestedPath,
+              renderedPath: lastAppliedPathRef.current,
+            });
+            if (!didSucceed && !shouldContinue) {
               resetRouteRequestUi({ token: requestId, hasAppliedSelectedRoute: false });
             }
+            if (stopLoop || !shouldContinue) break;
           }
         }
       })().finally(() => {
+        routeDebug('loop end', {
+          latestRequestedVariantId: latestRequestedVariantRef.current?.id ?? null,
+          renderedVariantId: renderedVariantIdRef.current,
+          renderedPath: lastAppliedPathRef.current,
+        });
         processLoopPromiseRef.current = null;
+        if (
+          isMapReadyRef.current &&
+          mapRef.current &&
+          latestRequestedVariantRef.current?.geometry_path &&
+          latestRequestedVariantRef.current.geometry_path !== lastAppliedPathRef.current
+        ) {
+          routeDebug('loop restart scheduled', {
+            latestRequestedVariantId: latestRequestedVariantRef.current.id,
+            latestRequestedPath: latestRequestedVariantRef.current.geometry_path,
+            renderedPath: lastAppliedPathRef.current,
+          });
+          scheduleDrainLoop('loop-end');
+        }
       });
-
-      await processLoopPromiseRef.current;
     };
 
-    void runSwitchLoop();
-  }, [isMapReady, prefersReducedRouteMotion, renderedVariantId, selectedVariantId, variant]);
+    runSwitchLoopRef.current = runSwitchLoop;
+    runSwitchLoop();
+  }, [isMapReady, variant]);
+
+  useEffect(() => {
+    const targetPath = variant?.geometry_path ?? null;
+    if (!isMapReady || !mapRef.current || !targetPath) return;
+    if (targetPath === lastAppliedPathRef.current) return;
+    const activeRequest = activeRequestRef.current;
+    const hasActiveTargetRequest = Boolean(
+      processLoopPromiseRef.current &&
+      activeRequest &&
+      activeRequest.geometryPath === targetPath,
+    );
+    if (hasActiveTargetRequest) return;
+    scheduleDrainLoop('pending-target');
+  }, [currentRenderingVariantId, isMapReady, selectedVariantId, variant]);
 
   const hasPendingMapWork =
-    selectedVariantId !== renderedVariantId || isRouteRequestPending || !hasAppliedSelectedRoute;
-  const showStatusBadge = hasPendingMapWork && (selectedVariantId !== renderedVariantId || showLoadingBadge);
+    selectedVariantId !== renderedVariantId || currentRenderingVariantId !== null;
+  const showStatusBadge = hasPendingMapWork;
   const showInitialPlaceholder = !error && !hasPresentedRealMap;
   const placeholderLabel = isMapReady ? '正在展开路线' : '地图加载中';
+
+  useEffect(() => {
+    if (overlayVisibilityRef.current === showInitialPlaceholder) return;
+    overlayVisibilityRef.current = showInitialPlaceholder;
+    perfLog('MapView', showInitialPlaceholder ? 'loading overlay show' : 'loading overlay hide', {
+      isMapReady,
+      selectedVariantId,
+      renderedVariantId,
+      currentRenderingVariantId,
+    });
+  }, [currentRenderingVariantId, isMapReady, renderedVariantId, selectedVariantId, showInitialPlaceholder]);
+
+  useEffect(() => {
+    if (badgeVisibilityRef.current === showStatusBadge) return;
+    badgeVisibilityRef.current = showStatusBadge;
+    perfLog('MapView', showStatusBadge ? 'status badge show' : 'status badge hide', {
+      selectedVariantId,
+      renderedVariantId,
+      currentRenderingVariantId,
+      showSlowHint,
+      showRetryHint,
+    });
+  }, [
+    currentRenderingVariantId,
+    renderedVariantId,
+    selectedVariantId,
+    showRetryHint,
+    showSlowHint,
+    showStatusBadge,
+  ]);
 
   return (
     <div className="map-view">
@@ -1508,3 +1769,9 @@ export function MapView({
     </div>
   );
 }
+
+
+
+
+
+

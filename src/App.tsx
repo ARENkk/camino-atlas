@@ -1,17 +1,24 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { Suspense, lazy, useEffect, useMemo, useRef, useState } from 'react';
 import routesData from '../data/routes.json';
 import { FavoritesDrawer } from './components/FavoritesDrawer';
-import { MapView } from './components/MapView';
 import { CaminoHistoryModal } from './components/CaminoHistoryModal';
 import { RouteDetail } from './components/RouteDetail';
 import { RouteList } from './components/RouteList';
 import type { AtlasData, RouteVariant } from './types/routes';
 import { HEAVY_ROUTE_GEOMETRY_PATHS, prefetchRouteGeometries } from './data/routeGeometry';
 import { FAVORITES_STORAGE_KEY, normalizeFavoriteVariantIds, readFavoriteIdsFromStorage } from './utils/favorites';
+import { perfLog } from './utils/perfDebug';
 
 const atlasData = routesData as AtlasData;
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mjgawgza';
 const ENABLE_ROUTE_DEBUG = false;
+const MAP_MOUNT_IDLE_TIMEOUT_MS = 700;
+const MAP_MOUNT_FALLBACK_DELAY_MS = 180;
+
+const loadMapViewModule = () =>
+  import('./components/MapView').then((mod) => ({ default: mod.MapView }));
+
+const LazyMapView = lazy(loadMapViewModule);
 
 function routeDebug(...args: unknown[]) {
   if (!ENABLE_ROUTE_DEBUG) return;
@@ -62,6 +69,7 @@ export default function App() {
   const [isMobileViewport, setIsMobileViewport] = useState(false);
   const [introReady, setIntroReady] = useState(false);
   const [feedbackOpen, setFeedbackOpen] = useState(false);
+  const [shouldMountMap, setShouldMountMap] = useState(false);
   const [detailError, setDetailError] = useState('');
   const [submitError, setSubmitError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -78,6 +86,12 @@ export default function App() {
   const selectedVariant = variantsById[selectedVariantId] ?? null;
   const selectedGroup = selectedVariant ? groupsById[selectedVariant.group_id] : null;
   const isRouteSwitching = Boolean(selectedVariant && renderedVariantId !== selectedVariant.id);
+  const defaultPrefetchPaths = useMemo(() => {
+    return groups
+      .map((group) => getGroupDefaultVariantId(group.id, variants, group.default_variant_id))
+      .map((variantId) => (variantId ? variantsById[variantId]?.geometry_path : null))
+      .filter((geometryPath): geometryPath is string => Boolean(geometryPath));
+  }, [groups, variants, variantsById]);
 
   function handleSelectGroup(groupId: string) {
     setActiveGroupId(groupId);
@@ -125,6 +139,84 @@ export default function App() {
   useEffect(() => {
     routeDebug('selection state', { selectedVariantId, renderedVariantId });
   }, [renderedVariantId, selectedVariantId]);
+
+  useEffect(() => {
+    perfLog('App', 'first UI commit', {
+      selectedVariantId,
+      activeGroupId,
+    });
+    const frame = window.requestAnimationFrame(() => {
+      perfLog('App', 'first UI painted', {
+        selectedVariantId,
+        activeGroupId,
+      });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || shouldMountMap) return;
+    const idleWindow = window as Window & {
+      requestIdleCallback?: (callback: IdleRequestCallback, options?: IdleRequestOptions) => number;
+      cancelIdleCallback?: (handle: number) => void;
+    };
+
+    let idleHandle: number | null = null;
+    let timeoutHandle: number | null = null;
+    let cancelled = false;
+
+    const mountMap = () => {
+      if (cancelled) return;
+      perfLog('App', 'MapView mount requested', {
+        selectedVariantId: selectedVariant?.id ?? selectedVariantId,
+        currentPath: selectedVariant?.geometry_path ?? null,
+      });
+      void loadMapViewModule();
+      setShouldMountMap(true);
+    };
+
+    if (typeof idleWindow.requestIdleCallback === 'function') {
+      idleHandle = idleWindow.requestIdleCallback(() => mountMap(), { timeout: MAP_MOUNT_IDLE_TIMEOUT_MS });
+    }
+
+    timeoutHandle = window.setTimeout(mountMap, MAP_MOUNT_FALLBACK_DELAY_MS);
+
+    return () => {
+      cancelled = true;
+      if (idleHandle !== null) idleWindow.cancelIdleCallback?.(idleHandle);
+      if (timeoutHandle !== null) window.clearTimeout(timeoutHandle);
+    };
+  }, [shouldMountMap]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const currentPath = selectedVariant?.geometry_path;
+    const prioritizedPaths = Array.from(
+      new Set([
+        currentPath,
+        ...defaultPrefetchPaths.filter((path) => path !== currentPath).slice(0, 3),
+      ].filter((path): path is string => Boolean(path))),
+    );
+    if (!prioritizedPaths.length) return;
+
+    const idleWindow = window as Window & {
+      requestIdleCallback?: (callback: IdleRequestCallback, options?: IdleRequestOptions) => number;
+      cancelIdleCallback?: (handle: number) => void;
+    };
+
+    const prefetch = () => {
+      routeDebug('prefetch priority', { prioritizedPaths });
+      prefetchRouteGeometries(prioritizedPaths);
+    };
+
+    if (typeof idleWindow.requestIdleCallback === 'function') {
+      const handle = idleWindow.requestIdleCallback(() => prefetch(), { timeout: 1200 });
+      return () => idleWindow.cancelIdleCallback?.(handle);
+    }
+
+    const timer = window.setTimeout(prefetch, 320);
+    return () => window.clearTimeout(timer);
+  }, [defaultPrefetchPaths, selectedVariant?.geometry_path]);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -342,6 +434,7 @@ export default function App() {
   useEffect(() => {
     const timer = window.setTimeout(() => {
       setIntroReady(true);
+      perfLog('App', 'intro ready');
     }, 50);
     return () => window.clearTimeout(timer);
   }, []);
@@ -499,16 +592,34 @@ export default function App() {
 
       <main className="right-main">
         <section className="map-area glass-panel">
-          <MapView
-            variant={selectedVariant}
-            selectedVariantId={selectedVariantId}
-            renderedVariantId={renderedVariantId}
-            onRenderedVariantChange={(nextRenderedVariantId) => {
-              setRenderedVariantId((prev) =>
-                prev === nextRenderedVariantId ? prev : nextRenderedVariantId,
-              );
-            }}
-          />
+          {shouldMountMap ? (
+            <Suspense
+              fallback={
+                <div className="map-view">
+                  <div className="map-canvas">
+                    <div className="map-placeholder">地图准备中</div>
+                  </div>
+                </div>
+              }
+            >
+              <LazyMapView
+                variant={selectedVariant}
+                selectedVariantId={selectedVariantId}
+                renderedVariantId={renderedVariantId}
+                onRenderedVariantChange={(nextRenderedVariantId) => {
+                  setRenderedVariantId((prev) =>
+                    prev === nextRenderedVariantId ? prev : nextRenderedVariantId,
+                  );
+                }}
+              />
+            </Suspense>
+          ) : (
+            <div className="map-view">
+              <div className="map-canvas">
+                <div className="map-placeholder">地图准备中</div>
+              </div>
+            </div>
+          )}
         </section>
         <section className="detail-area glass-panel">
           <RouteDetail
@@ -618,3 +729,5 @@ export default function App() {
     </div>
   );
 }
+
+
